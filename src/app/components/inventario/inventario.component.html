@@ -104,6 +104,13 @@
       </form>
       <div class="row">
         <div class="input-field col s6">
+          <input  id="name1" type="text" class="validate" [(ngModel)]="producto.descuento" name="Cantidad">
+          <label for="name1" class="active"> Descuento</label>
+
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s6">
           <i class="material-icons prefix">info</i>
           <label for="name" class="active" > Inicio descuento</label>
           <input type="text" class="datepicker" id="inicio_descuento" [(ngModel)]="producto.inicio_descuento" name="inicio_descuento">
@@ -191,8 +198,14 @@
             <span>Descuento</span>
           </label>
         </p>
-
       </form>
+      <div class="row">
+        <div class="input-field col s6">
+          <input  id="name" type="text" class="validate" [(ngModel)]="producto.descuento" name="Cantidad">
+          <label for="name" class="active"> Descuento</label>
+
+        </div>
+      </div>
 
       <div class="row">
         <div class="input-field col s6">

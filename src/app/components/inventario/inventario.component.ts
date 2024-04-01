@@ -44,7 +44,8 @@ export class InventarioComponent  implements OnInit{
       }); 
       $('#descuento').prop('checked', false);
       $('#inicio_descuento').prop('disabled', true);
-      $('#fin_descuento').prop('disabled', true);     
+      $('#fin_descuento').prop('disabled', true);  
+      $('#name1').prop('disabled',true);   
     });
 
     this.inventarioService.list().subscribe((resProductos:any) => {
@@ -76,10 +77,12 @@ export class InventarioComponent  implements OnInit{
     if($('#descuento').is(':checked')){
       $('#inicio_descuento').prop('disabled', false);
       $('#fin_descuento').prop('disabled', false);
+      $('#name1').prop('disabled',false);
     }
     else{
       $('#inicio_descuento').prop('disabled', true);
       $('#fin_descuento').prop('disabled', true);
+      $('#name1').prop('disabled',true);
     }
   }
   buscarProducto(name:any){
