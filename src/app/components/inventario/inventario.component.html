@@ -92,21 +92,21 @@
         </div>
       </div>
 
-      <div class="row">
-        <div class="input-field col s6">
-          <i class="material-icons prefix">percent</i>
-          <input  id="name" type="text" class="validate" [(ngModel)]="producto.descuento" name="descuento">
-          <label for="name" class="active"> Descuento</label>
-        </div>
-      </div>
+      <form action="#">
+
+        <p>
+          <label>
+            <input type="checkbox" class="filled-in" checked="checked" id="descuento" (click)="revisarDescuento()"/>
+            <span>Descuento</span>
+          </label>
+        </p>
+
+      </form>
       <div class="row">
         <div class="input-field col s6">
           <i class="material-icons prefix">info</i>
           <label for="name" class="active" > Inicio descuento</label>
           <input type="text" class="datepicker" id="inicio_descuento" [(ngModel)]="producto.inicio_descuento" name="inicio_descuento">
-          
-          <!--<input [(ngModel)]="producto.inicio_descuento" type="text" id="fechaIni" #fechaI
-              name="fecha1" (change)="modificarFechaInicio(fechaI.value)" class="datepicker">-->
         </div>
 
         <div class="input-field col s6">
@@ -183,14 +183,17 @@
           <label for="name" class="active"> Cantidad</label>
         </div>
       </div>
+      <form action="#">
 
-      <div class="row">
-        <div class="input-field col s6">
-          <i class="material-icons prefix">percent</i>
-          <input  id="name" type="text" class="validate" [(ngModel)]="producto.descuento" name="descuento">
-          <label for="name" class="active"> Descuento</label>
-        </div>
-      </div>
+        <p>
+          <label>
+            <input type="checkbox" class="filled-in" checked="checked" id="descuento" />
+            <span>Descuento</span>
+          </label>
+        </p>
+
+      </form>
+
       <div class="row">
         <div class="input-field col s6">
           <i class="material-icons prefix">info</i>

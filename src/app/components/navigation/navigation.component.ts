@@ -80,7 +80,6 @@ constructor(private router:Router,private categoriaService:CategoriaService,priv
   MostrarOfertas(id:any)
   {
     //Debe redirigir al home
-    
     this.inventarioService.verOfertas(id);
 
   }
