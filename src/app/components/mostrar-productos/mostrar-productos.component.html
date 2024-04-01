@@ -1,20 +1,41 @@
 <div class="container">
-<div class="carousel">
-  <a class="carousel-item"><img  src="../../../assets/images/img1.png" width=1000px height=300px></a>
-  <a class="carousel-item"><img  src="../../../assets/images/img2.png" width=1000px height=300px></a>
-  <a class="carousel-item"><img  src="../../../assets/images/img3.png" width=1000px height=300px></a>
-  <a class="carousel-item"><img  src="../../../assets/images/img4.png" width=1000px height=300px></a>
-  <a class="carousel-item"><img  src="../../../assets/images/img5.png" width=1000px height=300px></a>
-</div>
+  <div class="carousel">
+    <a class="carousel-item"><img src="../../../assets/images/img1.png" width=1000px height=300px></a>
+    <a class="carousel-item"><img src="../../../assets/images/img2.png" width=1000px height=300px></a>
+    <a class="carousel-item"><img src="../../../assets/images/img3.png" width=1000px height=300px></a>
+    <a class="carousel-item"><img src="../../../assets/images/img4.png" width=1000px height=300px></a>
+    <a class="carousel-item"><img src="../../../assets/images/img5.png" width=1000px height=300px></a>
+  </div>
 </div>
 
+<div class="barra">
+  <nav>
+    <div class="nav-wrapper">
+      <div class="input-field ">
+        <input [(ngModel)]="buscar" type="search" id = "search" class="validate" (input)="Buscar()">
+        <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+        <!--<button class="btn waves-effect waves-light right" type="button" (click)="Buscar()">Buscar<i
+            class="material-icons right">send</i></button>
+        -->
+      </div>
+    </div>
+  </nav>
+</div>
+<button class="btn waves-effect waves-light" type="button" (click)="Restablecer()" style="position: absolute; top:0px; right: 513px; height: 64px;">
+  <i class="material-icons right">refresh</i>
+</button>
+
+
+
+
 <div class="container">
-<div class="cajita" *ngFor="let producto of productos"  >
-    <div class="card small" >
+  <div class="cajita" *ngFor="let producto of productos">
+    <div class="card small">
       <p>{{producto.nombre}}</p>
       <p>{{producto.precio}}</p>
       <p>{{producto.descripcion}}</p>
-      <a  class="waves-effect waves-light btn" (click)="agregarProducto(producto.idProducto)"><i class="material-icons left">add</i>Agregar</a>
+      <a class="waves-effect waves-light btn" (click)="agregarProducto(producto.idProducto)"><i
+          class="material-icons left">add</i>Agregar</a>
     </div>
   </div>
 </div>
