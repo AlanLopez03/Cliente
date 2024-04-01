@@ -16,7 +16,7 @@ export class MostrarProductosComponent implements OnInit{
 inserta=new addProducto();
 producto= new Producto();
 productos: Producto []= [];
-buscar:string='';
+buscar : string = '';
 constructor(private inventarioService: InventarioService,private carritoService:CarritoService,private router:Router) { }
   ngOnInit(): void {
     $(document).ready(function(){
@@ -57,6 +57,19 @@ constructor(private inventarioService: InventarioService,private carritoService:
       },
       err => console.log(err)
     );
+
+
+    
+  }
+
+  Restablecer ()
+  {
+    this.inventarioService.list().subscribe(
+      (res:any) => {
+        this.productos = res;
+      },
+      err => console.log(err)
+    );
   }
 
   agregarProducto(id:any){//Recibe el id del producto
@@ -93,6 +106,33 @@ constructor(private inventarioService: InventarioService,private carritoService:
 
     
   }
+
+  Buscar ()
+  {
+    console.log ("Holaaaaaa");
+    console.log ("La variable tiene",this.buscar);
+    this.inventarioService.BuscarProducto(this.buscar).subscribe((res:any) => {
+        if (res.id_producto == -1)
+        {
+          this.productos = [];
+        }
+        else
+        {
+          console.log ("YA ENTRO");
+          console.log (res);
+          this.productos = res;
+          /*this.inventarioService.list().subscribe(
+            (res:any) => {
+              this.productos = res;
+            },
+            err => console.log(err)
+          );*/
+        }
+      },
+      err => console.log(err)
+    );
+  }
+
   filtrarProductos(id:any){
     this.inventarioService.filtrarProductos(id).subscribe(
       (res:any) => {
@@ -102,5 +142,6 @@ constructor(private inventarioService: InventarioService,private carritoService:
       err => console.log(err)
     );
   }
+
 
 }

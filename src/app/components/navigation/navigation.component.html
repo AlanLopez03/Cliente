@@ -16,26 +16,13 @@
 <ul id="Categorias" class="dropdown-content" *ngIf="categorias!=undefined">
   <li *ngFor="let categoria of categorias"><a>{{categoria.nombre}}</a></li>
 </ul>
-
   <nav>
     <div class="nav-wrapper">
-      <a  class="brand-logo" href="home">Joyeria</a>
-      <div class="barra">
-        <nav>
-          <div class="nav-wrapper  ">
-            <form>
-              <div class="input-field">
-                <input id="search" type="search" required>
-                <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                <i class="material-icons">close</i>
-              </div>
-            </form>
-          </div>
-        </nav>
-    </div>
+
+      <a  class="brand-logo" href="home">Joyeria</a> 
     <div class="lateral">
       <ul class="right hide-on-med-and-down">
-        <li><a class="dropdown-trigger" href="#!" data-target="dropdown2">Categorias<i class="material-icons right">arrow_drop_down</i></a></li>
+        <li><a class="dropdown-trigger" href="#!" data-target="Categorias"><i class="material-icons left">drag_handle</i>Categorías</a></li>
         <li><a href="home/carrito"><i class="material-icons left">add_shopping_cart</i>Carrito</a></li>
         <li><a (click)="MostrarOfertas(1)"><i class="material-icons left">local_offer</i>Ofertas</a></li>
         <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Menú<i class="material-icons right">arrow_drop_down</i></a></li>
