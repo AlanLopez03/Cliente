@@ -1,0 +1,43 @@
+<div class="container">
+    <table>
+        <thead>
+            <th>Lista de compras</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let compra of compras">
+                <td>Fecha de compra: </td>
+                <td>{{compra.fecha}}</td>
+                <td><a class="waves-effect waves-light btn pink darken-4 modal-trigger" (click)="abrirAct(compra.idCompra)"><i
+                    class="material-icons">edit</i></a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div id="modalAct" class="modal">
+    <div class="modal-content">
+        <H4>Estado de compra</H4>
+            <div class="row">
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>Fecha de realizacion:</th>
+                            <td>{{compraUsuario.fecha}}</td>
+                        </tr>
+                        <tr>
+                            <th>Monto:</th>
+                            <td>{{compraUsuario.monto}}</td>
+                        </tr>
+                        <tr>
+                            <th>Estado de la compra:</th>
+                            <td>{{estado.nombre}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+    </div>
+    <div class="modal-footer">
+        <a (click)="cerrarAct()" class="waves-effect waves-light btn pink darken-3">Cerrar</a>
+    </div>
+</div>

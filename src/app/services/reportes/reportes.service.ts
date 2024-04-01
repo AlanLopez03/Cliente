@@ -19,6 +19,9 @@ export class ReportesService {
   list(){
     return this.http.get(`${environment.API_URI}/compras/`);
   }
+  listOne(id:any){
+    return this.http.get(`${environment.API_URI}/compras/${id}`);
+  }
   buscarComprasUsuario(id:any){
     return this.http.get(`${environment.API_URI}/compras/verCompras/${id}`);
   }
