@@ -4,6 +4,9 @@ import { Router } from '@angular/router';
 import { ventas } from '../../models/ventas';
 import { Estados } from '../../models/estados';
 import Swal from 'sweetalert2';
+
+declare var $: any;
+
 @Component({
   selector: 'app-usuario-compras',
   templateUrl: './usuario-compras.component.html',
@@ -11,8 +14,9 @@ import Swal from 'sweetalert2';
 })
 export class UsuarioComprasComponent implements OnInit{
   compras:ventas[] = [];
-  constructor(private router: Router, private reportesService: ReportesService) { }
-  ngOnInit(): void {
+  compraUsuario = new ventas();
+  estado = new Estados();
+  constructor(private router: Router, private reportesService: ReportesService) { 
     var id = localStorage.getItem('idUsuario');
     console.log(id);
     this.reportesService.verComprasUsuario(id).subscribe((res:any) => 
@@ -28,6 +32,27 @@ export class UsuarioComprasComponent implements OnInit{
         title: '?...',
         text: 'No se han encontrado compras',
       });
+    });
+  }
+
+  abrirAct(id:any){
+    this.reportesService.listOne(id).subscribe((res:any) => {
+      this.compraUsuario = res;
+      this.reportesService.getEstado(res.idEdo).subscribe((resE :any) =>{
+        this.estado = resE;
+        $('#modalAct').modal();
+        $('#modalAct').modal().modal('open');
+      })
+    })
+  }
+
+  cerrarAct() {
+    $('#modalAct').modal().modal('close');
+  }
+
+  ngOnInit(): void {
+    $(document).ready(function(){
+      $('.modal').modal();
     });
   }
 }
