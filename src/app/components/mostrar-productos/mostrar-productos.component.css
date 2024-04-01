@@ -9,3 +9,14 @@
     width: 80%;
     margin: 0 auto;
 }
+
+.barra{
+    width: 500px;
+    position: absolute;
+    left: 20%;
+    top:0%;
+}
+
+.input-field{
+    background-color: rgb(32, 112, 0);
+}

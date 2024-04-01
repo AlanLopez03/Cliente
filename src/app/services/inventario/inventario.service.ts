@@ -31,4 +31,8 @@ export class InventarioService {
   agregarStock(producto: any) {
     return this.http.put(`${environment.API_URI}/productos/agregarStock/${producto.idProducto}`, producto);
   }
+
+  BuscarProducto(nombre : any) {
+    return this.http.get(`${environment.API_URI}/productos/buscarProducto/${nombre}`);
+  }
 }
