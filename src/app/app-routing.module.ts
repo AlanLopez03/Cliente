@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { InicioComponent } from './components/inicio/inicio.component';
-import { RegistrarUsuarioComponent } from './components/registrar-usuario/registrar-usuario.component'; 
+import { RegistrarUsuarioComponent } from './components/registrar-usuario/registrar-usuario.component';
 import { InventarioComponent } from './components/inventario/inventario.component';
 import { ControlComponent } from './components/control/control.component';
 import { ModificarUsuarioComponent } from './components/modificar-usuario/modificar-usuario.component';
@@ -15,32 +15,34 @@ import { RecuperarPasswordComponent } from './components/recuperar-password/recu
 import { NewPasswordComponent } from './components/new-password/new-password.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 const routes: Routes = [
-{path:"",redirectTo: "login",pathMatch: "full"},{path:'login',component: LoginComponent,},
+  { path: "", redirectTo: "login", pathMatch: "full" }, { path: 'login', component: LoginComponent, },
 
-{path:'home',component:InicioComponent,
-children:
-[
-  {path:'carrito',redirectTo: 'carrito',pathMatch: 'full'},
-  {path:'carrito',component:CarritoComponent,},
-  {path:"",component:MostrarProductosComponent,},
-  {path:'usuarioCompras',redirectTo: 'usuarioCompras',pathMatch: 'full'},{path:'usuarioCompras',component:UsuarioComprasComponent,},
-  {path:'perfil',component:PerfilComponent}
+  {
+    path: 'home', component: InicioComponent,
+    children:
+      [
+        { path: 'carrito', redirectTo: 'carrito', pathMatch: 'full' },
+        { path: 'carrito', component: CarritoComponent, },
+        { path: "", component: MostrarProductosComponent, },
+        { path: 'usuarioCompras', redirectTo: 'usuarioCompras', pathMatch: 'full' }, { path: 'usuarioCompras', component: UsuarioComprasComponent, },
+        { path: 'perfil', component: PerfilComponent }
 
-]
-},
-{path:'control',component:ControlComponent,children:
-[
-  {path:'inventario',redirectTo: 'inventario',pathMatch: 'full'},{path:'inventario',component:InventarioComponent,},
-  {path:'pedidos',redirectTo: 'pedidos',pathMatch: 'full'},{path:'pedidos',component:PedidosComponent,},
-  {path:'reportes',redirectTo: 'reportes',pathMatch: 'full'},{path:'reportes',component:ReportesComponent,},
-  {path:'modificarUsuario',redirectTo: 'modificarUsuario',pathMatch: 'full'},{path:'modificarUsuario',component:ModificarUsuarioComponent,},
-]
-},
-{path:'nuevoUsuario',component:RegistrarUsuarioComponent,},
-{path:'recuperarPassword',component:RecuperarPasswordComponent,},
-{path:'restablecerPassword',component:NewPasswordComponent,},
+      ]
+  },
+  {
+    path: 'control', component: ControlComponent, children:
+      [
+        { path: 'inventario', redirectTo: 'inventario', pathMatch: 'full' }, { path: 'inventario', component: InventarioComponent, },
+        { path: 'pedidos', redirectTo: 'pedidos', pathMatch: 'full' }, { path: 'pedidos', component: PedidosComponent, },
+        { path: 'reportes', redirectTo: 'reportes', pathMatch: 'full' }, { path: 'reportes', component: ReportesComponent, },
+        { path: 'modificarUsuario', redirectTo: 'modificarUsuario', pathMatch: 'full' }, { path: 'modificarUsuario', component: ModificarUsuarioComponent, },
+      ]
+  },
+  { path: 'nuevoUsuario', component: RegistrarUsuarioComponent, },
+  { path: 'recuperarPassword', component: RecuperarPasswordComponent, },
+  { path: 'restablecerPassword/:token', component: NewPasswordComponent, },
 
-//{path:'control',redirectTo: 'control',pathMatch: 'full'},{path:'control',component:ControlComponent,},
+  //{path:'control',redirectTo: 'control',pathMatch: 'full'},{path:'control',component:ControlComponent,},
 
 
 
