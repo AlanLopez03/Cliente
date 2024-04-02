@@ -17,10 +17,6 @@ export class RecuperarPasswordComponent {
   constructor(private usuarioService: UsuarioService, private router: Router,private correoService:CorreoService) { }
 
   enviarCorreo() {
-    this.correoService.enviarCorreoRecuperarContrasenya(this.usuario).subscribe((resUsuario: any) =>
-      {
-        console.log(resUsuario);
-      },err => console.error(err));
 
     if (this.usuario.correo == ""){
       Swal.fire({
