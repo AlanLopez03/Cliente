@@ -52,5 +52,11 @@ export class UsuarioService {
   eliminaDireccion(idDom: any){
     return this.http.delete(`${environment.API_URI}/domicilios/eliminar/${idDom}`);
   }
+  existeC(correo:any){
+    return this.http.post(`${environment.API_URI}/usuarios/existeC`,{"correo":correo})
+  }
+  actualizarPassword(token:any, password:any){
+    return this.http.put(`${environment.API_URI}/usuarios/reestablecerPassword/${token}`,{"password":password});
+  }
 
 }
