@@ -19,7 +19,7 @@ export class RecuperarPasswordComponent {
   enviarCorreo() {
     this.correoService.enviarCorreoRecuperarContrasenya(this.usuario).subscribe((resUsuario: any) =>
       {
-        console.log(resUsuario) ;
+        console.log(resUsuario);
       },err => console.error(err));
   }
 
