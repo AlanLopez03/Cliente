@@ -35,3 +35,15 @@
     <a (click)="comprarCarrito()" class="waves-effect waves-light btn"><i class="material-icons right">cloud</i>Comprar</a>
   </div>
 </div>
+
+<div class="container" *ngIf="!carrito" style="text-align: center;">
+  <br>
+  <br>
+  <br>
+  <img src="../../../assets/images/scarrito.png" width="100px">
+  <br>
+  No hay productos que Mostrar
+  <br>
+  <br>
+  <br>
+</div>

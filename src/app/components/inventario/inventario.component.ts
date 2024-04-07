@@ -50,6 +50,14 @@ export class InventarioComponent  implements OnInit{
 
     this.inventarioService.list().subscribe((resProductos:any) => {
       this.productos = resProductos;
+      if(resProductos == false){
+        Swal.fire({
+          title: 'No hay producgtos',
+          text: 'No hay productos por mostrar',
+          icon: 'warning',
+          confirmButtonText: 'Aceptar'
+        })
+      }
       for(let i=0;i<this.productos.length;i++){
         let aux=new Date(this.productos[i].inicio_descuento) ;
         let aux2=new Date(this.productos[i].fin_descuento );
