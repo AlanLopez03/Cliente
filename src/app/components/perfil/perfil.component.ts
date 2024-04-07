@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import { UsuarioService } from '../../services/usuario/usuario.service';
 import { Rol } from '../../models/rolModel';
 import { Domicilio } from '../../models/domicilio';
 import { getUsuario } from '../../models/getUsuario';
 import Swal from 'sweetalert2';
+import { Usuario } from '../../models/Usuario';
+import { Route, Router } from '@angular/router';
 
 declare var $: any;
 
@@ -12,15 +14,19 @@ declare var $: any;
   templateUrl: './perfil.component.html',
   styleUrl: './perfil.component.css'
 })
-export class PerfilComponent {
+export class PerfilComponent implements OnInit{
+  constructor(private usuarioService:UsuarioService,private router:Router){}
   usuario: getUsuario = new getUsuario();
   rol: Rol = new Rol();
   direcciones: Domicilio[] = [];
   direccion : Domicilio = new Domicilio();
   idUsuario = 0;
   flagD = 0;
-
-  constructor(private usuarioService:UsuarioService){
+  ngOnInit(): void {
+    $(document).ready(function () {
+      $('.modal').modal();
+      $('.collapsible').collapsible();}
+    );
     this.usuarioService.listone(localStorage.getItem('idUsuario')).subscribe((resusuario: any) => {
       this.usuario = resusuario;
       this.idUsuario = resusuario.idUsuario;
@@ -36,39 +42,40 @@ export class PerfilComponent {
   }
 
   abrirND() {
-    $('#modalN').modal().modal('open');
+    this.direccion = new Domicilio();//limpia el objeto
+    $('#modalN').modal('open');
   }
 
   abrirActP() {
     this.usuarioService.listone(this.idUsuario).subscribe((resusuario: any) => {
       this.usuario = resusuario;
-      $('#modalActP').modal();
-      $('#modalActP').modal().modal('open');
+
+      $('#modalActP').modal('open');
     },
       err => console.error(err)
     );
   }
 
   cerrarND() {
-    $('#modalN').modal().modal('close');
+    $('#modalN').modal('close');
   }
   cerrarActP() {
-    $('#modalActP').modal().modal('close');
+    $('#modalActP').modal('close');
   }
 
   abrirActD(id: any) {
     this.usuarioService.getDireccion(id).subscribe((resdir: any) => {
 
       this.direccion = resdir;
-      $('#modalAct').modal();
-      $('#modalAct').modal().modal('open');
+      $('#modalAct').modal('open');
+      
     },
       err => console.error(err)
     );
   }
 
   cerrarActD() {
-    $('#modalAct').modal().modal('close');
+    $('#modalAct').modal('close')
   }
 
   agregarDireccion() {
@@ -113,7 +120,7 @@ export class PerfilComponent {
     }).then((result) => {
       if (result.isConfirmed) {
         this.usuarioService.eliminaDireccion(id).subscribe((resproducto: any) => {
-          console.log("resproducto: ", resproducto);
+          //console.log("resproducto: ", resproducto);
           this.usuarioService.getDomicilio(localStorage.getItem('idUsuario')).subscribe((resdir: any) => {
             this.direcciones = resdir;
             //console.log(resproducto);
@@ -162,10 +169,6 @@ export class PerfilComponent {
     });
   }
 
-  ngOnInit(): void {
-    $(document).ready(function () {
-      $('.collapsible').collapsible();
-    });
-  }
+
 
 }

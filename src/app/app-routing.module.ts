@@ -14,6 +14,7 @@ import { UsuarioComprasComponent } from './components/usuario-compras/usuario-co
 import { RecuperarPasswordComponent } from './components/recuperar-password/recuperar-password.component';
 import { NewPasswordComponent } from './components/new-password/new-password.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
+import { EscogerDomicilioComponent } from './components/escoger-domicilio/escoger-domicilio.component';
 const routes: Routes = [
   { path: "", redirectTo: "login", pathMatch: "full" }, { path: 'login', component: LoginComponent, },
 
@@ -25,7 +26,8 @@ const routes: Routes = [
         { path: 'carrito', component: CarritoComponent, },
         { path: "", component: MostrarProductosComponent, },
         { path: 'usuarioCompras', redirectTo: 'usuarioCompras', pathMatch: 'full' }, { path: 'usuarioCompras', component: UsuarioComprasComponent, },
-        { path: 'perfil', component: PerfilComponent }
+        { path: 'perfil', component: PerfilComponent },
+        { path: 'escogerDomicilio', component: EscogerDomicilioComponent}
 
       ]
   },

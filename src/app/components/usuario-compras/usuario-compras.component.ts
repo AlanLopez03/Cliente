@@ -40,8 +40,8 @@ export class UsuarioComprasComponent implements OnInit{
       this.compraUsuario = res;
       this.reportesService.getEstado(res.idEdo).subscribe((resE :any) =>{
         this.estado = resE;
-        $('#modalAct').modal();
-        $('#modalAct').modal().modal('open');
+        $('#modalAct').modal('open');
+ 
       })
     })
   }

@@ -1,3 +1,7 @@
+
+
+
+
 <ng-container *ngIf="carrito.length > 0">
   <div>
     <h1>Carrito</h1>
@@ -32,6 +36,28 @@
   </div>
   <div class="container">
     <a (click)="limpiarCarrito()" class="waves-effect waves-light btn"><i class="material-icons right">delete</i>Limpiar carrito</a>
-    <a (click)="comprarCarrito()" class="waves-effect waves-light btn"><i class="material-icons right">cloud</i>Comprar</a>
+    <!--<a (click)="comprarCarrito()" class="waves-effect waves-light btn"><i class="material-icons right">cloud</i>Comprar</a>-->
+    <button  data-target="modal1" class="btn modal-trigger">Comprar</button>
+  </div>
+</div>
+
+
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <h4>Selecciona una direccion de envio</h4>
+    <div class="row">
+
+        <div *ngFor="let direccion of domicilios" (click)="setDomicilio(direccion.idDomicilio)">
+          <div id ="direccion">
+          <p>Calle {{direccion.calle}}  # {{direccion.numero}}</p>
+          <p>Colonia  {{direccion.colonia}}</p>
+          <p>{{direccion.ciudad}}</p>
+          <p>{{direccion.estado}}</p>
+          </div>
+        </div>
+
+  </div>
+  <div class="modal-footer">
+    <a  class="modal-close waves-effect waves-green btn-flat" (click)="comprarCarrito()">Confirmar</a>
   </div>
 </div>

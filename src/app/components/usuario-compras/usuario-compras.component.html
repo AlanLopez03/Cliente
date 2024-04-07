@@ -7,7 +7,7 @@
             <tr *ngFor="let compra of compras">
                 <td>Fecha de compra: </td>
                 <td>{{compra.fecha |date:'yyyy-MM-dd'}}</td>
-                <td><a class="waves-effect waves-light btn pink darken-4 modal-trigger" (click)="abrirAct(compra.idCompra)"><i
+                <td><a class="modal-trigger waves-effect waves-light btn pink darken-4 " data-target="modalAct" (click)="abrirAct(compra.idCompra)"><i
                     class="material-icons">edit</i></a></td>
             </tr>
         </tbody>
@@ -22,7 +22,7 @@
                     <tbody>
                         <tr>
                             <th>Fecha de realizacion:</th>
-                            <td>{{compraUsuario.fecha}}</td>
+                            <td>{{compraUsuario.fecha|date:'yyyy-MM-dd'}}</td>
                         </tr>
                         <tr>
                             <th>Monto:</th>

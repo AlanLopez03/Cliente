@@ -6,6 +6,7 @@ export class Domicilio{
     estado: string;
     cp: number;
     idCliente: number;
+    numero: number;
 
     constructor(){
         this.idDomicilio = 0;
@@ -15,5 +16,6 @@ export class Domicilio{
         this.estado = '';
         this.cp = 0;
         this.idCliente = 0;
+        this.numero = 0;
     }
 }

@@ -7,7 +7,7 @@
             <table class="striped" *ngIf="usuario != undefined">
                 <thead>
                     <th>Datos de perfil</th>
-                    <th><a class="waves-effect waves-light btn pink darken-3 modal-trigger" (click)="abrirActP()"><i
+                    <th><a class="modal-trigger waves-effect waves-light btn pink darken-3" data-target="modalActP"(click)="abrirActP()"><i
                                 class="material-icons">edit</i> Editar nombre</a></th>
                 </thead>
                 <tbody>
@@ -40,10 +40,11 @@
                         <tr *ngFor="let direccion of direcciones">
                             <td>{{direccion.cp}}</td>
                             <td>{{direccion.calle}}</td>
+                            <td>{{direccion.numero}}</td>
                             <td>{{direccion.colonia}}</td>
-                            <td><a class="waves-effect waves-light btn pink darken-4 modal-trigger" (click)="abrirActD(direccion.idDomicilio)"><i
+                            <td><a class=" modal-trigger waves-effect waves-light btn pink darken-4 " data-target="modalAct" (click)="abrirActD(direccion.idDomicilio)"><i
                                 class="material-icons">edit</i></a></td>
-                            <td><a class="waves-effect waves-light btn pink darken-3 modal-trigger " (click)="eliminarDir(direccion.idDomicilio)"><i
+                            <td><a class=" waves-effect waves-light btn pink darken-3" (click)="eliminarDir(direccion.idDomicilio)"><i
                                         class="material-icons">delete</i></a></td>
                         </tr>
                     </table>
@@ -52,8 +53,12 @@
                             <td>No hay direcciones disponibles</td>
                         </tr>
                     </table>
-                    <td><a class="waves-effect waves-light btn pink darken-3 modal-trigger" (click)="abrirND()"><i
-                                class="material-icons">edit</i>Agregar una nueva direccion</a></td>
+                    <td><a class="modal-trigger waves-effect waves-light btn pink darken-3" data-target="modalN" (click)="abrirND()"><i
+                                class="material-icons" >edit</i>Agregar una nueva direccion</a>
+                                
+                       
+                            </td>
+
                 </div>
             </li>
         </ul>
@@ -68,6 +73,10 @@
                 <div class="input-field col s6">
                     <input id="calle" type="text" [(ngModel)]="direccion.calle" name="calle" class="validate">
                     <label for="calle">Calle</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="numero" type="text" [(ngModel)]="direccion.numero" name="calle" class="validate">
+                    <label for="numero">Número</label>
                 </div>
                 <div class="input-field col s6">
                     <input id="colonia" type="text" [(ngModel)]="direccion.colonia" name="colonia" class="validate">
@@ -108,6 +117,10 @@
                 <div class="input-field col s6">
                     <input id="calle" type="text" [(ngModel)]="direccion.calle" name="calle" class="validate">
                     <label class="active" for="calle">Calle</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="numero" type="text" [(ngModel)]="direccion.numero" name="numero" class="validate">
+                    <label class="active" for="numero">Número</label>
                 </div>
                 <div class="input-field col s6">
                     <input id="colonia" type="text" [(ngModel)]="direccion.colonia" name="colonia" class="validate">

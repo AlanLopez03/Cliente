@@ -58,5 +58,8 @@ export class UsuarioService {
   actualizarPassword(token:any, password:any){
     return this.http.put(`${environment.API_URI}/usuarios/reestablecerPassword/${token}`,{"password":password});
   }
+  verDomicilios(idUsuario: any){
+    return this.http.get(`${environment.API_URI}/domicilios/verDomiciliosCLiente/${idUsuario}`);
+  }
 
 }
