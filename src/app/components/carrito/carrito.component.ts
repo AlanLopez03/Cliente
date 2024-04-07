@@ -179,9 +179,9 @@ constructor(private carritoService: CarritoService, private inventarioService: I
           'La compra se ha realizado con éxito',
           'success'
         )
+        this.router.navigateByUrl('/home');
         this.ngOnInit();
       }
-        
       },
       err => console.log(err)
     );
