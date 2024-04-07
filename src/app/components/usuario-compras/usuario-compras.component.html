@@ -7,8 +7,9 @@
             <tr *ngFor="let compra of compras">
                 <td>Fecha de compra: </td>
                 <td>{{compra.fecha |date:'yyyy-MM-dd'}}</td>
-                <td><a class="waves-effect waves-light btn pink darken-4 modal-trigger" (click)="abrirAct(compra.idCompra)"><i
+                <td><a class="modal-trigger waves-effect waves-light btn pink darken-4 " data-target="modalAct" (click)="abrirAct(compra.idCompra)"><i
                     class="material-icons">edit</i></a></td>
+                
             </tr>
         </tbody>
     </table>
@@ -18,11 +19,12 @@
     <div class="modal-content">
         <H4>Estado de compra</H4>
             <div class="row">
-                <table>
+                <table >
                     <tbody>
+
                         <tr>
                             <th>Fecha de realizacion:</th>
-                            <td>{{compraUsuario.fecha}}</td>
+                            <td>{{compraUsuario.fecha|date:'yyyy-MM-dd'}}</td>
                         </tr>
                         <tr>
                             <th>Monto:</th>
@@ -32,6 +34,15 @@
                             <th>Estado de la compra:</th>
                             <td>{{estado.nombre}}</td>
                         </tr>
+                        <tr>
+                            <th>Enviado a:</th>
+                            <td>{{datos.calle}} #{{datos.numero}}</td>
+                            <td>Colonia {{datos.colonia}},{{datos.ciudad}} {{datos.estado}}</td>
+                        </tr>
+                        <tr>
+                            <th>Productos comprados:</th>
+                        </tr>
+
                     </tbody>
                 </table>
             </div>

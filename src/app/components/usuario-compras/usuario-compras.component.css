@@ -1,0 +1,3 @@
+body {
+    overflow: auto; /* O cualquier otro valor para restaurar el scroll */
+}
