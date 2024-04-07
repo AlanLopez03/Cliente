@@ -1,1 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Asegura que el contenido mínimo ocupe toda la altura de la pantalla */
+  }
+  
+  .content {
+    flex: 1;
+  }
+  
+  .page-footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }

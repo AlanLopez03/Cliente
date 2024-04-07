@@ -41,6 +41,7 @@
 </div>
 
 
+
 <div id="modal1" class="modal">
   <div class="modal-content">
     <h4>Selecciona una direccion de envio</h4>
@@ -59,4 +60,16 @@
   <div class="modal-footer">
     <a  class="modal-close waves-effect waves-green btn-flat" (click)="comprarCarrito()">Confirmar</a>
   </div>
+</div>
+
+<div class="container" *ngIf="!carrito" style="text-align: center;">
+  <br>
+  <br>
+  <br>
+  <img src="../../../assets/images/scarrito.png" width="100px">
+  <br>
+  No hay productos que Mostrar
+  <br>
+  <br>
+  <br>
 </div>

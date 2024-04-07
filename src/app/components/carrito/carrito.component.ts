@@ -38,10 +38,21 @@ export class CarritoComponent implements OnInit {
     this.carritoService.listone(localStorage.getItem('idUsuario')).subscribe(
       (res: any) => {
         this.carrito = res;
-        //console.log("hola");
-        //console.log(this.carrito);
+
+        console.log("hola");
+        console.log(this.carrito);
+        if (res == false){
+          Swal.fire({
+            title: 'Sin productos',
+            text: 'No hay productos que ver',
+            icon: 'warning',
+            confirmButtonText: 'Aceptar'
+          })
+        }
+
       },
       err => console.log(err)
+
     );
     this.usuarioService.verDomicilios(localStorage.getItem('idUsuario')).subscribe(
       (res: any) => {

@@ -31,6 +31,14 @@ export class ModificarUsuarioComponent implements OnInit {
      {
       this.usuarios = resUsuarios;
       console.log(this.usuarios);
+      if (resUsuarios == false){
+        Swal.fire({
+          title: 'Sin usuarios',
+          text: 'No hay usuarios disponibles',
+          icon: 'warning',
+          confirmButtonText: 'Aceptar'
+        })
+      }
     }, err => console.log(err));
     this.usuarioService.getRoles().subscribe((resRoles: any) => {
       this.roles = resRoles;
