@@ -8,7 +8,8 @@ export class Domicilio{
     idCliente: number;
     numero: number;
 
-    constructor(){
+    constructor()
+    {
         this.idDomicilio = 0;
         this.calle = '';
         this.colonia = '';

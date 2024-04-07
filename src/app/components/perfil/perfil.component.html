@@ -37,11 +37,23 @@
                 <div class="collapsible-header"><i class="material-icons">home</i>Direcciones</div>
                 <div class="collapsible-body">
                     <table class="default" *ngIf="flagD == 0">
+                        <tr>
+                            <th>Codigo postal</th>
+                            <th>Calle</th>
+                            <th>Número</th>
+                            <th>Colonia</th>
+                            <th>Ciudad</th>
+                            <th>Estado</th>
+                            <th>Editar</th>
+                            <th>Eliminar</th>
+                        </tr>
                         <tr *ngFor="let direccion of direcciones">
                             <td>{{direccion.cp}}</td>
                             <td>{{direccion.calle}}</td>
                             <td>{{direccion.numero}}</td>
                             <td>{{direccion.colonia}}</td>
+                            <td>{{direccion.ciudad}}</td>
+                            <td>{{direccion.estado}}</td>
                             <td><a class=" modal-trigger waves-effect waves-light btn pink darken-4 " data-target="modalAct" (click)="abrirActD(direccion.idDomicilio)"><i
                                 class="material-icons">edit</i></a></td>
                             <td><a class=" waves-effect waves-light btn pink darken-3" (click)="eliminarDir(direccion.idDomicilio)"><i

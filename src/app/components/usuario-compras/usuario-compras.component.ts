@@ -1,5 +1,7 @@
 import { Component,OnInit } from '@angular/core';
 import { ReportesService } from '../../services/reportes/reportes.service';
+import { UsuarioService } from '../../services/usuario/usuario.service';
+import { Domicilio } from '../../models/domicilio';
 import { Router } from '@angular/router';
 import { ventas } from '../../models/ventas';
 import { Estados } from '../../models/estados';
@@ -14,9 +16,10 @@ declare var $: any;
 })
 export class UsuarioComprasComponent implements OnInit{
   compras:ventas[] = [];
+  datos = new Domicilio();
   compraUsuario = new ventas();
   estado = new Estados();
-  constructor(private router: Router, private reportesService: ReportesService) { 
+  constructor(private router: Router, private reportesService: ReportesService,private usuarioService: UsuarioService) { 
     var id = localStorage.getItem('idUsuario');
     console.log(id);
     this.reportesService.verComprasUsuario(id).subscribe((res:any) => 
@@ -36,18 +39,24 @@ export class UsuarioComprasComponent implements OnInit{
   }
 
   abrirAct(id:any){
+    this.datos = new Domicilio();
     this.reportesService.listOne(id).subscribe((res:any) => {
       this.compraUsuario = res;
+      var idDom=this.compraUsuario.idDomicilio;
       this.reportesService.getEstado(res.idEdo).subscribe((resE :any) =>{
         this.estado = resE;
+      });
+      this.usuarioService.verDatosDomicilio(idDom).subscribe((resD:any) =>{
+        if(resD!=false)
+          this.datos = resD;
         $('#modalAct').modal('open');
- 
-      })
+      });
+      
     })
   }
 
   cerrarAct() {
-    $('#modalAct').modal().modal('close');
+    $('#modalAct').modal('close');
   }
 
   ngOnInit(): void {

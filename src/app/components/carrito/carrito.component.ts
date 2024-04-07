@@ -170,7 +170,16 @@ export class CarritoComponent implements OnInit {
     this.router.navigate(['/pagar']);
   }
   comprarCarrito() {
+    if(this.idDomicilio<=0 || this.idDomicilio==null)
+    {
+      Swal.fire(
+        'Error',
+        'Debe seleccionar un domicilio',
+        'error'
+      )
+    }
     
+    else
     {
       var objeto = new Compra();
       var fecha = new Date();//Se debe formatear la fecha a yyyy-mm-dd
@@ -182,7 +191,7 @@ export class CarritoComponent implements OnInit {
       // Formatear la fecha actual en el formato "yyyy-mm-dd"
       let fechaActualFormateada = `${año}-${mes}-${dia}`;
       //console.log(fechaActualFormateada); // Salida: "2022-02-06" (por ejemplo)
-      objeto.set(fechaActualFormateada, 1);//Cambiar fecha
+      objeto.set(fechaActualFormateada, 1,this.idDomicilio);//Cambiar fecha
       console.log("Domicilio",this.idDomicilio);
 
       this.carritoService.comprar(localStorage.getItem('idUsuario'), objeto).subscribe(

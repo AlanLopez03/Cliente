@@ -62,4 +62,8 @@ export class UsuarioService {
     return this.http.get(`${environment.API_URI}/domicilios/verDomiciliosCLiente/${idUsuario}`);
   }
 
+  verDatosDomicilio(idDomicilio: any){
+    return this.http.get(`${environment.API_URI}/domicilios/verDatosDomicilio/${idDomicilio}`);
+  }
+
 }
