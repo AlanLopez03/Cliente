@@ -39,6 +39,17 @@
     <button  data-target="modal1" class="btn modal-trigger">Comprar</button>
   </div>
 </div>
+<div class="container" *ngIf="!carrito" style="text-align: center;">
+  <br>
+  <br>
+  <br>
+  <img src="../../../assets/images/scarrito.png" width="100px">
+  <br>
+  No hay productos que Mostrar
+  <br>
+  <br>
+  <br>
+</div>
 
 
 
@@ -62,14 +73,3 @@
   </div>
 </div>
 
-<div class="container" *ngIf="!carrito" style="text-align: center;">
-  <br>
-  <br>
-  <br>
-  <img src="../../../assets/images/scarrito.png" width="100px">
-  <br>
-  No hay productos que Mostrar
-  <br>
-  <br>
-  <br>
-</div>
