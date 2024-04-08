@@ -151,7 +151,7 @@ export class CarritoComponent implements OnInit {
             },
               err => console.log(err));
           }
-          else if(decremento==null ){
+          else if(decremento==null  ){
             console.log("agregando")
             this.inserta.setAtributos(id, parseInt(a), 1);
             this.carritoService.insertar(this.inserta).subscribe((res: any) => {
