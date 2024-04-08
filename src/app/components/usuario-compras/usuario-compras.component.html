@@ -29,7 +29,7 @@
                         </tr>
                         <tr>
                             <th>Monto:</th>
-                            <td>{{compraUsuario.monto}}</td>
+                            <td>{{compraUsuario.monto | number:'1.2-2'}}</td>
                         </tr>
                         <tr>
                             <th>Estado de la compra:</th>
@@ -55,7 +55,7 @@
                                 {{pedidos[i].cantidadProducto}}
                             </td>
                             <td >
-                                {{pedidos[i].subtotal}}
+                                {{pedidos[i].subtotal| number:'1.2-2'}}
                             </td>
                         </tr>
                             <tr>

@@ -23,7 +23,7 @@
         <span >{{ producto.cantidad }}</span>
        
       </td>
-      <td>{{ producto.precio }}</td>
+      <td>{{ producto.precio* producto.descuento }} </td>
       <td>
         <a><i class="material-icons" (click)="insertarProducto(producto.idProducto)">add</i></a>
         <a><i class="material-icons" (click)="insertarProducto(producto.idProducto, -1,producto.cantidad)">remove</i></a>
