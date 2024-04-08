@@ -23,6 +23,7 @@ import { RecuperarPasswordComponent } from './components/recuperar-password/recu
 import { NewPasswordComponent } from './components/new-password/new-password.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { EscogerDomicilioComponent } from './components/escoger-domicilio/escoger-domicilio.component';
+import { OfertasComponent } from './components/ofertas/ofertas.component';
 
 
 
@@ -46,7 +47,8 @@ import { EscogerDomicilioComponent } from './components/escoger-domicilio/escoge
     RecuperarPasswordComponent,
     NewPasswordComponent,
     PerfilComponent,
-    EscogerDomicilioComponent
+    EscogerDomicilioComponent,
+    OfertasComponent
   ],
   imports: [
     FormsModule,

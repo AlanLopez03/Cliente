@@ -1,0 +1,28 @@
+<div class="contenedor">
+  <span class="titulo">Ofertas</span>
+  <table class="default" *ngIf="productos != undefined">
+    <tr>
+      <td>Nombre</td>
+      <td>Cantidad</td>
+      <td>Precio</td>
+      <td>Descuento</td>
+      <td>Fecha de inicio</td>
+      <td>Fecha Final</td>
+    </tr>
+    <tr *ngFor="let producto of productos | paginate: { itemsPerPage: pageSize, currentPage: p }; let i=index">
+      <td>{{ producto.nombre }}</td>
+      <td>{{ producto.stock }}</td>
+      <td>{{ producto.precio }}</td>
+      <td>{{ producto.descuento }}</td>
+      <td>{{ producto.inicio_descuento }}</td>
+      <td>{{ producto.fin_descuento }}</td>
+      
+    </tr>
+  </table>
+  <br><br>
+  <a class="waves-effect waves-light btn" (click)="enviarOfertas()"><i class="material-icons">send</i> Enviar Usuarios</a>
+  <br><br>
+  <div class="row center-align">
+    <pagination-controls class="my-pagination" (pageChange)="p = ($event)" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+  </div>
+</div>

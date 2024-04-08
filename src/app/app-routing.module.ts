@@ -15,6 +15,7 @@ import { RecuperarPasswordComponent } from './components/recuperar-password/recu
 import { NewPasswordComponent } from './components/new-password/new-password.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { EscogerDomicilioComponent } from './components/escoger-domicilio/escoger-domicilio.component';
+import { OfertasComponent } from './components/ofertas/ofertas.component';
 const routes: Routes = [
   { path: "", redirectTo: "login", pathMatch: "full" }, { path: 'login', component: LoginComponent, },
 
@@ -38,6 +39,7 @@ const routes: Routes = [
         { path: 'pedidos', redirectTo: 'pedidos', pathMatch: 'full' }, { path: 'pedidos', component: PedidosComponent, },
         { path: 'reportes', redirectTo: 'reportes', pathMatch: 'full' }, { path: 'reportes', component: ReportesComponent, },
         { path: 'modificarUsuario', redirectTo: 'modificarUsuario', pathMatch: 'full' }, { path: 'modificarUsuario', component: ModificarUsuarioComponent, },
+        {path:'ofertas',redirectTo:'ofertas',pathMatch:'full'},{path:'ofertas',component:OfertasComponent,}
       ]
   },
   { path: 'nuevoUsuario', component: RegistrarUsuarioComponent, },
