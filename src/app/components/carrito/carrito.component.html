@@ -20,13 +20,13 @@
     <tr *ngFor="let producto of carrito | paginate: { itemsPerPage: pageSize, currentPage: p }; let i = index">
       <td>{{ producto.nombre }}</td>
       <td>
-        <span *ngIf="producto.cantidad > 0; else noDisponible">{{ producto.cantidad }}</span>
-        <ng-template #noDisponible>No disponible</ng-template>
+        <span >{{ producto.cantidad }}</span>
+       
       </td>
       <td>{{ producto.precio }}</td>
       <td>
         <a><i class="material-icons" (click)="insertarProducto(producto.idProducto)">add</i></a>
-        <a><i class="material-icons" (click)="insertarProducto(producto.idProducto, -1)">remove</i></a>
+        <a><i class="material-icons" (click)="insertarProducto(producto.idProducto, -1,producto.cantidad)">remove</i></a>
         <a><i class="material-icons" (click)="eliminarProducto(producto.idProducto)">delete</i></a>
       </td>
     </tr>

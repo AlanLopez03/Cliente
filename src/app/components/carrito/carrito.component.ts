@@ -21,27 +21,27 @@ export class CarritoComponent implements OnInit {
   pedidos: Pedidos[] = [];
   pedido = new Pedidos();
   producto = new Producto();
+  productos: Producto[] = [];
   carrito1: Carrito = new Carrito();
   carrito: Carrito[] = [];
   pageSize = 5;
   idDomicilio: number = 0;
   p = 1;
-  constructor(private carritoService: CarritoService, private inventarioService: InventarioService, private router: Router,private usuarioService:UsuarioService) { }
+  constructor(private carritoService: CarritoService, private inventarioService: InventarioService, private router: Router, private usuarioService: UsuarioService) { }
   inserta = new addProducto();
   ngOnInit(): void {
+    this.carrito = [];
+    this.productos = [];
     $(document).ready(function () {
-      $('#direccion').click(function() {
+      $('#direccion').click(function () {
         $(this).css('background-color', '#ff0000'); // Cambiar a rojo
-    });
+      });
     })
     this.idDomicilio = 0;
     this.carritoService.listone(localStorage.getItem('idUsuario')).subscribe(
       (res: any) => {
-        this.carrito = res;
-
-        console.log("hola");
-        console.log(this.carrito);
-        if (res == false){
+       
+        if (res == false) {
           Swal.fire({
             title: 'Sin productos',
             text: 'No hay productos que ver',
@@ -49,6 +49,22 @@ export class CarritoComponent implements OnInit {
             confirmButtonText: 'Aceptar'
           })
         }
+        else {
+          this.carrito = res;
+          //console.log("Carrito",this.carrito);
+          for (let producto of this.carrito) {
+            //console.log("Producto",producto.idProducto);
+            this.inventarioService.listone(producto.idProducto).subscribe(
+              (res: any) => {
+                this.productos.push(res);
+              },
+              err => console.log(err)
+            );
+
+          }
+        }
+        //console.log("Productos", this.productos);
+
 
       },
       err => console.log(err)
@@ -56,21 +72,21 @@ export class CarritoComponent implements OnInit {
     );
     this.usuarioService.verDomicilios(localStorage.getItem('idUsuario')).subscribe(
       (res: any) => {
-        if (res!=false) {
-        this.domicilios = res;
-        console.log(this.domicilios);
-      }
+        if (res != false) {
+          this.domicilios = res;
+          //console.log(this.domicilios);
+        }
       },
-      
+
       err => console.log(err)
     );
-    
+
   }
   setDomicilio(id: any) {
     this.idDomicilio = id;
   }
   eliminarProducto(id: any) {
-    // console.log(id);
+    var idUsuario = localStorage.getItem('idUsuario');
     Swal.fire({
       title: '¿Está seguro que desea eliminar el producto del carrito?',
       text: "Esta acción no se puede revertir",
@@ -82,48 +98,80 @@ export class CarritoComponent implements OnInit {
       confirmButtonText: 'Eliminar'
     }).then((result) => {
 
-      if (result.isConfirmed) {
-        this.carritoService.eliminarProducto(id).subscribe(
-          (res: any) => {
-            Swal.fire(
-              'Producto eliminado',
-              'El producto se ha eliminado con éxito',
-              'success'
-            ).then((result) => {
-              this.ngOnInit();
-            })
-          }, err => console.log(err));
-      }
+      if (result.isConfirmed) 
+        this.carritoService.listarCompras(idUsuario).subscribe((res: any) => {
+          var productos = res;//Obtener la cantidad de productos en el carrito
+          for (let producto of productos) {
+            var datos = {
+              idProducto: producto.idProducto,
+              stock: producto.cantidad
+            }
+            //console.log("Agregando stock=", datos.stock);
+            this.inventarioService.agregarStock(datos).subscribe(
+              (res: any) => {
+
+              },
+              err => console.log(err)
+            );
+
+          }
+
+          this.carritoService.eliminarProducto(id).subscribe(
+            (res: any) => 
+              {
+              Swal.fire(
+                'Producto eliminado',
+                'El producto se ha eliminado con éxito',
+                'success'
+              ).then((result) => {
+                this.ngOnInit();
+              })
+            }, err => console.log(err));
+          })
     })
 
 
   }
-  insertarProducto(id: any, decremento?: any) {//Se debe mandar un objeto de tipo addProducto
+  insertarProducto(id: any, decremento?: any,cantidad?:any) {//Se debe mandar un objeto de tipo addProducto
+    this.producto = new Producto();
     var a = localStorage.getItem('idUsuario') ?? '1';
     var stock = 0;
-    if (decremento)
-      this.inserta.setAtributos(id, parseInt(a), -1);
-    else
-      this.inserta.setAtributos(id, parseInt(a), 1);
-    this.inventarioService.listone(id).subscribe(
-      (res: any) => {
-        stock = res.stock;//Obtiene el stock del producto
-        if (stock > 0) {
-          this.carritoService.insertar(this.inserta).subscribe((res: any) => {
-            this.ngOnInit();
-          },
-            err => console.log(err));
-        }
-        else {
-          Swal.fire(
-            'Error',
-            'No hay stock suficiente',
-            'error')
-        }
-      },
-      err => console.log(err)
 
-    );
+     this.inventarioService.listone(id).subscribe(
+       (res: any) => {
+         stock = res.stock;//Obtiene el stock del producto
+         if (stock > 0 || decremento) {//debe insertar el producto si hay stock o si se va a decrementar,ya que se retornaria un producto al stock
+          console.log("d",decremento)
+          console.log("stock",stock+decremento);
+
+          if (decremento != null && -(decremento) <= cantidad) {
+            this.inserta.setAtributos(id, parseInt(a), -1);
+            this.carritoService.insertar(this.inserta).subscribe((res: any) => {
+              this.ngOnInit();
+            },
+              err => console.log(err));
+          }
+          else if(decremento==null ){
+            console.log("agregando")
+            this.inserta.setAtributos(id, parseInt(a), 1);
+            this.carritoService.insertar(this.inserta).subscribe((res: any) => {
+              this.ngOnInit();
+            },
+              err => console.log(err));
+          }
+          
+          
+
+         }
+         else {
+           Swal.fire(
+             'Error',
+             'No hay stock suficiente',
+             'error')
+         }
+       },
+       err => console.log(err)
+     );
 
   }
   limpiarCarrito() {
@@ -141,7 +189,7 @@ export class CarritoComponent implements OnInit {
       if (result.isConfirmed) {
         //Debe agregar al stock si se limpia el carrito
         this.carritoService.listarCompras(idUsuario).subscribe((res: any) => {
-          console.log(res);
+          //console.log(res);
           //Obtenemos el arreglo con el carrito de productos
           var productos = res;//Obtener la cantidad de productos en el carrito
           for (let producto of productos) {
@@ -149,15 +197,13 @@ export class CarritoComponent implements OnInit {
               idProducto: producto.idProducto,
               stock: producto.cantidad
             }
+            //console.log("Agregando stock=", datos.stock);
             this.inventarioService.agregarStock(datos).subscribe(
-              (res: any) => {
-                console.log(res);
-              },
+
               err => console.log(err)
             );
 
           }
-
           this.carritoService.limpiarCarrito(idUsuario).subscribe(
             (res: any) => {
 
@@ -182,17 +228,15 @@ export class CarritoComponent implements OnInit {
   }
 
   comprarCarrito() {
-    if(this.idDomicilio<=0 || this.idDomicilio==null)
-    {
+    if (this.idDomicilio <= 0 || this.idDomicilio == null) {
       Swal.fire(
         'Error',
         'Debe seleccionar un domicilio',
         'error'
       )
     }
-    
-    else
-    {
+
+    else {
       var objeto = new Compra();
       var fecha = new Date();//Se debe formatear la fecha a yyyy-mm-dd
       let fechaActual = new Date();
@@ -203,8 +247,8 @@ export class CarritoComponent implements OnInit {
       // Formatear la fecha actual en el formato "yyyy-mm-dd"
       let fechaActualFormateada = `${año}-${mes}-${dia}`;
       //console.log(fechaActualFormateada); // Salida: "2022-02-06" (por ejemplo)
-      objeto.set(fechaActualFormateada, 1,this.idDomicilio);//Cambiar fecha
-      console.log("Domicilio",this.idDomicilio);
+      objeto.set(fechaActualFormateada, 1, this.idDomicilio);//Cambiar fecha
+      //console.log("Domicilio",this.idDomicilio);
 
       this.carritoService.comprar(localStorage.getItem('idUsuario'), objeto).subscribe(
         (res: any) => {
@@ -222,6 +266,7 @@ export class CarritoComponent implements OnInit {
               'success'
             )
             this.router.navigateByUrl('/home');
+            this.producto = new Producto();
             //this.ngOnInit();
           }
 
@@ -231,3 +276,4 @@ export class CarritoComponent implements OnInit {
     }
   }
 }
+
