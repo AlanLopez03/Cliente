@@ -5,6 +5,10 @@ import { Domicilio } from '../../models/domicilio';
 import { Router } from '@angular/router';
 import { ventas } from '../../models/ventas';
 import { Estados } from '../../models/estados';
+import { PedidosService } from '../../services/pedidos/pedidos.service';
+import { InventarioService } from '../../services/inventario/inventario.service';
+import { Pedidos } from '../../models/pedidos';
+import { Producto } from '../../models/producto';
 import Swal from 'sweetalert2';
 
 declare var $: any;
@@ -15,11 +19,13 @@ declare var $: any;
   styleUrl: './usuario-compras.component.css'
 })
 export class UsuarioComprasComponent implements OnInit{
+  pedidos:Pedidos[] = [];
+  productos:Producto[] = [];
   compras:ventas[] = [];
   datos = new Domicilio();
   compraUsuario = new ventas();
   estado = new Estados();
-  constructor(private router: Router, private reportesService: ReportesService,private usuarioService: UsuarioService) { 
+  constructor(private router: Router, private reportesService: ReportesService,private usuarioService: UsuarioService,private pedidosService: PedidosService,private inventarioService: InventarioService) { 
     var id = localStorage.getItem('idUsuario');
     console.log(id);
     this.reportesService.verComprasUsuario(id).subscribe((res:any) => 
@@ -39,6 +45,7 @@ export class UsuarioComprasComponent implements OnInit{
   }
 
   abrirAct(id:any){
+    
     this.datos = new Domicilio();
     this.reportesService.listOne(id).subscribe((res:any) => {
       this.compraUsuario = res;
@@ -49,8 +56,22 @@ export class UsuarioComprasComponent implements OnInit{
       this.usuarioService.verDatosDomicilio(idDom).subscribe((resD:any) =>{
         if(resD!=false)
           this.datos = resD;
-        $('#modalAct').modal('open');
+        
       });
+      this.pedidos = [];//Limpiamos el arreglo
+      this.productos = [];//Limpiamos el arreglo
+      console.log(id);
+      this.pedidosService.verPedidos(id).subscribe((res:any) => {
+        this.pedidos = res;
+        if (res!=false)
+          for (let i = 0; i < res.length; i++) 
+            this.inventarioService.listone(res[i].idProducto).subscribe((resP:any) => {
+              this.productos.push(resP);
+            });
+        
+      });
+      $('#modalAct').modal('open');
+ 
       
     })
   }

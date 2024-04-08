@@ -1,3 +1,4 @@
+<div class="contenedor">
 <div class="container">
     <table>
         <thead>
@@ -40,8 +41,27 @@
                             <td>Colonia {{datos.colonia}},{{datos.ciudad}} {{datos.estado}}</td>
                         </tr>
                         <tr>
-                            <th>Productos comprados:</th>
+                            <th>Productos:</th>
+                            <th>Nombre</th>
+                            <th>Cantidad</th>
+                            <th>Total</th>
                         </tr>
+                        <tr *ngFor="let producto of productos,let i=index">
+                            <th> </th>
+                            <td >
+                                {{producto.nombre}}
+                            </td>
+                            <td >
+                                {{pedidos[i].cantidadProducto}}
+                            </td>
+                            <td >
+                                {{pedidos[i].subtotal}}
+                            </td>
+                        </tr>
+                            <tr>
+                                <th>Total:</th>
+                                <td>{{compraUsuario.monto | number:'1.2-2'}}</td>
+                            </tr>
 
                     </tbody>
                 </table>
@@ -51,4 +71,5 @@
     <div class="modal-footer">
         <a (click)="cerrarAct()" class="waves-effect waves-light btn pink darken-3">Cerrar</a>
     </div>
+</div>
 </div>

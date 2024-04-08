@@ -222,7 +222,7 @@ export class CarritoComponent implements OnInit {
               'success'
             )
             this.router.navigateByUrl('/home');
-            this.ngOnInit();
+            //this.ngOnInit();
           }
 
         },
