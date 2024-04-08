@@ -10,6 +10,13 @@ export class CorreoService {
   {
   return this.http.post(`${environment.API_URI_CORREOS}/enviarCorreoRecuperarContrasenya/`,body);
   }
+
+  enviarCorreoOfertas(productos:any,correo:any)
+  {
+    const body = { productos, correo };
+  return this.http.post(`${environment.API_URI_CORREOS}/enviarCorreoOferta/`,body);
+}
+
   decodificarMail(token:any)
   {
   let dato={"token":token};

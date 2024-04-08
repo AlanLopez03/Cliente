@@ -22,6 +22,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { RecuperarPasswordComponent } from './components/recuperar-password/recuperar-password.component';
 import { NewPasswordComponent } from './components/new-password/new-password.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
+import { OfertasComponent } from './components/ofertas/ofertas.component';
 
 
 
@@ -44,7 +45,8 @@ import { PerfilComponent } from './components/perfil/perfil.component';
     UsuarioComprasComponent,
     RecuperarPasswordComponent,
     NewPasswordComponent,
-    PerfilComponent
+    PerfilComponent,
+    OfertasComponent
   ],
   imports: [
     FormsModule,
