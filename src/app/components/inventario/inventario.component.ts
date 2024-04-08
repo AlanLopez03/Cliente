@@ -41,8 +41,13 @@ export class InventarioComponent  implements OnInit{
       $('.modal').modal();  
       $('.datepicker').datepicker({
         format: 'yyyy-mm-dd'
-      });      
+      }); 
+      $('#descuento').prop('checked', false);
+      $('#inicio_descuento').prop('disabled', true);
+      $('#fin_descuento').prop('disabled', true);  
+      $('#name1').prop('disabled',true);   
     });
+
     this.inventarioService.list().subscribe((resProductos:any) => {
       this.productos = resProductos;
       for(let i=0;i<this.productos.length;i++){
@@ -68,24 +73,18 @@ export class InventarioComponent  implements OnInit{
     }, err => console.log(err));
 
   }
-  //buscarProducto(id:any){
-  //  console.log(id);
-  //  this.inventarioService.listone(id).subscribe((resProducto:any) => {
-  //    if (resProducto ) {
-  //    this.producto = resProducto;
-  //    this.openModificarProducto();
-  //  }
-  //    else{
-  //      Swal.fire({
-  //        position: 'center',
-  //        icon: 'error',
-  //        title: 'Producto no encontrado',
-  //        showConfirmButton: true,
-  //        timer: 1500
-  //      })
-  //    }
-  //  }, err => console.log(err));
-  //}
+  revisarDescuento(){
+    if($('#descuento').is(':checked')){
+      $('#inicio_descuento').prop('disabled', false);
+      $('#fin_descuento').prop('disabled', false);
+      $('#name1').prop('disabled',false);
+    }
+    else{
+      $('#inicio_descuento').prop('disabled', true);
+      $('#fin_descuento').prop('disabled', true);
+      $('#name1').prop('disabled',true);
+    }
+  }
   buscarProducto(name:any){
     if(name!='' && name!=null)
     {

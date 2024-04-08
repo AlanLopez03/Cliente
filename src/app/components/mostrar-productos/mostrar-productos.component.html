@@ -32,7 +32,9 @@
   <div class="cajita" *ngFor="let producto of productos">
     <div class="card small">
       <p>{{producto.nombre}}</p>
-      <p>{{producto.precio}}</p>
+      <p *ngIf="producto.descuento <1"> Descuento disponible {{producto.descuento*100}}%</p>
+      <p *ngIf="producto.descuento <1">A tan sólo  {{producto.precio *producto.descuento}}</p>
+      <p *ngIf="producto.descuento==1">{{producto.precio}}</p>
       <p>{{producto.descripcion}}</p>
       <a class="waves-effect waves-light btn" (click)="agregarProducto(producto.idProducto)"><i
           class="material-icons left">add</i>Agregar</a>

@@ -24,9 +24,36 @@ constructor(private inventarioService: InventarioService,private carritoService:
 }
       );
     });
-    this.inventarioService.list().subscribe(
+    if(localStorage.getItem("Categoria")==null || localStorage.getItem("Categoria")=='0' ){
+        this.inventarioService.list().subscribe(
+          (res:any) => {
+            this.productos = res;
+          },
+          err => console.log(err)
+      );
+    }else{
+      this.inventarioService.buscarporCategoria(localStorage.getItem("Categoria")).subscribe((res:any)=>{
+        this.productos= res
+      },err => console.log(err)
+      );
+      localStorage.removeItem("Categoria")
+    } 
+    this.inventarioService.flagObservable$.subscribe((res:any) => {
+      this.listarOfertas();
+    })
+
+  }
+  listarOfertas(){
+    this.inventarioService.obtenerOfertas().subscribe(
       (res:any) => {
-        this.productos = res;
+        if (res.length>0)
+          this.productos = res;
+        else
+        Swal.fire(
+          'Error',
+          'No hay ofertas disponibles',
+          'error')
+      
       },
       err => console.log(err)
     );
