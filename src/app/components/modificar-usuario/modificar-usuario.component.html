@@ -44,11 +44,11 @@
               <label class="active">Nombre de usuario </label>
               <input   [(ngModel)]="usuario.username"  type="text" class="validate">
         </div>        
-        <div class="row">
+        <!-- <div class="row">
             <div class="input-field col s12">
               <label class="active">Contraseña </label>
               <input   [(ngModel)]="usuario.password"  type="text" class="validate">
-        </div>
+        </div> -->
             <a class='dropdown-trigger btn' href='#' data-target='dropdown1' *ngIf="roles!=undefined">{{rol.nombreRol}}</a>
             <ul id='dropdown1' class='dropdown-content' >
                 <li *ngFor="let rol of roles">
