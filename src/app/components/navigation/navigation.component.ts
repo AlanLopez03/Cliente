@@ -44,7 +44,7 @@ constructor(private router:Router,private categoriaService:CategoriaService,priv
     console.log('salir');
     console.log(localStorage.getItem('idUsuario'));
     localStorage.removeItem('idUsuario');
-    this.router.navigateByUrl('/');
+    this.router.navigateByUrl('/login');
 
   }
 

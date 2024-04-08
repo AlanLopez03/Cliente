@@ -40,7 +40,19 @@ export class InventarioComponent  implements OnInit{
       $('.dropdown-trigger').dropdown();
       $('.modal').modal();  
       $('.datepicker').datepicker({
-        format: 'yyyy-mm-dd'
+        format: 'yyyy-mm-dd',
+        i18n: {
+          cancel: 'Cancelar',
+          clear: 'Limpiar',
+          done: 'Aceptar',
+          previousMonth: '‹',
+          nextMonth: '›',
+          months: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+          monthsShort: ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
+          weekdays: ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
+          weekdaysShort: ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'],
+          weekdaysAbbrev:	['D','L','M','M','J','V','S']
+        }
       }); 
       $('#descuento').prop('checked', false);
       $('#inicio_descuento').prop('disabled', true);
