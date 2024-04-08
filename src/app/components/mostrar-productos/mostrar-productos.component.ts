@@ -24,18 +24,19 @@ export class MostrarProductosComponent implements OnInit {
       }
       );
     });
-    if (localStorage.getItem("Categoria") == null || localStorage.getItem("Categoria") == '0') {
+    if ((localStorage.getItem("Categoria") == null || localStorage.getItem("Categoria") == '0' ) ||  localStorage.getItem("Arreglo") == null) {
       this.inventarioService.list().subscribe(
         (res: any) => {
           this.productos = res;
         },
         err => console.log(err)
       );
-    } else {
-      this.inventarioService.buscarporCategoria(localStorage.getItem("Categoria")).subscribe((res: any) => {
-        console.log(res)
-        console.log("Ingreso")
-        if(res.length == 0){
+    }else {
+    const productosString = localStorage.getItem('Arreglo');
+      if (productosString != '9' && productosString != null) {
+        this.productos = JSON.parse(productosString);
+      }else{
+        if(localStorage.getItem("Categoria") == "-1"){
           Swal.fire({
             title: 'Sin productos',
             text: 'No hay productos por mostrar',
@@ -43,19 +44,32 @@ export class MostrarProductosComponent implements OnInit {
             confirmButtonText: 'Aceptar'
           })
         }
-        else{
-          this.productos = res
-          console.log("Hay productos")
+        //this.reloadPage();
+        if (localStorage.getItem("Categoria") != "-1") {
+          this.inventarioService.buscarporCategoria(localStorage.getItem("Categoria")).subscribe((res: any) => {
+            console.log(res)
+            console.log("Ingreso")
+            if(res.length == 0){
+              Swal.fire({
+                title: 'Sin productos',
+                text: 'No hay productos por mostrar en esta categoria',
+                icon: 'warning',
+                confirmButtonText: 'Aceptar'
+              })
+            }
+            else{
+              this.productos = res
+              console.log("Hay productos")
+            }
+          }, err => console.log(err)
+          );
         }
-      }, err => console.log(err)
-      );
-      localStorage.removeItem("Categoria")
+      }
     }
-    this.inventarioService.flagObservable$.subscribe((res: any) => {
-      this.listarOfertas();
-    })
-
+    localStorage.removeItem("Categoria");
+    localStorage.removeItem("Arreglo");
   }
+
   listarOfertas() {
     this.inventarioService.obtenerOfertas().subscribe(
       (res: any) => {
@@ -147,6 +161,5 @@ export class MostrarProductosComponent implements OnInit {
       err => console.log(err)
     );
   }
-
-
 }
+
