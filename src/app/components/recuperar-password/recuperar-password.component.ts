@@ -40,6 +40,7 @@ export class RecuperarPasswordComponent {
             icon: 'info',
             confirmButtonText: 'Aceptar'
           })
+          this.router.navigateByUrl('/login');
         }
         else{
           Swal.fire({

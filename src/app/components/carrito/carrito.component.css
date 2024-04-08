@@ -5,3 +5,16 @@
     border: saddlebrown 1px solid;
     text-align: center;
 }
+
+.divOlvide
+{
+    color: rgb(0, 0, 0);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    background: #c7f7f7;
+}
+
+.pagination{
+    background: #aedddd;
+}

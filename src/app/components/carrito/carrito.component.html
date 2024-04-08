@@ -1,12 +1,14 @@
+<div class="divOlvide">
+  <h4>
+    Carrito de compras
+  </h4>
+</div>
 
-
-
-
-<ng-container *ngIf="carrito.length > 0">
-  <div>
-    <h1>Carrito</h1>
+<div class="container" *ngIf="!carrito">
+  <div class="row center-align">
+    <img src="../../../assets/images/no-product.png">
   </div>
-</ng-container>
+</div>
 
 <div class="container" *ngIf="carrito">
   <table class="default" *ngIf="carrito != undefined">

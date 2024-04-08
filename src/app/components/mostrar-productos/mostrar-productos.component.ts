@@ -17,6 +17,8 @@ export class MostrarProductosComponent implements OnInit {
   producto = new Producto();
   productos: Producto[] = [];
   buscar: string = '';
+  imagenes = ["anillo_u.jpg", "aretes_u.jpg", "arracadas_u.jpg", "esclavas_u.jpg", "Dijes_u.jpg", "Corazon.jpeg"]
+  campoEnfocado: boolean = false;
   constructor(private inventarioService: InventarioService, private carritoService: CarritoService, private router: Router) { }
   ngOnInit(): void {
     $(document).ready(function () {
@@ -33,8 +35,6 @@ export class MostrarProductosComponent implements OnInit {
       );
     } else {
       this.inventarioService.buscarporCategoria(localStorage.getItem("Categoria")).subscribe((res: any) => {
-        console.log(res)
-        console.log("Ingreso")
         if(res.length == 0){
           Swal.fire({
             title: 'Sin productos',
@@ -66,22 +66,29 @@ export class MostrarProductosComponent implements OnInit {
             'Error',
             'No hay ofertas disponibles',
             'error')
-
       },
       err => console.log(err)
     );
-
-
-
   }
 
   Restablecer() {
+    this.buscar = '';
     this.inventarioService.list().subscribe(
       (res: any) => {
         this.productos = res;
       },
       err => console.log(err)
     );
+  }
+
+  quitarTexto(){
+    this.campoEnfocado = true;
+  }
+
+  restaurarTexto(){
+    if (this.buscar === '') {
+      this.campoEnfocado = false;
+    }
   }
 
   agregarProducto(id: any) {//Recibe el id del producto
@@ -109,33 +116,29 @@ export class MostrarProductosComponent implements OnInit {
         }
       },
       err => console.log(err)
-
     );
-
-
   }
 
   Buscar() {
-    console.log("Holaaaaaa");
-    console.log("La variable tiene", this.buscar);
-    this.inventarioService.BuscarProducto(this.buscar).subscribe((res: any) => {
-      if (res.id_producto == -1) {
-        this.productos = [];
-      }
-      else {
-        console.log("YA ENTRO");
-        console.log(res);
-        this.productos = res;
-        /*this.inventarioService.list().subscribe(
-          (res:any) => {
-            this.productos = res;
-          },
-          err => console.log(err)
-        );*/
-      }
-    },
-      err => console.log(err)
-    );
+    if( this.buscar == ''){
+      this.inventarioService.list().subscribe(
+        (res: any) => {
+          this.productos = res;
+        },
+        err => console.log(err)
+      );
+    } else {
+      this.inventarioService.BuscarProducto(this.buscar).subscribe((res: any) => {
+        if (res.id_producto == -1) {
+          this.productos = [];
+        }
+        else {
+          this.productos = res;
+        }
+      },
+        err => console.log(err)
+      );
+    }
   }
 
   filtrarProductos(id: any) {
@@ -148,5 +151,19 @@ export class MostrarProductosComponent implements OnInit {
     );
   }
 
-
+  seleccionarImagen(Categoria : any) : string {
+    if(Categoria == 1)
+      return this.imagenes[0]
+    if(Categoria == 2)
+      return this.imagenes[1]
+    if(Categoria == 3)
+      return this.imagenes[2]
+    if(Categoria == 4)
+      return this.imagenes[3]
+    if(Categoria == 5)
+      return this.imagenes[4]
+    if(Categoria == 8)
+      return this.imagenes[5]
+    return "img1.png"
+  }
 }

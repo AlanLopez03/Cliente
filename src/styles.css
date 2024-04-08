@@ -1,15 +1,15 @@
-.wrapper {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; /* Asegura que el contenido mínimo ocupe toda la altura de la pantalla */
-  }
-  
-  .content {
-    flex: 1;
-  }
-  
-  .page-footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-  }
+body > app-root > app-inicio{
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+body > app-root > app-control{
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
