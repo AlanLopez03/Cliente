@@ -12,7 +12,7 @@
   <nav>
     <div class="nav-wrapper">
       <div class="input-field ">
-        <input [(ngModel)]="buscar" type="search" id = "search" class="validate" (input)="Buscar()">
+        <input [(ngModel)]="buscar" type="search" id="search" class="validate" (input)="Buscar()">
         <label class="label-icon" for="search"><i class="material-icons">search</i></label>
         <!--<button class="btn waves-effect waves-light right" type="button" (click)="Buscar()">Buscar<i
             class="material-icons right">send</i></button>
@@ -21,7 +21,8 @@
     </div>
   </nav>
 </div>
-<button class="btn waves-effect waves-light" type="button" (click)="Restablecer()" style="position: absolute; top:0px; right: 513px; height: 64px;">
+<button class="btn waves-effect waves-light" type="button" (click)="Restablecer()"
+  style="position: absolute; top:0px; right: 513px; height: 64px;">
   <i class="material-icons right">refresh</i>
 </button>
 
@@ -33,7 +34,7 @@
     <div class="card small">
       <p>{{producto.nombre}}</p>
       <p *ngIf="producto.descuento <1"> Descuento disponible {{producto.descuento*100}}%</p>
-      <p *ngIf="producto.descuento <1">A tan sólo  {{producto.precio *producto.descuento}}</p>
+      <p *ngIf="producto.descuento <1">A tan sólo {{producto.precio *producto.descuento}}</p>
       <p *ngIf="producto.descuento==1">{{producto.precio}}</p>
       <p>{{producto.descripcion}}</p>
       <a class="waves-effect waves-light btn" (click)="agregarProducto(producto.idProducto)"><i

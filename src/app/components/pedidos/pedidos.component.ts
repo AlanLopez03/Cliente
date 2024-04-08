@@ -3,6 +3,8 @@ import { PedidosService } from '../../services/pedidos/pedidos.service';
 import { ReportesService } from '../../services/reportes/reportes.service';
 import { Router } from '@angular/router';
 import { OnInit } from '@angular/core';
+import Swal from 'sweetalert2'
+
 @Component({
   selector: 'app-pedidos',
   templateUrl: './pedidos.component.html',
@@ -17,6 +19,14 @@ export class PedidosComponent implements OnInit {
       res => {
         this.pedidos = res;
         console.log(res);
+        if (this.pedidos.length == 0){
+          Swal.fire({
+            title: 'No hay pedidos',
+            text: 'Por el momento, no hay pedidos por mostrar',
+            icon: 'warning',
+            confirmButtonText: 'Aceptar'
+          })
+        }
       },
       err => console.log(err)
     );

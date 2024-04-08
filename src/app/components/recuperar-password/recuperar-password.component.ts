@@ -17,6 +17,7 @@ export class RecuperarPasswordComponent {
   constructor(private usuarioService: UsuarioService, private router: Router,private correoService:CorreoService) { }
 
   enviarCorreo() {
+
     if (this.usuario.correo == ""){
       Swal.fire({
         title: 'Error',
