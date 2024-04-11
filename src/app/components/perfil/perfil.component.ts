@@ -1,4 +1,4 @@
-import { Component,OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from '../../services/usuario/usuario.service';
 import { Rol } from '../../models/rolModel';
 import { Domicilio } from '../../models/domicilio';
@@ -6,6 +6,8 @@ import { getUsuario } from '../../models/getUsuario';
 import Swal from 'sweetalert2';
 import { Usuario } from '../../models/Usuario';
 import { Route, Router } from '@angular/router';
+import { environment } from '../../environments/environment';
+import { ImagenesService } from '../../services/imagenes/imagenes.service';
 
 declare var $: any;
 
@@ -14,30 +16,41 @@ declare var $: any;
   templateUrl: './perfil.component.html',
   styleUrl: './perfil.component.css'
 })
-export class PerfilComponent implements OnInit{
-  constructor(private usuarioService:UsuarioService,private router:Router){}
+export class PerfilComponent implements OnInit {
+  constructor(private usuarioService: UsuarioService, private router: Router,private imagenesService:ImagenesService) {
+    this.imgPrincipal = null;
+    this.fileToUpload = null;
+   }
   usuario: getUsuario = new getUsuario();
   rol: Rol = new Rol();
   direcciones: Domicilio[] = [];
-  direccion : Domicilio = new Domicilio();
+  direccion: Domicilio = new Domicilio();
   idUsuario = 0;
   flagD = 0;
+  imgPrincipal: any;
+  fileToUpload: any ;
+
+  liga: string = environment.API_URL_IMAGENES+'/usuarios/'+localStorage.getItem('idUsuario')+'.jpg';
   ngOnInit(): void {
     $(document).ready(function () {
       $('.modal').modal();
-      $('.collapsible').collapsible();}
+      $('.collapsible').collapsible();
+    }
     );
+    this.imgPrincipal = null;
+
+
     this.usuarioService.listone(localStorage.getItem('idUsuario')).subscribe((resusuario: any) => {
       this.usuario = resusuario;
       this.idUsuario = resusuario.idUsuario;
-      this.usuarioService.getRol(this.usuario.idRol).subscribe((resRol: any) =>{
+      this.usuarioService.getRol(this.usuario.idRol).subscribe((resRol: any) => {
         this.rol = resRol;
         this.usuarioService.getDomicilio(localStorage.getItem('idUsuario')).subscribe((resDir: any) => {
           this.direcciones = resDir;
           this.flagD = 0;
           console.log(this.direcciones);
-        },err => this.flagD= 1)
-      },err => console.log(err))
+        }, err => this.flagD = 1)
+      }, err => console.log(err))
     }, err => console.log(err));
   }
 
@@ -68,7 +81,7 @@ export class PerfilComponent implements OnInit{
 
       this.direccion = resdir;
       $('#modalAct').modal('open');
-      
+
     },
       err => console.error(err)
     );
@@ -78,11 +91,27 @@ export class PerfilComponent implements OnInit{
     $('#modalAct').modal('close')
   }
 
+  cargandoImagen(event: any) {
+    this.imgPrincipal = null;
+    const files: FileList = event.target.files;
+
+      this.fileToUpload = files.item(0);
+      let imgPromise = this.getFileBlob(this.fileToUpload);
+      imgPromise.then(blob => {
+        this.imagenesService.guardarImagen(this.usuario.idUsuario,"usuarios",blob ).subscribe(
+          (res: any) => {
+            this.imgPrincipal = blob;
+          },
+          err => console.error(err));
+      })
+    
+  }
+
   agregarDireccion() {
     this.direccion.idCliente = this.idUsuario;
-    this.usuarioService.crearDomicilio(this.direccion).subscribe((resD: any) =>{
+    this.usuarioService.crearDomicilio(this.direccion).subscribe((resD: any) => {
       this.cerrarND();
-      this.usuarioService.getDomicilio(localStorage.getItem('idUsuario')).subscribe((resDir: any) =>{
+      this.usuarioService.getDomicilio(localStorage.getItem('idUsuario')).subscribe((resDir: any) => {
         this.direcciones = resDir
         Swal.fire({
           title: "Exito!",
@@ -95,9 +124,9 @@ export class PerfilComponent implements OnInit{
 
   actualizarDireccion() {
     this.direccion.idCliente = this.idUsuario;
-    this.usuarioService.actualizarDomicilio(this.direccion).subscribe((resD: any) =>{
+    this.usuarioService.actualizarDomicilio(this.direccion).subscribe((resD: any) => {
       this.cerrarActD();
-      this.usuarioService.getDomicilio(localStorage.getItem('idUsuario')).subscribe((resDir: any) =>{
+      this.usuarioService.getDomicilio(localStorage.getItem('idUsuario')).subscribe((resDir: any) => {
         this.direcciones = resDir
         Swal.fire({
           title: "Exito!",
@@ -108,7 +137,7 @@ export class PerfilComponent implements OnInit{
     })
   }
 
-  eliminarDir(id: any){
+  eliminarDir(id: any) {
     Swal.fire({
       title: "¿Estas seguro de eliminar esta direccion?",
       text: "No será posible revertir este cambio!",
@@ -139,7 +168,7 @@ export class PerfilComponent implements OnInit{
     });
   }
 
-  actualizar(){
+  actualizar() {
     Swal.fire({
       title: "¿Estas seguro de editar el perfil?",
       icon: "warning",
@@ -169,6 +198,20 @@ export class PerfilComponent implements OnInit{
     });
   }
 
-
+  getFileBlob(file: File): Promise<string | ArrayBuffer | null> {
+    const reader = new FileReader();
+    return new Promise((resolve, reject) => {
+      reader.onload = () => {
+        // Aseguramos que reader.result sea manejado adecuadamente
+        resolve(reader.result);
+      };
+      reader.onerror = error => {
+        // Manejo del error
+        reject(error);
+      };
+      // Inicia la lectura del contenido del Blob, que será completada con el evento load.
+      reader.readAsDataURL(file);
+    });
+  }
 
 }

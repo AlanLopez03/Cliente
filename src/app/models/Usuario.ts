@@ -8,11 +8,11 @@ export class Usuario {
     constructor() {
 
         this.nombre = '';//Unir nombre y apellido
-        //this.apellido = '';
         this.correo = '';
         this.username = '';
         this.password = '';
         this.idRol = 2;
+
     }
 }
 export class UsuarioPassword {
