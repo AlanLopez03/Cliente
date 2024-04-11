@@ -1,14 +1,13 @@
 <div class="container">
     <div class="row">
         <div class="col s4 m4">
-             <!-- <img src="../../../assets/images/profile.png" width="100%"> -->
-
-            <!-- <input type="file" (change)="cargandoImagen($event.target)" multiple>  -->
             <img *ngIf="usuario.foto == 0" src="../../../assets/images/profile.png" width="100%">
             <img *ngIf="usuario.foto == 1" [src]="liga" [alt]="liga" width="100%"> 
+            <div>
+                <input type="file"  (change)="cargandoImagen($event)" multiple>    
+            </div>
         </div>
-
-             <input type="file" (change)="cargandoImagen($event)" multiple>      
+        
         <div class="col s8 m8">
             <table class="striped" *ngIf="usuario != undefined">
                 <thead>

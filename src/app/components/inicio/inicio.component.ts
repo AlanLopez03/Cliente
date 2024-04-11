@@ -25,7 +25,7 @@ getProductos()
     this.inventarioService.list().subscribe(
       (res:any) => {
         this.productos = res;
-        console.log(res);
+        //console.log(res);
       },err => console.log(err)
       );
   }

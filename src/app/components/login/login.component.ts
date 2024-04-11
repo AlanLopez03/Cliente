@@ -19,9 +19,11 @@ logueo(){
       if (res) 
       {
         this.usuarioService.listone(res.idUsuario).subscribe(res => 
-        {console.log(res);},err => console.log(err));
+        {//console.log(res);
+
+        },err => console.log(err));
         localStorage.setItem('idUsuario',res.idUsuario);
-        console.log(res);
+        //console.log(res);
         if (res.idRol == 1){   
           this.router.navigateByUrl('/control');}
         else
@@ -34,5 +36,8 @@ logueo(){
   );
 }
 listone(){
-  this.usuarioService.listone(1).subscribe(res => {console.log(res);},err => console.log(err));}
+  this.usuarioService.listone(1).subscribe(res => {
+    //console.log(res);
+  },
+    err => console.log(err));}
 }

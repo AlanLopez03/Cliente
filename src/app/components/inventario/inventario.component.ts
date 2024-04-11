@@ -112,7 +112,7 @@ export class InventarioComponent  implements OnInit{
         nombre: name
       }
       this.inventarioService.buscarProducto(data).subscribe((res:any) => {
-        console.log(res);
+        //console.log(res);
         if (res.length>0) {
           this.productos = res;
         }

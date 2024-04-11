@@ -17,10 +17,10 @@ declare var $: any;
   styleUrl: './perfil.component.css'
 })
 export class PerfilComponent implements OnInit {
-  constructor(private usuarioService: UsuarioService, private router: Router,private imagenesService:ImagenesService) {
+  constructor(private usuarioService: UsuarioService, private router: Router, private imagenesService: ImagenesService) {
     this.imgPrincipal = null;
     this.fileToUpload = null;
-   }
+  }
   usuario: getUsuario = new getUsuario();
   rol: Rol = new Rol();
   direcciones: Domicilio[] = [];
@@ -28,9 +28,9 @@ export class PerfilComponent implements OnInit {
   idUsuario = 0;
   flagD = 0;
   imgPrincipal: any;
-  fileToUpload: any ;
+  fileToUpload: any;
 
-  liga: string = environment.API_URL_IMAGENES+'/usuarios/'+localStorage.getItem('idUsuario')+'.jpg';
+  liga: string = environment.API_URL_IMAGENES + '/usuarios/' + localStorage.getItem('idUsuario') + '.jpg';
   ngOnInit(): void {
     $(document).ready(function () {
       $('.modal').modal();
@@ -48,7 +48,6 @@ export class PerfilComponent implements OnInit {
         this.usuarioService.getDomicilio(localStorage.getItem('idUsuario')).subscribe((resDir: any) => {
           this.direcciones = resDir;
           this.flagD = 0;
-          console.log(this.direcciones);
         }, err => this.flagD = 1)
       }, err => console.log(err))
     }, err => console.log(err));
@@ -92,19 +91,31 @@ export class PerfilComponent implements OnInit {
   }
 
   cargandoImagen(event: any) {
-    this.imgPrincipal = null;
-    const files: FileList = event.target.files;
+    if (event.target.files && event.target.files[0])
+      Swal.fire({
+        title: "¿Estas seguro de agregar la imagen?",
 
-      this.fileToUpload = files.item(0);
-      let imgPromise = this.getFileBlob(this.fileToUpload);
-      imgPromise.then(blob => {
-        this.imagenesService.guardarImagen(this.usuario.idUsuario,"usuarios",blob ).subscribe(
-          (res: any) => {
-            this.imgPrincipal = blob;
-          },
-          err => console.error(err));
-      })
-    
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Guardar imagen"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.imgPrincipal = null;
+          const files: FileList = event.target.files;
+          this.fileToUpload = files.item(0);
+          let imgPromise = this.getFileBlob(this.fileToUpload);
+          imgPromise.then(blob => {
+            this.imagenesService.guardarImagen(this.usuario.idUsuario, "usuarios", blob).subscribe(
+              (res: any) => {
+                this.imgPrincipal = blob;
+                window.location.reload();
+              },
+              err => console.error(err));
+          });
+        }
+      });
   }
 
   agregarDireccion() {
