@@ -6,7 +6,9 @@ import { addProducto } from '../../models/carrito';
 import { CarritoService } from '../../services/carrito/carrito.service';
 import Swal from 'sweetalert2';
 import { ChangeDetectorRef } from '@angular/core';
+import { environment } from '../../environments/environment';
 declare var $: any;
+
 @Component({
   selector: 'app-mostrar-productos',
   templateUrl: './mostrar-productos.component.html',
@@ -17,9 +19,16 @@ export class MostrarProductosComponent implements OnInit {
   producto = new Producto();
   productos: Producto[] = [];
   buscar: string = '';
-  imagenes = ["anillo_u.jpg", "aretes_u.jpg", "arracadas_u.jpg", "esclavas_u.jpg", "Dijes_u.jpg", "Corazon.jpeg"]
   campoEnfocado: boolean = false;
-  constructor(private inventarioService: InventarioService, private carritoService: CarritoService, private router: Router) { }
+  imgPrincipal: any;
+  fileToUpload: any;
+  liga: string = environment.API_URL_IMAGENES + '/productos';
+
+  constructor(private inventarioService: InventarioService, private carritoService: CarritoService, private router: Router) {
+    this.imgPrincipal = null;
+    this.fileToUpload = null;
+  }
+
   ngOnInit(): void {
     $(document).ready(function () {
       $('.carousel').carousel({
@@ -55,8 +64,6 @@ export class MostrarProductosComponent implements OnInit {
         //this.reloadPage();
         if (localStorage.getItem("Categoria") != "-1") {
           this.inventarioService.buscarporCategoria(localStorage.getItem("Categoria")).subscribe((res: any) => {
-            console.log(res)
-            console.log("Ingreso")
             if(res.length == 0){
               Swal.fire({
                 title: 'Sin productos',
@@ -67,7 +74,6 @@ export class MostrarProductosComponent implements OnInit {
             }
             else{
               this.productos = res
-              console.log("Hay productos")
             }
           }, err => console.log(err)
           );
@@ -171,23 +177,6 @@ export class MostrarProductosComponent implements OnInit {
       },
       err => console.log(err)
     );
-  }
-
-
-  seleccionarImagen(Categoria : any) : string {
-    if(Categoria == 1)
-      return this.imagenes[0]
-    if(Categoria == 2)
-      return this.imagenes[1]
-    if(Categoria == 3)
-      return this.imagenes[2]
-    if(Categoria == 4)
-      return this.imagenes[3]
-    if(Categoria == 5)
-      return this.imagenes[4]
-    if(Categoria == 8)
-      return this.imagenes[5]
-    return "img1.png"
   }
 
 }

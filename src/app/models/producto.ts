@@ -10,6 +10,7 @@ export class Producto{
     idMaterial: number;
     idCategoria: number;
     idMarca: number;
+    foto: number;
     constructor(){
         this.idProducto = 1;
         this.nombre = '';
@@ -22,5 +23,6 @@ export class Producto{
         this.idMaterial = 1;
         this.idCategoria = 1;
         this.idMarca = 1;
+        this.foto = 0;
     }
 }
