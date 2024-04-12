@@ -1,23 +1,30 @@
 <div class="contenedor">
-  <div>Modificar usuarios</div>
+  <div><h5 class="center">Modificar usuarios</h5><br></div>
   <table class="default" *ngIf="usuarios != undefined">
       <tr>
-          <th>Nombre</th>
-          <th>Modificar datos</th>
-          <th>Eliminar</th>
+          <th class="center">Foto de perfil</th>
+          <th class="center">Nombre</th>
+          <th class="center">Usuario</th>
+          <th class="center">Correo</th>
+          <th class="center">Editar información</th>
+          <th class="center">Nueva imagen</th>
       </tr>
       <tr *ngFor="let usuario of usuarios | paginate: { itemsPerPage: pageSize, currentPage: p }; let i=index">
-          <td>{{ usuario.nombre }}</td>
-          <td>
-              <a class="modal-trigger" data-target="modalModificarusuario" (click)="modificarUsuario(usuario.idUsuario)">
-                  <i class="material-icons">edit</i>
-              </a>
-          </td>
-          <td>
-              <a (click)="eliminarUsuario(usuario.idUsuario)">
-                  <i class="material-icons">delete</i>
-              </a>
-          </td>
+        <td class="center" [width]="150">
+          <img *ngIf="usuario.foto == 0" src="../../../assets/images/profile.png" style="width: 100px;">
+          <img *ngIf="usuario.foto == 1" src="{{liga}}/{{usuario.idUsuario}}.jpg" [alt]="liga" style="width: 100px;">
+        </td>
+        <td class="center">{{ usuario.nombre }}</td>
+        <td class="center">{{ usuario.username }}</td>
+        <td class="center">{{ usuario.correo }}</td>
+        <td class="center">
+            <a href="javascript:void(0)" class="modal-trigger" data-target="modalModificarusuario" (click)="modificarUsuario(usuario.idUsuario)">
+                <i class="material-icons">edit</i>
+            </a>
+        </td>
+        <td>
+          <input type="file" (change)="cargandoImagen($event, usuario.idUsuario)">
+        </td>
       </tr>
   </table>
   <div class="row center-align">

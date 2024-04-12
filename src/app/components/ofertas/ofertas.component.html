@@ -2,6 +2,7 @@
   <span class="titulo">Ofertas</span>
   <table class="default" *ngIf="productos != undefined">
     <tr>
+      <td class="center">Imagen</td>
       <td>Nombre</td>
       <td>Cantidad</td>
       <td>Precio</td>
@@ -10,6 +11,10 @@
       <td>Fecha Final</td>
     </tr>
     <tr *ngFor="let producto of productos | paginate: { itemsPerPage: pageSize, currentPage: p }; let i=index">
+      <td class="center" [width]="150">
+        <img *ngIf="producto.foto == 0" src="../../../assets/images/productoDesconocido.jpeg" style="width: 100px;">
+        <img *ngIf="producto.foto == 1" src="{{liga}}/{{producto.idProducto}}.jpg" [alt]="liga" style="width: 100px;">
+      </td>
       <td>{{ producto.nombre }}</td>
       <td>{{ producto.stock }}</td>
       <td>{{ producto.precio }}</td>

@@ -10,6 +10,7 @@ import { Pedidos, nuevoPedido } from '../../models/pedidos';
 import { error } from 'jquery';
 import { UsuarioService } from '../../services/usuario/usuario.service';
 import { Domicilio } from '../../models/domicilio';
+import { environment } from '../../environments/environment';
 @Component({
   selector: 'app-carrito',
   templateUrl: './carrito.component.html',
@@ -27,6 +28,7 @@ export class CarritoComponent implements OnInit {
   pageSize = 5;
   idDomicilio: number = 0;
   p = 1;
+  liga: string = environment.API_URL_IMAGENES + '/productos';
   constructor(private carritoService: CarritoService, private inventarioService: InventarioService, private router: Router, private usuarioService: UsuarioService) { }
   inserta = new addProducto();
   ngOnInit(): void {
@@ -51,7 +53,7 @@ export class CarritoComponent implements OnInit {
         }
         else {
           this.carrito = res;
-          //console.log("Carrito",this.carrito);
+          console.log("Carrito",this.carrito);
           for (let producto of this.carrito) {
             //console.log("Producto",producto.idProducto);
             this.inventarioService.listone(producto.idProducto).subscribe(
@@ -62,6 +64,7 @@ export class CarritoComponent implements OnInit {
             );
 
           }
+          console.log(this.productos);
         }
         //console.log("Productos", this.productos);
 

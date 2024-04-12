@@ -3,8 +3,9 @@ import { UsuarioService } from '../../services/usuario/usuario.service';
 import { Router } from '@angular/router';
 import { getUsuario } from '../../models/getUsuario';
 import { Rol } from '../../models/rolModel';
-
 import Swal from 'sweetalert2'
+import { environment } from '../../environments/environment';
+import { ImagenesService } from '../../services/imagenes/imagenes.service';
 declare var $: any;
 
 @Component({
@@ -13,13 +14,20 @@ declare var $: any;
   styleUrls: ['./modificar-usuario.component.css']
 })
 export class ModificarUsuarioComponent implements OnInit {
-  constructor(private usuarioService: UsuarioService, private router: Router) { }
+  constructor(private usuarioService: UsuarioService, private router: Router, private imagenesService: ImagenesService) {
+    this.imgPrincipal = null;
+    this.fileToUpload = null;
+  }
   usuarios: getUsuario[] = [];
   usuario: getUsuario = new getUsuario();
   rol: Rol = new Rol();
   roles: Rol[] = [];
   pageSize = 5;
   p = 1;
+  imgPrincipal: any;
+  fileToUpload: any;
+  liga: string = environment.API_URL_IMAGENES + '/usuarios';
+
   ngOnInit(): void {
     // Inicializa los modales en ngOnInit
     $(document).ready(function(){
@@ -27,6 +35,7 @@ export class ModificarUsuarioComponent implements OnInit {
       $('.modal').modal();  
     });
 
+    this.imgPrincipal = null;
     this.usuarioService.list().subscribe((resUsuarios: any) =>
      {
       this.usuarios = resUsuarios;
@@ -113,10 +122,63 @@ export class ModificarUsuarioComponent implements OnInit {
         }, err => console.log(err));
       }
     });
-
-
-
   }
+  
+  cargandoImagen(event: any, id : any) {
+    if (event.target.files && event.target.files[0])
+      Swal.fire({
+        title: "¿Estas seguro de agregar la imagen?",
+
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Guardar imagen"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.imgPrincipal = null;
+          console.log(id);
+          const files: FileList = event.target.files;
+          this.fileToUpload = files.item(0);
+          let imgPromise = this.getFileBlob(this.fileToUpload);
+          imgPromise.then(blob => {
+            this.imagenesService.guardarImagen(id, "usuarios", blob).subscribe(
+              (res: any) => {
+                this.imgPrincipal = blob;
+                this.usuarioService.updateFoto(id, this.usuario).subscribe((resUsuario: any) => 
+                  {
+                    Swal.fire({
+                      position: 'center',
+                      icon: 'success',
+                      title: 'Imagen actualizada correctamente',
+                      showConfirmButton: false,
+                      timer: 1500
+                    })
+                  }, err => console.log(err));
+                window.location.reload();
+              },
+              err => console.error(err));
+          });
+        }
+      });
+  }
+
+  getFileBlob(file: File): Promise<string | ArrayBuffer | null> {
+    const reader = new FileReader();
+    return new Promise((resolve, reject) => {
+      reader.onload = () => {
+        // Aseguramos que reader.result sea manejado adecuadamente
+        resolve(reader.result);
+      };
+      reader.onerror = error => {
+        // Manejo del error
+        reject(error);
+      };
+      // Inicia la lectura del contenido del Blob, que será completada con el evento load.
+      reader.readAsDataURL(file);
+    });
+  }
+
   return(){
     $('modal2').modal('close');
   }

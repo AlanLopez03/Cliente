@@ -8,6 +8,8 @@ import { Material } from '../../models/material';
 import { Marca } from '../../models/marca';
 import { MaterialService } from '../../services/material/material.service';
 import { MarcaService } from '../../services/marca/marca.service';
+import { environment } from '../../environments/environment';
+import { ImagenesService } from '../../services/imagenes/imagenes.service';
 import Swal from 'sweetalert2'
 import { data } from 'jquery';
 
@@ -30,9 +32,16 @@ export class InventarioComponent  implements OnInit{
   producto = new Producto();
   productos:Producto[]= []; 
   fecha = String;
-  pageSize = 5;
+  pageSize = 4;
   p = 1;
-  constructor(private inventarioService:InventarioService ,private categoriaService:CategoriaService,private materialService:MaterialService,private marcaService:MarcaService,private router:Router ) { }
+  constructor(private inventarioService:InventarioService ,private categoriaService:CategoriaService,private materialService:MaterialService,private marcaService:MarcaService,private router:Router, private imagenesService: ImagenesService) {
+    this.imgPrincipal = null;
+    this.fileToUpload = null;
+  }
+  imgPrincipal: any;
+  fileToUpload: any;
+  liga: string = environment.API_URL_IMAGENES + '/productos';
+
   ngOnInit(): void 
   {
     this.producto = new Producto();
@@ -283,12 +292,66 @@ export class InventarioComponent  implements OnInit{
           );
         }
         },
-
-
-        );}
+      );}
     }
     );
   }
+
+  cargandoImagen(event: any, id : any) {
+    if (event.target.files && event.target.files[0])
+      Swal.fire({
+        title: "¿Estas seguro de agregar la imagen?",
+
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Guardar imagen"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.imgPrincipal = null;
+          console.log(id);
+          const files: FileList = event.target.files;
+          this.fileToUpload = files.item(0);
+          let imgPromise = this.getFileBlob(this.fileToUpload);
+          imgPromise.then(blob => {
+            this.imagenesService.guardarImagen(id, "productos", blob).subscribe(
+              (res: any) => {
+                this.imgPrincipal = blob;
+                this.inventarioService.updateFoto(id, this.producto).subscribe((resProducto: any) => 
+                  {
+                    Swal.fire({
+                      position: 'center',
+                      icon: 'success',
+                      title: 'Imagen actualizada correctamente',
+                      showConfirmButton: false,
+                      timer: 1500
+                    })
+                  }, err => console.log(err));
+                window.location.reload();
+              },
+              err => console.error(err));
+          });
+        }
+      });
+  }
+
+  getFileBlob(file: File): Promise<string | ArrayBuffer | null> {
+    const reader = new FileReader();
+    return new Promise((resolve, reject) => {
+      reader.onload = () => {
+        // Aseguramos que reader.result sea manejado adecuadamente
+        resolve(reader.result);
+      };
+      reader.onerror = error => {
+        // Manejo del error
+        reject(error);
+      };
+      // Inicia la lectura del contenido del Blob, que será completada con el evento load.
+      reader.readAsDataURL(file);
+    });
+  }
+
   return(){
     $('#modal1').modal('close');
 
@@ -307,6 +370,7 @@ export class InventarioComponent  implements OnInit{
   crearProducto(){
     this.producto.inicio_descuento=$("#inicio_descuento").val();
     this.producto.fin_descuento=$("#fin_descuento").val();
+    this.producto.foto = 0;
     this.inventarioService.crear(this.producto).subscribe(
       res => {
         Swal.fire({

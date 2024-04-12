@@ -5,6 +5,7 @@ export class Usuario {
     username: string;
     password: string;
     idRol: number;
+    foto: number;
     constructor() {
 
         this.nombre = '';//Unir nombre y apellido
@@ -12,7 +13,7 @@ export class Usuario {
         this.username = '';
         this.password = '';
         this.idRol = 2;
-
+        this.foto = 0;
     }
 }
 export class UsuarioPassword {

@@ -23,30 +23,40 @@
 </div>
 
 
-<div class="contenedor">
+<div class="contenedor center">
   <span class="titulo">Modificar productos</span>
   <table class="default" *ngIf="productos != undefined">
     <tr>
-      <td>Código</td>
-      <td>Nombre</td>
-      <td>Cantidad</td>
-      <td>Precio</td>
-      <td>Acciones</td>
+      <td class="center">Imagen</td>
+      <td class="center">Código</td>
+      <td class="center">Nombre</td>
+      <td class="center">Cantidad</td>
+      <td class="center">Precio</td>
+      <td class="center">Acciones</td>
+      <td class="center">Eliminar</td>
+      <td class="center">Nueva imagen</td>
     </tr>
     <tr *ngFor="let producto of productos | paginate: { itemsPerPage: pageSize, currentPage: p }; let i=index">
-      <td>{{ producto.idProducto }}</td>
-      <td>{{ producto.nombre }}</td>
-      <td>{{ producto.stock }}</td>
-      <td>{{ producto.precio }}</td>
-      <td>
+      <td class="center" [width]="150">
+        <img *ngIf="producto.foto == 0" src="../../../assets/images/productoDesconocido.jpeg" style="width: 100px;">
+        <img *ngIf="producto.foto == 1" src="{{liga}}/{{producto.idProducto}}.jpg" [alt]="liga" style="width: 100px;">
+      </td>
+      <td class="center">{{ producto.idProducto }}</td>
+      <td class="center">{{ producto.nombre }}</td>
+      <td class="center">{{ producto.stock }}</td>
+      <td class="center">${{ producto.precio }}</td>
+      <td class="center">
         <a class="modal-trigger" data-target="modal1" (click)="modificarProducto(producto.idProducto)">
           <i class="material-icons">edit</i>
         </a>
       </td>
-      <td>
+      <td class="center">
         <a (click)="eliminarProducto(producto.idProducto)">
           <i class="material-icons">delete</i>
         </a>
+      </td>
+      <td>
+        <input type="file" (change)="cargandoImagen($event, producto.idProducto)">
       </td>
     </tr>
   </table>

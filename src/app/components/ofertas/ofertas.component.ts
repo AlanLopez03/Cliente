@@ -11,6 +11,8 @@ import { MarcaService } from '../../services/marca/marca.service';
 import { CorreoService } from '../../services/correo/correo.service';
 import { Usuario } from '../../models/Usuario';
 import { UsuarioService } from '../../services/usuario/usuario.service';
+import { environment } from '../../environments/environment';
+import { ImagenesService } from '../../services/imagenes/imagenes.service';
 import Swal from 'sweetalert2'
 import { data } from 'jquery';
 
@@ -39,6 +41,7 @@ export class OfertasComponent {
   p = 1;
 
   constructor(private usuarioService: UsuarioService,private inventarioService: InventarioService, private categoriaService: CategoriaService, private materialService: MaterialService, private marcaService: MarcaService, private router: Router, private correoService:CorreoService) { }
+  liga: string = environment.API_URL_IMAGENES + '/productos';
   ngOnInit(): void {
     this.producto = new Producto();
     $(document).ready(function () {

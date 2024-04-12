@@ -22,6 +22,9 @@ export class UsuarioService {
   update(usuario: any) {
     return this.http.put(`${environment.API_URI}/usuarios/actualizar/${usuario.idUsuario}`, usuario);
   }
+  updateFoto(id: any, usuario: any) {
+    return this.http.put(`${environment.API_URI}/usuarios/actualizarFoto/${id}`, usuario);
+  }
   getRoles(){
     return this.http.get(`${environment.API_URI}/roles/`);
   }

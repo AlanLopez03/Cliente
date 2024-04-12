@@ -110,6 +110,16 @@ export class PerfilComponent implements OnInit {
             this.imagenesService.guardarImagen(this.usuario.idUsuario, "usuarios", blob).subscribe(
               (res: any) => {
                 this.imgPrincipal = blob;
+                this.usuarioService.updateFoto(this.usuario.idUsuario, this.usuario).subscribe((resUsuario: any) => 
+                  {
+                    Swal.fire({
+                      position: 'center',
+                      icon: 'success',
+                      title: 'Imagen actualizada correctamente',
+                      showConfirmButton: false,
+                      timer: 1500
+                    })
+                  }, err => console.log(err));
                 window.location.reload();
               },
               err => console.error(err));

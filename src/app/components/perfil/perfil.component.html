@@ -1,10 +1,10 @@
-<div class="container">
+<div class="contenedor">
     <div class="row">
-        <div class="col s4 m4">
-            <img *ngIf="usuario.foto == 0" src="../../../assets/images/profile.png" width="100%">
-            <img *ngIf="usuario.foto == 1" [src]="liga" [alt]="liga" width="100%"> 
+        <div class="col s4 m4 center">
+            <img *ngIf="usuario.foto == 0" src="../../../assets/images/profile.png" width="70%">
+            <img *ngIf="usuario.foto == 1" [src]="liga" [alt]="liga" width="80%"> 
             <div>
-                <input type="file"  (change)="cargandoImagen($event)" multiple>    
+                <input type="file"  (change)="cargandoImagen($event)">    
             </div>
         </div>
         

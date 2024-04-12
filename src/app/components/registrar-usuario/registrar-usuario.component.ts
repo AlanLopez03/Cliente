@@ -13,7 +13,8 @@ export class RegistrarUsuarioComponent {
   constructor(private usuarioService: UsuarioService, private router: Router) { }
 
   registrarUsuario() {
-  if (this.usuario.nombre != null &&  this.usuario.correo != null && this.usuario.password != null && this.usuario.username!=null) 
+  if (this.usuario.nombre != null &&  this.usuario.correo != null && this.usuario.password != null && this.usuario.username!=null){
+    this.usuario.foto = 0;
     this.usuarioService.crearUsuario(this.usuario).subscribe(
       res => {
         Swal.fire({
@@ -29,7 +30,7 @@ export class RegistrarUsuarioComponent {
       },
       err => console.log(err)
     )
-  else
+  }else
     Swal.fire({
       position: 'center',
       icon: 'error',

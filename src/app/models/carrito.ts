@@ -5,7 +5,7 @@ export class Carrito{
     precio:number;
     stock:number;
     descuento:number;
-    subtotal:number;
+    foto: number;
 
     constructor(){
         this.idProducto=1;
@@ -14,7 +14,7 @@ export class Carrito{
         this.precio=0;
         this.stock=0;
         this.descuento=0;
-        this.subtotal=0;
+        this.foto = 0;
     }
 
 }
