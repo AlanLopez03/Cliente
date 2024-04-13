@@ -41,8 +41,8 @@ constructor(private router:Router,private categoriaService:CategoriaService,priv
     if (idio !== null && idio === '1') {
       this.translate.use('en');
     }
-    if (idio !== null && idio === '1') {
-      this.translate.use('en');
+    if (idio !== null && idio === '2') {
+      this.translate.use('es');
     }
   }
   setIdioma(idioma:any) {
@@ -51,8 +51,8 @@ constructor(private router:Router,private categoriaService:CategoriaService,priv
     if (idio !== null && idio === '1') {
       this.translate.use('en');
     }
-    if (idio !== null && idio === '1') {
-      this.translate.use('en');
+    if (idio !== null && idio === '2') {
+      this.translate.use('es');
     }
   }
 
