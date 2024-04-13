@@ -9,6 +9,7 @@ import { Categoria } from '../../models/categoria';
 import { ChangeDetectorRef } from '@angular/core';
 import { MostrarProductosComponent } from '../mostrar-productos/mostrar-productos.component';
 import { Location } from '@angular/common';
+import { TranslateService } from "@ngx-translate/core";
 import Swal from 'sweetalert2';
 import e from 'cors';
 declare var $:any;
@@ -20,7 +21,7 @@ declare var $:any;
 export class NavigationComponent implements OnInit{
   categorias: Categoria []= [];
   productos: Producto[] = [];
-constructor(private router:Router,private categoriaService:CategoriaService,private inventarioService:InventarioService,private location: Location) { }
+constructor(private router:Router,private categoriaService:CategoriaService,private inventarioService:InventarioService,private location: Location,private translate: TranslateService) { }
   ngOnInit(): void {
     $(document).ready(function(){
       $('.sidenav').sidenav();
@@ -33,7 +34,26 @@ constructor(private router:Router,private categoriaService:CategoriaService,priv
       },
       err => console.log(err)
     );
-  
+    this.actualizarIdioma();
+  }
+  actualizarIdioma(){
+    const idio = localStorage.getItem('idioma');
+    if (idio !== null && idio === '1') {
+      this.translate.use('en');
+    }
+    if (idio !== null && idio === '1') {
+      this.translate.use('en');
+    }
+  }
+  setIdioma(idioma:any) {
+    localStorage.setItem('idioma',idioma);
+    const idio = localStorage.getItem('idioma');
+    if (idio !== null && idio === '1') {
+      this.translate.use('en');
+    }
+    if (idio !== null && idio === '1') {
+      this.translate.use('en');
+    }
   }
 
   isHome(): boolean {

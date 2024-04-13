@@ -1,6 +1,6 @@
 <div class="divOlvide">
   <h4>
-    Carrito de compras
+  {{"Carrito de Compras" | translate }}
   </h4>
 </div>
 
@@ -13,10 +13,10 @@
 <div class="container" *ngIf="carrito">
   <table class="default" *ngIf="carrito != undefined">
     <tr>
-      <td>Nombre</td>
-      <td>Cantidad</td>
-      <td>Precio unitario</td>
-      <td>Acciones</td>
+      <td>{{"Nombre"|translate}}</td>
+      <td>{{"Cantidad"|translate}}</td>
+      <td>{{"Precio Unitario"|translate}}</td>
+      <td>{{"Acciones"|translate}}</td>
     </tr>
 
     <tr *ngFor="let producto of carrito | paginate: { itemsPerPage: pageSize, currentPage: p }; let i = index">
@@ -37,8 +37,8 @@
     <pagination-controls class="my-pagination" (pageChange)="p = ($event)" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
   </div>
   <div class="container">
-    <a (click)="limpiarCarrito()" class="waves-effect waves-light btn"><i class="material-icons right">delete</i>Limpiar carrito</a>
-    <button  data-target="modal1" class="btn modal-trigger">Comprar</button>
+    <a (click)="limpiarCarrito()" class="waves-effect waves-light btn"><i class="material-icons right">delete</i>{{"Limpiar Carrito"|translate}}</a>
+    <button  data-target="modal1" class="btn modal-trigger">{{"Confirmar Compra"|translate}}</button>
   </div>
 </div>
 <div class="container" *ngIf="!carrito" style="text-align: center;">
@@ -47,7 +47,7 @@
   <br>
   <img src="../../../assets/images/scarrito.png" width="100px">
   <br>
-  No hay productos que Mostrar
+  {{ "No hay productos en el carrito" | translate }}
   <br>
   <br>
   <br>

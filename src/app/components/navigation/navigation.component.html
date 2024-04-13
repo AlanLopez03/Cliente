@@ -1,7 +1,7 @@
 <ul id="dropdown1" class="dropdown-content">
-    <li><a href="home/perfil">Mi cuenta</a></li>
-    <li><a href="home/usuarioCompras">Mis compras</a></li>
-    <li><a (click)="logOut()"> Salir</a></li>
+    <li><a href="home/perfil">{{"Mi cuenta"| translate}}</a></li>
+    <li><a href="home/usuarioCompras">{{"Mis compras"|translate}}</a></li>
+    <li><a (click)="logOut()">{{"Salir"|translate}}</a></li>
 </ul>
 
 <ul id="dropdown2" class="dropdown-content">
@@ -13,7 +13,11 @@
   <li><a [href]="isHome() ? 'javascript:void(0)' : 'home/'" (click)="Collares()">Collares</a></li>
   <li><a [href]="isHome() ? 'javascript:void(0)' : 'home/'" (click)="Todas()">Todas</a></li>
 </ul>
-  
+
+<ul id="dropdown3" class="dropdown-content idioma-nav">
+  <li (click)="setIdioma(1)"><a>English</a></li>
+  <li (click)="setIdioma(2)"><a>Español</a></li>
+</ul>
   
 <ul id="Categorias" class="dropdown-content" *ngIf="categorias!=undefined">
   <li *ngFor="let categoria of categorias"><a>{{categoria.nombre}}</a></li>
@@ -28,13 +32,13 @@
       </a>
       <div class="lateral">
         <ul class="right hide-on-med-and-down">
-          <li><a class="dropdown-trigger" href="#!" data-target="dropdown2"><i class="material-icons left">drag_handle</i>Categorías</a></li>
-          <li><a href="home/carrito"><i class="material-icons left">add_shopping_cart</i>Carrito</a></li>
-          <li><a [href]="isHome() ? 'javascript:void(0)' : 'home/'" (click)="MostrarOfertas(1)"><i class="material-icons left">local_offer</i>Ofertas</a></li>
-          <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Menú<i class="material-icons right">arrow_drop_down</i></a></li>
+          <li><a class="dropdown-trigger" href="#!" data-target="dropdown2"><i class="material-icons left">drag_handle</i>{{"Categorias" | translate}}</a></li>
+          <li><a class="dropdown-trigger" data-target="dropdown3">{{"Idioma" | translate}}<i class="material-icons right">arrow_drop_down</i></a></li>
+          <li><a href="home/carrito"><i class="material-icons left">add_shopping_cart</i>{{"Carrito" | translate}}</a></li>
+          <li><a [href]="isHome() ? 'javascript:void(0)' : 'home/'" (click)="MostrarOfertas(1)"><i class="material-icons left">local_offer</i>{{"Ofertas" | translate}}</a></li>
+          <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">{{"Menú" | translate }}<i class="material-icons right">arrow_drop_down</i></a></li>
         </ul>
       </div>
-
     </div>
   </nav>
 </div>
