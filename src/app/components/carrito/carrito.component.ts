@@ -27,6 +27,7 @@ export class CarritoComponent implements OnInit {
   pageSize = 5;
   idDomicilio: number = 0;
   p = 1;
+  idioma = localStorage.getItem('idioma') ?? 2;
   constructor(private carritoService: CarritoService, private inventarioService: InventarioService, private router: Router, private usuarioService: UsuarioService) { }
   inserta = new addProducto();
   ngOnInit(): void {

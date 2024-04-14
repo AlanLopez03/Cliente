@@ -5,13 +5,21 @@
 </ul>
 
 <ul id="dropdown2" class="dropdown-content">
-  <li><a [href]="isHome() ? 'javascript:void(0)' : 'home/'" (click)="Anillos()">Anillos</a></li>
-  <li><a [href]="isHome() ? 'javascript:void(0)' : 'home/'" (click)="Aretes()">Aretes</a></li>
-  <li><a [href]="isHome() ? 'javascript:void(0)' : 'home/'" (click)="Arracadas()">Arracadas</a></li>
-  <li><a [href]="isHome() ? 'javascript:void(0)' : 'home/'" (click)="Esclavas()">Esclavas</a></li>
-  <li><a [href]="isHome() ? 'javascript:void(0)' : 'home/'" (click)="Dijes()">Dijes</a></li>
-  <li><a [href]="isHome() ? 'javascript:void(0)' : 'home/'" (click)="Collares()">Collares</a></li>
-  <li><a [href]="isHome() ? 'javascript:void(0)' : 'home/'" (click)="Todas()">Todas</a></li>
+  <li *ngIf="idioma == 2"><a [href]="isHome() ? 'javascript:void(0)' : 'home/'" (click)="Anillos()">Anillos</a></li>
+  <li *ngIf="idioma == 2"><a [href]="isHome() ? 'javascript:void(0)' : 'home/'" (click)="Aretes()">Aretes</a></li>
+  <li *ngIf="idioma == 2"><a [href]="isHome() ? 'javascript:void(0)' : 'home/'" (click)="Arracadas()">Arracadas</a></li>
+  <li *ngIf="idioma == 2"><a [href]="isHome() ? 'javascript:void(0)' : 'home/'" (click)="Esclavas()">Esclavas</a></li>
+  <li *ngIf="idioma == 2"><a [href]="isHome() ? 'javascript:void(0)' : 'home/'" (click)="Dijes()">Dijes</a></li>
+  <li *ngIf="idioma == 2"><a [href]="isHome() ? 'javascript:void(0)' : 'home/'" (click)="Collares()">Collares</a></li>
+  <li *ngIf="idioma == 2"><a [href]="isHome() ? 'javascript:void(0)' : 'home/'" (click)="Todas()">Todas</a></li>
+
+  <li *ngIf="idioma == 1"><a [href]="isHome() ? 'javascript:void(0)' : 'home/'" (click)="Anillos()">Earrings</a></li>
+  <li *ngIf="idioma == 1"><a [href]="isHome() ? 'javascript:void(0)' : 'home/'" (click)="Aretes()">Rings</a></li>
+  <li *ngIf="idioma == 1"><a [href]="isHome() ? 'javascript:void(0)' : 'home/'" (click)="Arracadas()">Hoop earrings</a></li>
+  <li *ngIf="idioma == 1"><a [href]="isHome() ? 'javascript:void(0)' : 'home/'" (click)="Esclavas()">Bangles</a></li>
+  <li *ngIf="idioma == 1"><a [href]="isHome() ? 'javascript:void(0)' : 'home/'" (click)="Dijes()">Pendants</a></li>
+  <li *ngIf="idioma == 1"><a [href]="isHome() ? 'javascript:void(0)' : 'home/'" (click)="Collares()">Necklaces</a></li>
+  <li *ngIf="idioma == 1"><a [href]="isHome() ? 'javascript:void(0)' : 'home/'" (click)="Todas()">All</a></li>
 </ul>
 
 <ul id="dropdown3" class="dropdown-content idioma-nav">

@@ -27,6 +27,7 @@ export class PerfilComponent implements OnInit {
   direccion: Domicilio = new Domicilio();
   idUsuario = 0;
   flagD = 0;
+  idioma = localStorage.getItem('idioma') ?? 2;
   imgPrincipal: any;
   fileToUpload: any;
 

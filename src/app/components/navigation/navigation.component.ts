@@ -21,6 +21,7 @@ declare var $:any;
 export class NavigationComponent implements OnInit{
   categorias: Categoria []= [];
   productos: Producto[] = [];
+  idioma = localStorage.getItem('idioma') ?? 2;
 constructor(private router:Router,private categoriaService:CategoriaService,private inventarioService:InventarioService,private location: Location,private translate: TranslateService) { }
   ngOnInit(): void {
     $(document).ready(function(){
@@ -40,9 +41,11 @@ constructor(private router:Router,private categoriaService:CategoriaService,priv
     const idio = localStorage.getItem('idioma');
     if (idio !== null && idio === '1') {
       this.translate.use('en');
+      this.idioma=idio;
     }
     if (idio !== null && idio === '2') {
       this.translate.use('es');
+      this.idioma=idio;
     }
   }
   setIdioma(idioma:any) {
@@ -50,10 +53,13 @@ constructor(private router:Router,private categoriaService:CategoriaService,priv
     const idio = localStorage.getItem('idioma');
     if (idio !== null && idio === '1') {
       this.translate.use('en');
+      this.idioma=idio;
     }
     if (idio !== null && idio === '2') {
       this.translate.use('es');
+      this.idioma=idio;
     }
+    this.reloadPage()
   }
 
   isHome(): boolean {

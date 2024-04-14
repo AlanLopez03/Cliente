@@ -33,7 +33,8 @@
                         </tr>
                         <tr>
                             <th>{{"Estado de compra"|translate}}:</th>
-                            <td>{{estado.nombre}}</td>
+                            <td *ngIf="idioma == 2">{{estado.nombre}}</td>
+                            <td *ngIf="idioma == 1">{{estado.Name}}</td>
                         </tr>
                         <tr>
                             <th>{{"Enviado a"|translate}}:</th>
@@ -48,8 +49,11 @@
                         </tr>
                         <tr *ngFor="let producto of productos,let i=index">
                             <th> </th>
-                            <td >
+                            <td *ngIf="idioma == 2">
                                 {{producto.nombre}}
+                            </td>
+                            <td *ngIf="idioma == 1">
+                                {{producto.name}}
                             </td>
                             <td >
                                 {{pedidos[i].cantidadProducto}}

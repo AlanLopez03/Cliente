@@ -17,6 +17,7 @@ export class MostrarProductosComponent implements OnInit {
   producto = new Producto();
   productos: Producto[] = [];
   buscar: string = '';
+  idioma = localStorage.getItem('idioma') ?? 2;
   imagenes = ["anillo_u.jpg", "aretes_u.jpg", "arracadas_u.jpg", "esclavas_u.jpg", "Dijes_u.jpg", "Corazon.jpeg"]
   campoEnfocado: boolean = false;
   constructor(private inventarioService: InventarioService, private carritoService: CarritoService, private router: Router) { }

@@ -20,7 +20,8 @@
     </tr>
 
     <tr *ngFor="let producto of carrito | paginate: { itemsPerPage: pageSize, currentPage: p }; let i = index">
-      <td>{{ producto.nombre }}</td>
+      <td *ngIf="idioma == 2">{{ producto.nombre }}</td>
+      <td *ngIf="idioma == 1">{{ producto.name }}</td>
       <td>
         <span >{{ producto.cantidad }}</span>
        

@@ -20,7 +20,8 @@
         <span *ngIf="producto.descuento<1" class="oferta-etiqueta card-title">{{"Oferta" | translate}}</span>
       </div>
       <div class="card-content">
-        <h5>{{producto.nombre}}</h5>
+        <h5 *ngIf="idioma == 2">{{producto.nombre}}</h5>
+        <h5 *ngIf="idioma == 1">{{producto.name}}</h5>
         <p *ngIf="producto.descuento <1"> {{"Descuento disponible"|translate}} {{producto.descuento*100}}%</p>
         <p *ngIf="producto.descuento <1">{{"Por tan solo" |translate }}  ${{producto.precio *producto.descuento}}</p>
         <p *ngIf="producto.descuento==1">${{producto.precio}}</p>
