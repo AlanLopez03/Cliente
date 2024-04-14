@@ -41,7 +41,7 @@
     "Numero":"Number",
     "Colonia":"Colony",
     "Ciudad":"City",
-    "Estado":"State",
+    "Estado":"Status",
     "Editar":"Edit",
     "Eliminar":"Delete",
     "No hay direcciones disponibles":"There are no addresses available",
@@ -51,5 +51,102 @@
     "ACTUALIZAR DIRECCION":"UPDATE ADDRESS",
     "EDITAR USUARIO":"EDIT USER",
     "Editar Nombre":"Edit Name",
-    "AGREGAR DIRECCION":"ADD ADDRESS"
+    "AGREGAR DIRECCION":"ADD ADDRESS",
+    "Usuarios":"Users",
+    "Reportes":"Reports",
+    "Inventario":"Inventory",
+    "Bienvenido":"Welcome",
+    "Modificar datos":"Modify data",
+    "Modificar usuario":"Modify user",
+    "Modificar usuarios":"Modify users",
+    "Modificar":"Modify",
+    "Cancelar":"Cancel",
+    "Buscar por nombre":"Search by name",
+    "Nuevo producto":"New product",
+    "Modificar productos":"Modify products",
+    "Código":"Code",
+    "Precio":"Price",
+    "Modificar datos del producto":"Modify product data",
+    "Nombre del producto":"Product name",
+    "Descuento":"Discount",
+    "Inicio descuento":"Start of discount",
+    "Fin descuento":"End of discount",
+    "Guardar Datos":"Save data",
+    "Fecha de inicio":"Start date",
+    "Fecha de fin":"End date",
+    "Enviar a Usuarios":"Send to users",
+    "Reporte de ventas":"Sales report",
+    "ID Compra":"Purchase ID",
+    "Detalles":"Details",
+    "Datos de la compra":"Purchase data",
+    "Subtotal":"Subtotal",
+    "Cliente":"Customer",
+    "Agregar producto":"Add product",
+
+    "ProductoNoEncontrado":{
+        "title":"Product not found",
+        "confirm":"ok"
+    },
+    "escribeNombre":{
+        "title":"Write a name",
+        "text":"You must write a name to search",
+        "confirm":"ok"
+    },
+    "ProductoActualizado":{
+        "title":"Product updated",
+        "confirm":"ok"
+    },
+    "ProductoEliminado":{
+        "title":"Product deleted",
+        "confirm":"ok"
+    },
+    "eliminarProducto":{
+        "title":"Are you sure",
+        "text":"you won´t be able to revert this",
+        "confirm":"ok,delete it",
+        "cancel":"Cancel"
+    },
+    "errorAlActualizar":{
+        "title":"Error updating",
+        "confirm":"ok"
+    },
+    "crearProducto":{
+        "title":"Product created successfully", 
+        "confirm":"ok"
+    },
+    "noHayProductos":{
+        "title":"There are no products",
+        "confirm":"ok"
+    },
+    "sinUsuarios":{
+        "title":"There are no users",
+        "confirm":"ok"
+    },
+    "modificarUsuario":{
+        "title":"User modified successfully",
+        "confirm":"ok"
+    },
+    "eliminarUsuario":{
+        "title":"Are you sure",
+        "text":"you won´t be able to revert this",
+        "confirm":"ok",
+        "cancel":"Cancel"
+    },
+    "usuarioEliminado":{
+        "title":"User deleted successfully",
+        "confirm":"ok"
+    },
+    "sinReportes":{
+        "title":"Ooops :(",
+        "text":"There are no reports available",
+        "confirm":"ok"
+    },
+    "ponerFechas":
+    {
+        "title":"Select dates",
+        "text":"You must select a  start and end date",
+        "confirm":"ok"
+    }
+
+    
 }
