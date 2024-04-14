@@ -1,13 +1,13 @@
 <div class="contenedor">
-  <span class="titulo">Ofertas</span>
+  <span class="titulo">{{"Ofertas"|translate}}</span>
   <table class="default" *ngIf="productos != undefined">
     <tr>
-      <td>Nombre</td>
-      <td>Cantidad</td>
-      <td>Precio</td>
-      <td>Descuento</td>
-      <td>Fecha de inicio</td>
-      <td>Fecha Final</td>
+      <td>{{"Nombre"|translate}}</td>
+      <td>{{"Cantidad"|translate}}</td>
+      <td>{{"Precio"|translate}}</td>
+      <td>{{"Descuento"|translate}}</td>
+      <td>{{"Fecha de inicio"|translate}}</td>
+      <td>{{"Fecha de fin"|translate}}</td>
     </tr>
     <tr *ngFor="let producto of productos | paginate: { itemsPerPage: pageSize, currentPage: p }; let i=index">
       <td>{{ producto.nombre }}</td>
@@ -20,7 +20,7 @@
     </tr>
   </table>
   <br><br>
-  <a class="waves-effect waves-light btn" (click)="enviarOfertas()"><i class="material-icons">send</i> Enviar Usuarios</a>
+  <a class="waves-effect waves-light btn" (click)="enviarOfertas()"><i class="material-icons">send</i> {{"Enviar a Usuarios"|translate}}</a>
   <br><br>
   <div class="row center-align">
     <pagination-controls class="my-pagination" (pageChange)="p = ($event)" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>

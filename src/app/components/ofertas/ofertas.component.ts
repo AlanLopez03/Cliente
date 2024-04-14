@@ -11,6 +11,8 @@ import { MarcaService } from '../../services/marca/marca.service';
 import { CorreoService } from '../../services/correo/correo.service';
 import { Usuario } from '../../models/Usuario';
 import { UsuarioService } from '../../services/usuario/usuario.service';
+import { IdiomaService } from '../../services/idioma/idioma.service';
+import { TranslateService } from '@ngx-translate/core';
 import Swal from 'sweetalert2'
 import { data } from 'jquery';
 
@@ -38,7 +40,10 @@ export class OfertasComponent {
   pageSize = 5;
   p = 1;
 
-  constructor(private usuarioService: UsuarioService,private inventarioService: InventarioService, private categoriaService: CategoriaService, private materialService: MaterialService, private marcaService: MarcaService, private router: Router, private correoService:CorreoService) { }
+  constructor(private usuarioService: UsuarioService,private inventarioService: InventarioService, private categoriaService: CategoriaService, private materialService: MaterialService, private marcaService: MarcaService, private router: Router, private correoService:CorreoService
+
+    ,private translate: TranslateService, private idiomaService: IdiomaService
+  ) { }
   ngOnInit(): void {
     this.producto = new Producto();
     $(document).ready(function () {
@@ -51,6 +56,9 @@ export class OfertasComponent {
       $('#inicio_descuento').prop('disabled', true);
       $('#fin_descuento').prop('disabled', true);
       $('#name1').prop('disabled', true);
+    });
+    this.idiomaService.currentLanguage.subscribe((res: string) => {
+      this.translate.use(res);
     });
 
     this.inventarioService.list().subscribe((resProductos: any) => {
@@ -91,7 +99,7 @@ export class OfertasComponent {
         //console.log ("Productos: ", this.productos[i].nombre);
         this.correoService.enviarCorreoOfertas(this.productos,this.usuarios[i].correo).subscribe((resUsuario: any) =>
           {
-            console.log(resUsuario) ;
+            //console.log(resUsuario) ;
           },err => console.error(err));
       }
     

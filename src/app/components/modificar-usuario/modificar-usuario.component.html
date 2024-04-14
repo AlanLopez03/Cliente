@@ -1,10 +1,10 @@
 <div class="contenedor">
-  <div>Modificar usuarios</div>
+  <div>{{"Modificar usuarios"|translate}}</div>
   <table class="default" *ngIf="usuarios != undefined">
       <tr>
-          <th>Nombre</th>
-          <th>Modificar datos</th>
-          <th>Eliminar</th>
+          <th>{{"Nombre"|translate}}</th>
+          <th>{{"Modificar datos"|translate}}</th>
+          <th>{{"Eliminar"|translate}}</th>
       </tr>
       <tr *ngFor="let usuario of usuarios | paginate: { itemsPerPage: pageSize, currentPage: p }; let i=index">
           <td>{{ usuario.nombre }}</td>
@@ -28,20 +28,20 @@
 
   <div  id="modalModificarusuario" class="modal" >
     <div class="modal-content">
-      <h4>Modificar usuario</h4>
+      <h4>{{"Modificar usuario"|translate}}</h4>
       <div class="row">
         <div class="input-field col s12">
-          <label class="active">Nombre </label>
+          <label class="active">{{"Nombre"|translate}} </label>
           <input   [(ngModel)]="usuario.nombre"  type="text" class="validate">
         </div>
         <div class="row">
             <div class="input-field col s12">
-              <label class="active">Correo </label>
+              <label class="active">{{"Correo"|translate}} </label>
               <input   [(ngModel)]="usuario.correo"  type="text" class="validate">
         </div>
         <div class="row">
             <div class="input-field col s12">
-              <label class="active">Nombre de usuario </label>
+              <label class="active">{{"Nombre de usuario"|translate}} </label>
               <input   [(ngModel)]="usuario.username"  type="text" class="validate">
         </div>        
         <!-- <div class="row">
@@ -61,9 +61,9 @@
     </div>
   </div>
     <div class="modal-footer">
-        <a class="modal-close btn-flat" (click)="cancelar()">Cancelar</a>
-        <a class="btn red darken-2" (click)="eliminarUsuario(usuario.idUsuario)" >Eliminar</a>
-        <a class="btn" (click)="guardar()" >Modificar</a>
+        <a class="modal-close btn-flat" (click)="cancelar()">{{"Cancelar"|translate}}</a>
+        <a class="btn red darken-2" (click)="eliminarUsuario(usuario.idUsuario)" >{{"Eliminar"|translate}}</a>
+        <a class="btn" (click)="guardar()" >{{"Modificar"|translate}}</a>
 
         <!--Agregar el color justo despues del boton-->
     </div>
