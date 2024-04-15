@@ -12,7 +12,7 @@ export class IdiomaService {
   constructor() {
   }
   changeLanguage(language: string) {//Funcion que cambia el idioma
-    localStorage.setItem('Idioma', language);//Guarda el idioma en el localstorage
+    localStorage.setItem('idioma', language);//Guarda el idioma en el localstorage
     this.languageSource.next(language);
   }
 }
