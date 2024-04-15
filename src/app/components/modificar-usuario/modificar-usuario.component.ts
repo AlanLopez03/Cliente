@@ -24,6 +24,7 @@ export class ModificarUsuarioComponent implements OnInit {
   pageSize = 5;
   lenguaje: string = 'es';
   p = 1;
+  idioma = localStorage.getItem('idioma') ?? "es";
   ngOnInit(): void {
     // Inicializa los modales en ngOnInit
     $(document).ready(function(){
