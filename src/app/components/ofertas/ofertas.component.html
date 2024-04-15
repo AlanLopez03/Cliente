@@ -10,7 +10,8 @@
       <td>{{"Fecha de fin"|translate}}</td>
     </tr>
     <tr *ngFor="let producto of productos | paginate: { itemsPerPage: pageSize, currentPage: p }; let i=index">
-      <td>{{ producto.nombre }}</td>
+      <td *ngIf="idioma=='es'">{{ producto.nombre }}</td>
+      <td *ngIf="idioma=='en'">{{ producto.name }}</td>
       <td>{{ producto.stock }}</td>
       <td>{{ producto.precio }}</td>
       <td>{{ producto.descuento }}</td>

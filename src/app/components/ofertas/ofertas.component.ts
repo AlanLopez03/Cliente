@@ -39,7 +39,7 @@ export class OfertasComponent {
   fecha = String;
   pageSize = 5;
   p = 1;
-
+  idioma = localStorage.getItem('idioma') ?? "es";
   constructor(private usuarioService: UsuarioService,private inventarioService: InventarioService, private categoriaService: CategoriaService, private materialService: MaterialService, private marcaService: MarcaService, private router: Router, private correoService:CorreoService
 
     ,private translate: TranslateService, private idiomaService: IdiomaService

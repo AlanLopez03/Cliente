@@ -4,6 +4,7 @@ import { Usuario } from '../../models/Usuario';
 import { IdiomaService } from '../../services/idioma/idioma.service';
 import { UsuarioService } from '../../services/usuario/usuario.service';
 import { TranslateService } from '@ngx-translate/core';
+import { Location } from '@angular/common';
 import { ChangeDetectorRef } from '@angular/core';
 declare var $: any;
 
@@ -16,7 +17,7 @@ export class AdminBarComponent implements OnInit{
   usuario = new Usuario();
   idUsuario = localStorage.getItem('idUsuario');
 
-constructor(private usuarioService:UsuarioService ,private router:Router,private idiomaService:IdiomaService ,private translate: TranslateService) { }
+constructor(private usuarioService:UsuarioService ,private router:Router,private idiomaService:IdiomaService,private location: Location ,private translate: TranslateService) { }
   ngOnInit(): void 
   {
     $(document).ready(function(){
@@ -32,6 +33,11 @@ constructor(private usuarioService:UsuarioService ,private router:Router,private
     })
     
   }
+  reloadPage() {
+    const currentUrl = this.location.path();
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+        this.router.navigate([currentUrl]);
+  });}
   logOut(){//Funciona para cerrar sesion pero no se como hacer para que se cierre la sesion en el servidor
     console.log('salir');
     console.log(localStorage.getItem('idUsuario'));
@@ -42,6 +48,7 @@ constructor(private usuarioService:UsuarioService ,private router:Router,private
   cambiarIdioma(idioma: string) {
     console.log(idioma);
     this.idiomaService.changeLanguage(idioma);
+    this.reloadPage();
   
   }
 

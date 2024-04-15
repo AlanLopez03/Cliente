@@ -33,6 +33,7 @@ export class InventarioComponent implements OnInit {
   fecha = String;
   pageSize = 5;
   p = 1;
+  idioma = localStorage.getItem('idioma') ?? "es";
   constructor(private inventarioService: InventarioService, private categoriaService: CategoriaService, private materialService: MaterialService,
     private marcaService: MarcaService, private router: Router, private translate: TranslateService) { }
   ngOnInit(): void {

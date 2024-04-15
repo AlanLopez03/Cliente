@@ -33,7 +33,7 @@ export class ReportesComponent implements OnInit {
   pedidos: Pedidos[] = [];
   pageSize = 5;
   p = 1;
-
+  idioma = localStorage.getItem('idioma') ?? "es";
   constructor(private router: Router, private reportesService: ReportesService, private usuarioService: UsuarioService, private pedidosService: PedidosService, private inventarioService: InventarioService, private idiomaService: IdiomaService, private translate: TranslateService) { }
 
   ngOnInit(): void {//Ya jala
