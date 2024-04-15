@@ -1,0 +1,158 @@
+{
+    "Lista de usuarios": "User list",
+    "Idioma": "Language",
+    "Categorias": "Categories",
+    "Carrito": "shopping cart",
+    "Ofertas": "Offers",
+    "Menú": "Menu",
+    "Oferta": "Offer",
+    "Buscar": "Search",
+    "Descuento disponible": "Discount available",
+    "Por tan solo":"For only",
+    "Agregar al carrito": "Add to cart",
+    "Agotado": "Sold out",
+    "Cantidad":"Quantity",
+    "Precio Unitario": "Unit price",
+    "Acciones": "Actions",
+    "Limpiar Carrito":"Clear Cart",
+    "Confirmar Compra": "Confirm Purchase",
+    "No hay productos para mostrar": "There are no products to show",
+    "Carrito de Compras": "Shopping Cart",
+    "Mi cuenta":"My account",
+    "Mis compras":"My shopping",
+    "Salir":"Log out",
+    "Lista de compras": "Shopping list",
+    "Fecha de compra": "Purchase date",
+    "Estado de compra": "Purchase status",
+    "Fecha de realizacion":"Date of realization",
+    "Monto": "Amount",
+    "Enviado a":"Send to",
+    "Productos": "Products",
+    "Nombre":"Name",
+    "Total": "Total amount",
+    "Cerrar": "Close",
+    "Datos del cliente": "Customer data",
+    "Nombre de usuario":"User name",
+    "Correo":"Email",
+    "Tipo de usuario":"User type",
+    "Direcciones":"Addresses",
+    "Codigo postal":"Postal code",
+    "Calle":"Street",
+    "Numero":"Number",
+    "Colonia":"Colony",
+    "Ciudad":"City",
+    "Estado":"Status",
+    "Editar":"Edit",
+    "Eliminar":"Delete",
+    "No hay direcciones disponibles":"There are no addresses available",
+    "Agregar nueva direccion":"Add new address",
+    "Agregar direccion":"Add address",
+    "CANCELAR":"CANCEL",
+    "ACTUALIZAR DIRECCION":"UPDATE ADDRESS",
+    "EDITAR USUARIO":"EDIT USER",
+    "Editar Nombre":"Edit Name",
+    "AGREGAR DIRECCION":"ADD ADDRESS",
+    "Usuarios":"Users",
+    "Reportes":"Reports",
+    "Inventario":"Inventory",
+    "Bienvenido":"Welcome",
+    "Modificar datos":"Modify data",
+    "Modificar usuario":"Modify user",
+    "Modificar usuarios":"Modify users",
+    "Modificar":"Modify",
+    "Cancelar":"Cancel",
+    "Buscar por nombre":"Search by name",
+    "Nuevo producto":"New product",
+    "Modificar productos":"Modify products",
+    "Código":"Code",
+    "Precio":"Price",
+    "Modificar datos del producto":"Modify product data",
+    "Nombre del producto":"Product name",
+    "Descuento":"Discount",
+    "Inicio descuento":"Start of discount",
+    "Fin descuento":"End of discount",
+    "Guardar Datos":"Save data",
+    "Fecha de inicio":"Start date",
+    "Fecha de fin":"End date",
+    "Enviar a Usuarios":"Send to users",
+    "Reporte de ventas":"Sales report",
+    "ID Compra":"Purchase ID",
+    "Detalles":"Details",
+    "Datos de la compra":"Purchase data",
+    "Subtotal":"Subtotal",
+    "Cliente":"Customer",
+    "Agregar producto":"Add product",
+    "Imagen":"Image",
+    "Nueva imagen":"New image",
+    "Usuario":"User",
+    "Editar información":"Edit information",
+    "Foto de perfil":"Profile picture",
+
+
+    "ProductoNoEncontrado":{
+        "title":"Product not found",
+        "confirm":"ok"
+    },
+    "escribeNombre":{
+        "title":"Write a name",
+        "text":"You must write a name to search",
+        "confirm":"ok"
+    },
+    "ProductoActualizado":{
+        "title":"Product updated",
+        "confirm":"ok"
+    },
+    "ProductoEliminado":{
+        "title":"Product deleted",
+        "confirm":"ok"
+    },
+    "eliminarProducto":{
+        "title":"Are you sure",
+        "text":"you won´t be able to revert this",
+        "confirm":"ok,delete it",
+        "cancel":"Cancel"
+    },
+    "errorAlActualizar":{
+        "title":"Error updating",
+        "confirm":"ok"
+    },
+    "crearProducto":{
+        "title":"Product created successfully", 
+        "confirm":"ok"
+    },
+    "noHayProductos":{
+        "title":"There are no products",
+        "confirm":"ok"
+    },
+    "sinUsuarios":{
+        "title":"There are no users",
+        "confirm":"ok"
+    },
+    "modificarUsuario":{
+        "title":"User modified successfully",
+        "confirm":"ok"
+    },
+    "eliminarUsuario":{
+        "title":"Are you sure",
+        "text":"you won´t be able to revert this",
+        "confirm":"ok",
+        "cancel":"Cancel"
+    },
+    "usuarioEliminado":{
+        "title":"User deleted successfully",
+        "confirm":"ok"
+    },
+    "sinReportes":{
+        "title":"Ooops :(",
+        "text":"There are no reports available",
+        "confirm":"ok"
+    },
+    "ponerFechas":
+    {
+        "title":"Select dates",
+        "text":"You must select a  start and end date",
+        "confirm":"ok"
+    }
+
+    
+}

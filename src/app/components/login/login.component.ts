@@ -24,10 +24,14 @@ logueo(){
         },err => console.log(err));
         localStorage.setItem('idUsuario',res.idUsuario);
         //console.log(res);
-        if (res.idRol == 1){   
+        if (res.idRol == 1){  
+          localStorage.setItem('idioma',"es") 
           this.router.navigateByUrl('/control');}
-        else
+        else{
+          localStorage.setItem('idioma',"2");
           this.router.navigateByUrl('/home');
+        }
+          
       } 
       else {
         alert('Usuario o contraseña incorrectos');

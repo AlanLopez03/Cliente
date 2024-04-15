@@ -2,7 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from '../../services/usuario/usuario.service';
 import { Router } from '@angular/router';
 import { getUsuario } from '../../models/getUsuario';
+import { IdiomaService } from '../../services/idioma/idioma.service';
 import { Rol } from '../../models/rolModel';
+
+import { Location } from '@angular/common';
+import { TranslateService } from "@ngx-translate/core";
+
 import Swal from 'sweetalert2'
 import { environment } from '../../environments/environment';
 import { ImagenesService } from '../../services/imagenes/imagenes.service';
@@ -14,19 +19,26 @@ declare var $: any;
   styleUrls: ['./modificar-usuario.component.css']
 })
 export class ModificarUsuarioComponent implements OnInit {
-  constructor(private usuarioService: UsuarioService, private router: Router, private imagenesService: ImagenesService) {
+
+  constructor(private usuarioService: UsuarioService, private router: Router, private imagenesService: ImagenesService,private idiomaService:IdiomaService,
+    private translate:TranslateService) {
     this.imgPrincipal = null;
     this.fileToUpload = null;
   }
+
   usuarios: getUsuario[] = [];
   usuario: getUsuario = new getUsuario();
   rol: Rol = new Rol();
   roles: Rol[] = [];
   pageSize = 5;
+  lenguaje: string = 'es';
   p = 1;
   imgPrincipal: any;
   fileToUpload: any;
   liga: string = environment.API_URL_IMAGENES + '/usuarios';
+
+
+  idioma = localStorage.getItem('idioma') ?? "es";
 
   ngOnInit(): void {
     // Inicializa los modales en ngOnInit
@@ -35,18 +47,25 @@ export class ModificarUsuarioComponent implements OnInit {
       $('.modal').modal();  
     });
 
+
     this.imgPrincipal = null;
+
+    this.idiomaService.currentLanguage.subscribe(lang => {
+      //this.lenguaje= lang;
+      this.translate.use(lang);
+    });
+
     this.usuarioService.list().subscribe((resUsuarios: any) =>
      {
       this.usuarios = resUsuarios;
-      console.log(this.usuarios);
+      //console.log(this.usuarios);
       if (resUsuarios == false){
-        Swal.fire({
-          title: 'Sin usuarios',
-          text: 'No hay usuarios disponibles',
+        this.translate.get('sinUsuarios').subscribe((translations) => 
+       { Swal.fire({
+          title: translations['sinUsuarios.title'],
           icon: 'warning',
-          confirmButtonText: 'Aceptar'
-        })
+          confirmButtonText: translations['sinUsuarios.confirm']
+        })})
       }
     }, err => console.log(err));
     this.usuarioService.getRoles().subscribe((resRoles: any) => {
@@ -55,6 +74,7 @@ export class ModificarUsuarioComponent implements OnInit {
     }, err => console.log(err));
     
   }
+
   modificarUsuario(idUsuario: any) {
     this.usuarioService.listone(idUsuario).subscribe((resUsuario: any) => {
       this.usuario = resUsuario;
@@ -69,13 +89,16 @@ export class ModificarUsuarioComponent implements OnInit {
     this.usuarioService.update(this.usuario).subscribe((resUsuario: any) => 
     {
       $('#modalModificarusuario').modal('close');
-      Swal.fire({
+      this.translate.get('modificarUsuario').subscribe((translations) =>
+      {
+        Swal.fire({
         position: 'center',
         icon: 'success',
-        title: 'Usuario modificado correctamente',
+        title: translations.title,
+        confirmButtonText: translations.confirm,
         showConfirmButton: false,
         timer: 1500
-      })
+      })})
     }, err => console.log(err));
   }
 
@@ -92,36 +115,43 @@ export class ModificarUsuarioComponent implements OnInit {
   }
   eliminarUsuario(idUsuario: any){
 
-    Swal.fire({
-      title: '¿Está seguro?',
-      text: "No podrá revertir esta acción",
+    this.translate.get('eliminarUsuario').subscribe((translations) =>
+   { Swal.fire({
+      title: translations.title,
+      text: translations.text,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#4caf50',
       cancelButtonColor: '#f44336',
-      confirmButtonText: 'Sí, eliminar',
-      cancelButtonText: 'Cancelar'
+      confirmButtonText: translations.confirm,
+      cancelButtonText: translations.cancel
     }).then((result) => {
       if (result.isConfirmed) {
         this.usuarioService.delete(idUsuario).subscribe((resUsuario: any) => 
         {
           console.log("Usuario eliminado correctamente")
-          Swal.fire({
+          this.translate.get('usuarioEliminado').subscribe((translations) =>
+{          Swal.fire({
             position: 'center',
             icon: 'success',
-            title: 'Usuario eliminado correctamente',
+            title: translations.title,
+            confirmButtonText: translations.confirm,
             showConfirmButton: false,
             timer: 1500
-          })
+          })})
           this.usuarioService.list().subscribe((resUsuarios: any) =>
           {
             this.usuarios = resUsuarios;
-            console.log(this.usuarios);
+            //console.log(this.usuarios);
           }, err => console.log(err));
           
         }, err => console.log(err));
       }
-    });
+
+    }
+  );
+})
+
   }
   
   cargandoImagen(event: any, id : any) {

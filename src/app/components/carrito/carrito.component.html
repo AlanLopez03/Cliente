@@ -1,6 +1,6 @@
 <div class="divOlvide">
   <h4>
-    Carrito de compras
+  {{"Carrito de Compras" | translate }}
   </h4>
 </div>
 
@@ -13,17 +13,29 @@
 <div class="container" *ngIf="carrito">
   <table class="default" *ngIf="carrito != undefined">
     <tr>
-      <td>      </td>
-      <td>Nombre</td>
-      <td>Cantidad</td>
-      <td>Precio unitario</td>
-      <td>Acciones</td>
+<!-- <<<<<<< HEAD
+    <tr *ngFor="let producto of carrito | paginate: { itemsPerPage: pageSize, currentPage: p }; let i = index">
+      <td [width]="150">
+        <img *ngIf="producto.foto == 0" src="../../../assets/images/productoDesconocido.jpeg" style="width: 100px;">
+        <img *ngIf="producto.foto == 1" src="{{liga}}/{{producto.idProducto}}.jpg" [alt]="liga" style="width: 100px;"> 
+======= -->
+        <td>{{"Imagen"|translate}}</td>
+      <td>{{"Nombre"|translate}}</td>
+      <td>{{"Cantidad"|translate}}</td>
+      <td>{{"Precio Unitario"|translate}}</td>
+      <td>{{"Acciones"|translate}}</td>
     </tr>
 
     <tr *ngFor="let producto of carrito | paginate: { itemsPerPage: pageSize, currentPage: p }; let i = index">
       <td [width]="150">
         <img *ngIf="producto.foto == 0" src="../../../assets/images/productoDesconocido.jpeg" style="width: 100px;">
         <img *ngIf="producto.foto == 1" src="{{liga}}/{{producto.idProducto}}.jpg" [alt]="liga" style="width: 100px;"> 
+      </td>
+      <td *ngIf="idioma == 2">{{ producto.nombre }}</td>
+      <td *ngIf="idioma == 1">{{ producto.name }}</td>
+      <td>
+        <span >{{ producto.cantidad }}</span>
+
       </td>
       <td>{{ producto.nombre }}</td>
       <td>{{ producto.cantidad }}</td>
@@ -39,8 +51,8 @@
     <pagination-controls class="my-pagination" (pageChange)="p = ($event)" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
   </div>
   <div class="container">
-    <a (click)="limpiarCarrito()" class="waves-effect waves-light btn"><i class="material-icons right">delete</i>Limpiar carrito</a>
-    <button  data-target="modal1" class="btn modal-trigger">Comprar</button>
+    <a (click)="limpiarCarrito()" class="waves-effect waves-light btn"><i class="material-icons right">delete</i>{{"Limpiar Carrito"|translate}}</a>
+    <button  data-target="modal1" class="btn modal-trigger">{{"Confirmar Compra"|translate}}</button>
   </div>
   <br>
 </div>
@@ -50,7 +62,7 @@
   <br>
   <img src="../../../assets/images/no-product.png" width="100px">
   <br>
-  No hay productos que Mostrar
+  {{ "No hay productos en el carrito" | translate }}
   <br>
   <br>
   <br>

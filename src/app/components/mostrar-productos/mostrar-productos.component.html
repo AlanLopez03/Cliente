@@ -1,10 +1,11 @@
 <div>
   <nav class="nav">
+    
     <div class="nav-wrapper">
       <div class="input-field">
         <input [(ngModel)]="buscar" type="search" id = "search" class="validate" (input)="Buscar()" (focus)="quitarTexto()" (blur)="restaurarTexto()" required>
         <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-        <span *ngIf="!buscar && !campoEnfocado" class="buscar-texto">Buscar</span>
+        <span *ngIf="!buscar && !campoEnfocado" class="buscar-texto">{{"Buscar" | translate}}</span>
       </div>
     </div>
   </nav>
@@ -15,20 +16,26 @@
   <div class="cajita" *ngFor="let producto of productos">
     <div class="card">
       <div class="card-image">
+
         <img *ngIf="producto.foto == 0" src="../../../assets/images/productoDesconocido.jpeg" width="100%">
         <img *ngIf="producto.foto == 1" src="{{liga}}/{{producto.idProducto}}.jpg" [alt]="liga" width="100%"> 
-        <span *ngIf="producto.descuento<1" class="oferta-etiqueta card-title">Oferta</span>
+        <!-- <span *ngIf="producto.descuento<1" class="oferta-etiqueta card-title">Oferta</span> -->
+
+        <!-- <img [src]="'../../../assets/images/' + seleccionarImagen(producto.idCategoria)" alt="Imagen del producto"> -->
+        <span *ngIf="producto.descuento<1" class="oferta-etiqueta card-title">{{"Oferta" | translate}}</span>
+
       </div>
       <div class="card-content">
-        <h5>{{producto.nombre}}</h5>
-        <p *ngIf="producto.descuento <1"> Descuento disponible {{producto.descuento*100}}%</p>
-        <p *ngIf="producto.descuento <1">A tan sólo  ${{producto.precio *producto.descuento}}</p>
+        <h5 *ngIf="idioma == 2">{{producto.nombre}}</h5>
+        <h5 *ngIf="idioma == 1">{{producto.name}}</h5>
+        <p *ngIf="producto.descuento <1"> {{"Descuento disponible"|translate}} {{producto.descuento*100}}%</p>
+        <p *ngIf="producto.descuento <1">{{"Por tan solo" |translate }}  ${{producto.precio *producto.descuento}}</p>
         <p *ngIf="producto.descuento==1">${{producto.precio}}</p>
         <p>{{producto.descripcion}}</p>
       </div>
       <div class="card-action">
-        <a *ngIf="producto.stock > 0" href="javascript:void(0)" (click)="agregarProducto(producto.idProducto)">Agregar al carrito</a>
-        <h6 *ngIf="producto.stock == 0">Agotado</h6>
+        <a *ngIf="producto.stock > 0" href="javascript:void(0)" (click)="agregarProducto(producto.idProducto)">{{"Agregar al carrito"|translate}}</a>
+        <h6 *ngIf="producto.stock == 0">{{"Agotado"|translate}}</h6>
       </div>
     </div>
   </div>
@@ -49,7 +56,7 @@
   </div>
 </div>
 
-<
+
 
 
 

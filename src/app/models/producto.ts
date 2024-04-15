@@ -1,7 +1,9 @@
 export class Producto{
     idProducto: number;
     nombre: string;
+    name : string;
     descripcion: string;
+    description: string;
     stock: number;
     precio: number;
     descuento: number;
@@ -14,7 +16,9 @@ export class Producto{
     constructor(){
         this.idProducto = 1;
         this.nombre = '';
+        this.name = '';
         this.descripcion = '';
+        this.description = '';
         this.stock = 1;
         this.precio = 1;
         this.descuento = 1;

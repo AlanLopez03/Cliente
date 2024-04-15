@@ -11,6 +11,8 @@ import { error } from 'jquery';
 import { UsuarioService } from '../../services/usuario/usuario.service';
 import { Domicilio } from '../../models/domicilio';
 import { environment } from '../../environments/environment';
+import { IdiomaService } from '../../services/idioma/idioma.service';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-carrito',
   templateUrl: './carrito.component.html',
@@ -29,7 +31,11 @@ export class CarritoComponent implements OnInit {
   idDomicilio: number = 0;
   p = 1;
   liga: string = environment.API_URL_IMAGENES + '/productos';
-  constructor(private carritoService: CarritoService, private inventarioService: InventarioService, private router: Router, private usuarioService: UsuarioService) { }
+  idioma = localStorage.getItem('idioma') ?? 2;
+
+  constructor(private carritoService: CarritoService, private inventarioService: InventarioService, private router: Router, private usuarioService: UsuarioService
+    ,private idiomaService: IdiomaService, private translate: TranslateService
+  ) { }
   inserta = new addProducto();
   ngOnInit(): void {
     this.carrito = [];
@@ -39,6 +45,9 @@ export class CarritoComponent implements OnInit {
         $(this).css('background-color', '#ff0000'); // Cambiar a rojo
       });
     })
+    //this.idiomaService.currentLanguage.subscribe((res: any) => {
+    //  this.translate.use(res);
+    //})
     this.idDomicilio = 0;
     this.carritoService.listone(localStorage.getItem('idUsuario')).subscribe(
       (res: any) => {

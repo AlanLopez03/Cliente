@@ -7,6 +7,8 @@ import { CarritoService } from '../../services/carrito/carrito.service';
 import Swal from 'sweetalert2';
 import { ChangeDetectorRef } from '@angular/core';
 import { environment } from '../../environments/environment';
+import { IdiomaService } from '../../services/idioma/idioma.service';
+import { TranslateService } from '@ngx-translate/core';
 declare var $: any;
 
 @Component({
@@ -19,17 +21,25 @@ export class MostrarProductosComponent implements OnInit {
   producto = new Producto();
   productos: Producto[] = [];
   buscar: string = '';
+
+  idioma = localStorage.getItem('idioma') ?? 2;
+  imagenes = ["anillo_u.jpg", "aretes_u.jpg", "arracadas_u.jpg", "esclavas_u.jpg", "Dijes_u.jpg", "Corazon.jpeg"]
   campoEnfocado: boolean = false;
   imgPrincipal: any;
   fileToUpload: any;
   liga: string = environment.API_URL_IMAGENES + '/productos';
 
-  constructor(private inventarioService: InventarioService, private carritoService: CarritoService, private router: Router) {
+  constructor(private inventarioService: InventarioService, private carritoService: CarritoService, private router: Router,private idiomaService: IdiomaService,private translate: TranslateService) {
     this.imgPrincipal = null;
     this.fileToUpload = null;
   }
 
   ngOnInit(): void {
+
+    this.idiomaService.currentLanguage.subscribe(lang => {
+      this.translate.use(lang);
+    });
+
     $(document).ready(function () {
       $('.carousel').carousel({
       }
