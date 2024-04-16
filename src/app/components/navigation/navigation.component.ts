@@ -55,6 +55,7 @@ constructor(private router:Router,private categoriaService:CategoriaService,
   setIdioma(idioma:any) {
     localStorage.setItem('idioma',idioma);
     const idio = localStorage.getItem('idioma');
+    console.log(typeof(idio));
     if (idio !== null && idio === '1') {
       this.translate.use('en');
       //this.idiomaService.changeLanguage('en');

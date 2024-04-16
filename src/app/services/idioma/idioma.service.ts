@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class IdiomaService {
   //Debe guardar el lenguaje actuar en el local storage para que al recargar la pagina no se pierda el idioma
-  private defaultLanguage = localStorage.getItem('Idioma') || 'es';
+  private defaultLanguage = localStorage.getItem('idioma') || 'es';
   private languageSource = new BehaviorSubject<string>(this.defaultLanguage);//Variable que almacena el idioma actual,por defecto es español
   currentLanguage = this.languageSource.asObservable();//Se convierte en un observable para que los componentes se suscriban a el
   constructor() {

@@ -40,6 +40,7 @@ export class CarritoComponent implements OnInit {
   ngOnInit(): void {
     this.carrito = [];
     this.productos = [];
+    
     $(document).ready(function () {
       $('#direccion').click(function () {
         $(this).css('background-color', '#ff0000'); // Cambiar a rojo
