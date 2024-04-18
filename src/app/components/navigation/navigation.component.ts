@@ -79,6 +79,7 @@ constructor(private router:Router,private categoriaService:CategoriaService,
     console.log('salir');
     console.log(localStorage.getItem('idUsuario'));
     localStorage.removeItem('idUsuario');
+    localStorage.removeItem('idioma');
     this.router.navigateByUrl('/login');
 
   }

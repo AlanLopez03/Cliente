@@ -40,13 +40,15 @@ constructor(private usuarioService:UsuarioService ,private router:Router,private
   });}
   logOut(){//Funciona para cerrar sesion pero no se como hacer para que se cierre la sesion en el servidor
     console.log('salir');
-    console.log(localStorage.getItem('idUsuario'));
+    //console.log(localStorage.getItem('idUsuario'));
     localStorage.removeItem('idUsuario');
+    localStorage.removeItem('idioma');
+
     this.router.navigateByUrl('/');
 
   }
   cambiarIdioma(idioma: string) {
-    console.log(idioma);
+    //console.log(idioma);
     this.idiomaService.changeLanguage(idioma);
     this.reloadPage();
   

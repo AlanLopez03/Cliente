@@ -88,7 +88,7 @@
     "Foto de perfil":"Foto de perfil",
     "ProductoNoEncontrado":{
         "title":"Producto no encontrado",
-        "Confirm":"Aceptar"
+        "confirm":"Aceptar"
     },
     "escribeNombre":{
         "title":"Debes escribir un nombre",

@@ -134,13 +134,13 @@ export class InventarioComponent implements OnInit {
           this.productos = res;
         }
         else {
-          this.translate.get(['ProductoNoEncontrado.title', 'ProductoNoEncontrado.confirm']).subscribe(translations => {
+          this.translate.get('ProductoNoEncontrado').subscribe(translations => {
             Swal.fire({
               position: 'center',
               icon: 'error',
-              title: translations['ProductoNoEncontrado.title'],
+              title: translations.title,
 
-              confirmButtonText: translations['ProductoNoEncontrado.confirm'],
+              confirmButtonText: translations.confirm,
               showConfirmButton: true,
               timer: 1500
             })
@@ -149,15 +149,15 @@ export class InventarioComponent implements OnInit {
         }
       }, err => console.log(err));
     }
-    else {
-      this.translate.get(['escribeNombre.title', 'escribeNombre.confirm', 'escribeNombre.text']).subscribe(translations => {
+    else {//Esta es una notacion mas larga para mostrar los alertas
+      this.translate.get('escribeNombre').subscribe(translations => {
         Swal.fire(
           {
             position: 'center',
             icon: 'error',
-            title: translations['escribeNombre.title'],
-            text: translations['escribeNombre.text'],
-            confirmButtonText: translations['escribeNombre.confirm'],
+            title: translations.title,
+            text: translations.text,  
+            confirmButtonText: translations.confirm,
             showConfirmButton: true,
             timer: 1500
 
@@ -227,13 +227,13 @@ export class InventarioComponent implements OnInit {
       this.inventarioService.actualizar(this.producto).subscribe(
         res => {
           $('#modal1').modal('close');
-          this.translate.get(['ProductoActualizado.title', 'ProductoActualizado.confirm']).subscribe(translations => {
+          this.translate.get('ProductoActualizado').subscribe(translations => {
             Swal.fire({
               position: 'center',
               icon: 'success',
-              title: translations['ProductoActualizado.title'],
+              title: translations.title,
               showConfirmButton: true,
-              confirmButtonText: translations['ProductoActualizado.confirm'],
+              confirmButtonText: translations.confirm,
               timer: 1500
             }).then((result) => {
               this.inventarioService.list().subscribe((resProductos: any) => {
@@ -244,7 +244,7 @@ export class InventarioComponent implements OnInit {
           })
         }, err => console.log(err));
     }
-    else
+    else//Esta es una notacion mas larga para mostrar los alertas
       this.translate.get(['ErrorActualizar.title', 'ErrorActualizar.confirm']).subscribe(translations => {
         {
           Swal.fire({
