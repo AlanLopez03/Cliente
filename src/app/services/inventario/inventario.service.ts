@@ -51,6 +51,7 @@ export class InventarioService {
   }
 
   BuscarProducto(nombre : any) {
+    
     return this.http.get(`${environment.API_URI}/productos/buscarProducto/${nombre}`);
 
   }
