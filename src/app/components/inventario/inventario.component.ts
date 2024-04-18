@@ -327,7 +327,6 @@ cargandoImagen(event: any, id : any) {
   if (event.target.files && event.target.files[0])
     Swal.fire({
       title: "¿Estas seguro de agregar la imagen?",
-
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
