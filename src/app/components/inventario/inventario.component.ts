@@ -35,6 +35,7 @@ export class InventarioComponent implements OnInit {
   marcas: Marca[] = [];
   producto = new Producto();
   productos: Producto[] = [];
+  id_producto : any;
   fecha = String;
   pageSize = 4;
   p = 1;
@@ -323,43 +324,51 @@ export class InventarioComponent implements OnInit {
 
 
 
-cargandoImagen(event: any, id : any) {
-  if (event.target.files && event.target.files[0])
-    Swal.fire({
-      title: "¿Estas seguro de agregar la imagen?",
+  cargandoImagen(event: any, id : any) {
+    if (event.target.files && event.target.files[0])
+      this.translate.get('AgregarImg').subscribe((translations) =>
+        {
+      Swal.fire({
 
-      icon: "warning",
+      title: translations.title,
+      text: translations.text,
+      icon: 'warning',
+      confirmButtonText: translations.confirm,
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Guardar imagen"
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.imgPrincipal = null;
-        console.log(id);
-        const files: FileList = event.target.files;
-        this.fileToUpload = files.item(0);
-        let imgPromise = this.getFileBlob(this.fileToUpload);
-        imgPromise.then(blob => {
-          this.imagenesService.guardarImagen(id, "productos", blob).subscribe(
-            (res: any) => {
-              this.imgPrincipal = blob;
-              this.inventarioService.updateFoto(id, this.producto).subscribe((resProducto: any) => {
-                Swal.fire({
-                  position: 'center',
-                  icon: 'success',
-                  title: 'Imagen actualizada correctamente',
-                  showConfirmButton: false,
-                  timer: 1500
+      cancelButtonColor: "#d33"
+
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.imgPrincipal = null;
+          console.log(id);
+          const files: FileList = event.target.files;
+          this.fileToUpload = files.item(0);
+          let imgPromise = this.getFileBlob(this.fileToUpload);
+          imgPromise.then(blob => {
+            this.imagenesService.guardarImagen(id, "productos", blob).subscribe(
+              (res: any) => {
+                this.imgPrincipal = blob;
+                this.inventarioService.updateFoto(id, this.producto).subscribe((resProducto: any) => {
+                  this.translate.get('imgActu').subscribe((translations) =>
+                    {
+                  Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: translations.title,
+                    showConfirmButton: false,
+                    timer: 1500
+                  })
                 })
-              }, err => console.log(err));
-              window.location.reload();
-            },
-            err => console.error(err));
-        });
-      }
-    });
-}
+                }, err => console.log(err));
+                window.location.reload();
+              },
+              err => console.error(err));
+          });
+        }
+      })
+      });
+  }
 
 getFileBlob(file: File): Promise < string | ArrayBuffer | null > {
   const reader = new FileReader();

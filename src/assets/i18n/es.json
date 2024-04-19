@@ -86,6 +86,22 @@
     "Usuario":"Usuario",
     "Editar información":"Editar información",
     "Foto de perfil":"Foto de perfil",
+    "Selecciona una direccion de envio":"Selecciona una direccion de envio",
+    "Confirmar": "Confirmar",
+    "Editar nombre de usuario":"Editar nombre de usuario",
+
+    "imgActu":
+    {
+        "title":"Imagen actualizada correctamente",
+        "confirm":"ok"
+    },
+
+    "AgregarImg":
+    {
+        "title":"¿Estas seguro de agregar la imagen?",
+        "confirm":"ok"
+    },
+
     "ProductoNoEncontrado":{
         "title":"Producto no encontrado",
         "confirm":"Aceptar"
@@ -117,10 +133,80 @@
         "title":"Producto creado", 
         "confirm":"ok"
     },
-    "noHayProductos":{
+
+    "carrito":{
+        "title":"Producto agregado",
+        "text":"El producto se ha agregado con éxito",
+        "confirm":"ok"
+    },
+
+    "noStock":{
+        "title":"Error",
+        "text":"No hay stock suficiente",
+        "confirm":"ok"
+    },
+
+    "Ofertass":
+    {
+        "title":"Error",
+        "text":"No hay ofertas disponibles",
+        "confirm":"ok"
+    },
+
+    "CarritoLim":
+    {
+        "title":"Carrito limpiado",
+        "text": "El carrito se ha limpiado con éxito",
+        "confirm":"ok"
+    },
+
+    "Compra":
+    {
+        "title":"Compra realizada",
+        "text": "La compra se ha realizado con éxito",
+        "confirm":"ok"
+    },
+
+    "Domicilio":
+    {
+        "title":"error",
+        "text": "Debe seleccionar un domicilio",
+        "confirm":"ok"
+    },
+
+    "CarritoUsu":
+    {
+        "title":"¿Está seguro que desea eliminar el producto del carrito?",
+        "text":"Esta acción no se puede revertir",
+        "confirm":"ok"
+    },
+
+    "eliminaArti":
+    {
+        "title":"Producto eliminado",
+        "text":"El producto se ha eliminado con éxito",
+        "confirm":"ok"
+    },
+
+    "LimpiarCarro":
+    {
+        "title":"¿Está seguro que desea limpiar el carrito?",
+        "text": "Esta acción no se puede revertir",
+        "confirm":"ok"
+    },
+
+
+    "sinProducto":{
         "title":"No hay productos",
         "confirm":"Aceptar"
     },
+
+    "noHayProductos":{
+        "title":"No hay productos",
+        "text": "No hay productos por mostrar en esta categoria",
+        "confirm":"Aceptar"
+    },
+
     "sinUsuarios":{
         "title":"No hay usuarios",
         "confirm":"Aceptar"
