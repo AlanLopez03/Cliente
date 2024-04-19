@@ -63,25 +63,32 @@ export class MostrarProductosComponent implements OnInit {
         this.productos = JSON.parse(productosString);
       }else{
         if(localStorage.getItem("Categoria") == "-1"){
+          this.translate.get('noHayProductos').subscribe((translations) =>
+            {
 // origin/Jose
+
           Swal.fire({
-            title: 'Sin productos',
-            text: 'No hay productos por mostrar',
+            title: translations.title,
+            text: translations.text,
             icon: 'warning',
-            confirmButtonText: 'Aceptar'
+            confirmButtonText: translations.confirm
           })
+        })
         }
         //this.reloadPage();
         if (localStorage.getItem("Categoria") != "-1") {
           this.inventarioService.buscarporCategoria(localStorage.getItem("Categoria")).subscribe((res: any) => {
             if(res.length == 0){
+              this.translate.get('noHayProductos').subscribe((translations) =>
+                {
               Swal.fire({
-                title: 'Sin productos',
-                text: 'No hay productos por mostrar en esta categoria',
+                title: translations.title,
+                text: translations.text,
                 icon: 'warning',
-                confirmButtonText: 'Aceptar'
+                confirmButtonText: translations.confirm
               })
-            }
+            })
+          }
             else{
               this.productos = res
             }
@@ -100,10 +107,15 @@ export class MostrarProductosComponent implements OnInit {
         if (res.length > 0)
           this.productos = res;
         else
-          Swal.fire(
-            'Error',
-            'No hay ofertas disponibles',
-            'error')
+        this.translate.get('Ofertass').subscribe((translations) =>
+          {
+            Swal.fire({
+              title: translations.title,
+              text: translations.text,
+              icon: 'warning',
+              confirmButtonText: translations.confirm
+            })
+      })
       },
       err => console.log(err)
     );
@@ -139,18 +151,29 @@ export class MostrarProductosComponent implements OnInit {
         console.log(stock);
         if (stock > 0) {
           this.carritoService.insertar(this.inserta).subscribe((res: any) => {
-            Swal.fire(
-              'Producto agregado',
-              'El producto se ha agregado con éxito',
-              'success')
+            this.translate.get('carrito').subscribe((translations) =>
+              {
+                Swal.fire({
+                  title: translations.title,
+                  text: translations.text,
+                  icon: 'warning',
+                  confirmButtonText: translations.confirm
+                })
           },
             err => console.log(err));
+          })
         }
+      
         else {
-          Swal.fire(
-            'Error',
-            'No hay stock suficiente',
-            'error')
+          this.translate.get('noStock').subscribe((translations) =>
+            {
+              Swal.fire({
+                title: translations.title,
+                text: translations.text,
+                icon: 'warning',
+                confirmButtonText: translations.confirm
+              })
+        })
         }
       },
       err => console.log(err)

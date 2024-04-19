@@ -4,12 +4,14 @@
       <td>
         <div class="input-field col s6">
           <i class="material-icons prefix">search</i>
-          <input id="icon_prefix" type="text" class="active" [(ngModel)]="producto.idProducto" name="busqueda">
+          <input id="icon_prefix" type="text" class="active" [(ngModel)]="id_producto" name="busqueda">
           <label for="icon_prefix">{{"Buscar por nombre"|translate}}</label>
-        </div>
+          <span *ngIf="producto.idProducto !== 1">{{ producto.idProducto }}</span>
+      </div>
+      
       </td>
       <td>
-        <a class="waves-effect waves-light btn" (click)="buscarProducto(producto.idProducto)">{{"Buscar"|translate}}</a>
+        <a class="waves-effect waves-light btn" (click)="buscarProducto(id_producto)">{{"Buscar"|translate}}</a>
       </td>
     </tr>
     <tr>
