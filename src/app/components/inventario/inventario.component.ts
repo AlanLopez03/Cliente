@@ -8,7 +8,7 @@ import { Material } from '../../models/material';
 import { Marca } from '../../models/marca';
 import { MaterialService } from '../../services/material/material.service';
 import { MarcaService } from '../../services/marca/marca.service';
-
+import { switchMap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { ImagenesService } from '../../services/imagenes/imagenes.service';
 
@@ -346,24 +346,40 @@ export class InventarioComponent implements OnInit {
           this.fileToUpload = files.item(0);
           let imgPromise = this.getFileBlob(this.fileToUpload);
           imgPromise.then(blob => {
-            this.imagenesService.guardarImagen(id, "productos", blob).subscribe(
-              (res: any) => {
+            this.imagenesService.guardarImagen(id, "productos", blob).pipe(
+              switchMap(resGuardar => {
+                // La imagen ha sido guardada correctamente, ahora procedemos a actualizar el producto
                 this.imgPrincipal = blob;
-                this.inventarioService.updateFoto(id, this.producto).subscribe((resProducto: any) => {
-                  this.translate.get('imgActu').subscribe((translations) =>
-                    {
-                  Swal.fire({
-                    position: 'center',
-                    icon: 'success',
-                    title: translations.title,
-                    showConfirmButton: false,
-                    timer: 1500
-                  })
-                })
-                }, err => console.log(err));
-                window.location.reload();
+                return this.inventarioService.updateFoto(id, this.producto);
+              }),
+              switchMap(resUpdate => {
+                // La foto del producto ha sido actualizada correctamente, ahora obtenemos la traducción para mostrar el mensaje
+                return this.translate.get('imgActu');
+              })
+            ).subscribe(
+              translation => {
+                // Todo fue exitoso, mostramos el mensaje al usuario
+                Swal.fire({
+                  position: 'center',
+                  icon: 'success',
+                  title: translation.title,
+                  showConfirmButton: false,
+                  timer: 1500
+                });
+                // Considera actualizar la UI aquí en vez de recargar la página, para una mejor experiencia del usuario
+                // window.location.reload();
               },
-              err => console.error(err));
+              err => {
+                // Manejo de errores para todo el flujo
+                console.error(err);
+                Swal.fire({
+                  position: 'center',
+                  icon: 'error',
+                  title: 'Error al actualizar la imagen',
+                  showConfirmButton: true
+                });
+              }
+            );
           });
         }
       })
