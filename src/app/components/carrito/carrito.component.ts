@@ -32,6 +32,8 @@ export class CarritoComponent implements OnInit {
   p = 1;
   liga: string = environment.API_URL_IMAGENES + '/productos';
   idioma = localStorage.getItem('idioma') ?? 2;
+  Anterior:any;
+  Siguiente:any;
 
   constructor(private carritoService: CarritoService, private inventarioService: InventarioService, private router: Router, private usuarioService: UsuarioService
     ,private idiomaService: IdiomaService, private translate: TranslateService
@@ -96,6 +98,13 @@ export class CarritoComponent implements OnInit {
 
       err => console.log(err)
     );
+    if(localStorage.getItem('idioma') == 'es'){
+      this.Anterior = 'Anterior';
+      this.Siguiente = 'Siguiente';
+    }else{
+      this.Anterior = 'Previous';
+      this.Siguiente = 'Next';
+    }
 
   }
   setDomicilio(id: any) {

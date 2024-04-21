@@ -34,6 +34,8 @@ export class ReportesComponent implements OnInit {
   pageSize = 5;
   p = 1;
   idioma = localStorage.getItem('idioma') ?? "es";
+  Anterior:any;
+  Siguiente:any;
   constructor(private router: Router, private reportesService: ReportesService, private usuarioService: UsuarioService, private pedidosService: PedidosService, private inventarioService: InventarioService, private idiomaService: IdiomaService, private translate: TranslateService) { }
 
   ngOnInit(): void {//Ya jala
@@ -70,7 +72,13 @@ export class ReportesComponent implements OnInit {
         );
       }
     });
-    //console.log(this.ventas);
+    if(localStorage.getItem('idioma') == 'es'){
+      this.Anterior = 'Anterior';
+      this.Siguiente = 'Siguiente';
+    }else{
+      this.Anterior = 'Previous';
+      this.Siguiente = 'Next';
+    }
 
   }
   buscar() {

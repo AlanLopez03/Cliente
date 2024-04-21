@@ -44,6 +44,8 @@ export class OfertasComponent {
   fecha = String;
   pageSize = 5;
   p = 1;
+  Anterior:any;
+  Siguiente:any;
   idioma = localStorage.getItem('idioma') ?? "es";
  
 
@@ -92,6 +94,13 @@ export class OfertasComponent {
     this.marcaService.list().subscribe((resMarcas: any) => {
       this.marcas = resMarcas;
     }, err => console.log(err));
+    if(localStorage.getItem('idioma') == 'es'){
+      this.Anterior = 'Anterior';
+      this.Siguiente = 'Siguiente';
+    }else{
+      this.Anterior = 'Previous';
+      this.Siguiente = 'Next';
+    }
   }
 
   enviarOfertas()

@@ -39,6 +39,8 @@ export class InventarioComponent implements OnInit {
   fecha = String;
   pageSize = 4;
   p = 1;
+  Anterior:any;
+  Siguiente:any;
 
   constructor(private inventarioService: InventarioService, private categoriaService: CategoriaService, private materialService: MaterialService,
     private marcaService: MarcaService, private router: Router, private imagenesService: ImagenesService, private translate: TranslateService) {
@@ -110,6 +112,14 @@ export class InventarioComponent implements OnInit {
     this.marcaService.list().subscribe((resMarcas: any) => {
       this.marcas = resMarcas;
     }, err => console.log(err));
+
+    if(localStorage.getItem('idioma') == 'es'){
+      this.Anterior = 'Anterior';
+      this.Siguiente = 'Siguiente';
+    }else{
+      this.Anterior = 'Previous';
+      this.Siguiente = 'Next';
+    }
 
   }
   revisarDescuento() {

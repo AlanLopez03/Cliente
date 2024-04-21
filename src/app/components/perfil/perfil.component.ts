@@ -9,6 +9,8 @@ import { Route, Router } from '@angular/router';
 import { environment } from '../../environments/environment';
 import { ImagenesService } from '../../services/imagenes/imagenes.service';
 import { switchMap } from 'rxjs/operators';
+import { TranslateService } from '@ngx-translate/core';
+import { transition } from '@angular/animations';
 declare var $: any;
 
 @Component({
@@ -17,7 +19,7 @@ declare var $: any;
   styleUrl: './perfil.component.css'
 })
 export class PerfilComponent implements OnInit {
-  constructor(private usuarioService: UsuarioService, private router: Router, private imagenesService: ImagenesService) {
+  constructor(private usuarioService: UsuarioService, private router: Router, private imagenesService: ImagenesService,private translate: TranslateService) { 
     this.imgPrincipal = null;
     this.fileToUpload = null;
   }
@@ -92,53 +94,60 @@ export class PerfilComponent implements OnInit {
   }
 
   cargandoImagen(event: any) {
-    if (event.target.files && event.target.files[0])
-      Swal.fire({
-        title: "¿Estas seguro de agregar la imagen?",
-
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Guardar imagen"
-      }).then((result) => {
-        if (result.isConfirmed) {
-          this.imgPrincipal = null;
-          const files: FileList = event.target.files;
-          this.fileToUpload = files.item(0);
-          let imgPromise = this.getFileBlob(this.fileToUpload);
-          imgPromise.then(blob => {
-            this.imagenesService.guardarImagen(this.usuario.idUsuario, "usuarios", blob).pipe(
-              switchMap(res => {
-                // Actualizar la imagen del usuario aquí significa que solo se llamará a updateFoto si guardarImagen fue exitoso.
-                return this.usuarioService.updateFoto(this.usuario.idUsuario, this.usuario);
-              })
-            ).subscribe(
-              resUsuario => {
-                // Manejo del éxito de ambas operaciones aquí
-                Swal.fire({
-                  position: 'center',
-                  icon: 'success',
-                  title: 'Imagen actualizada correctamente',
-                  showConfirmButton: false,
-                  timer: 1500
-                });
-                window.location.reload();
-              },
-              err => {
-                // Manejo de errores
-                console.error(err);
-                Swal.fire({
-                  position: 'center',
-                  icon: 'error',
-                  title: 'Error al actualizar la imagen',
-                  showConfirmButton: true
-                });
-              }
-            );
-          });
-        }
+    if (event.target.files && event.target.files[0]){
+      this.translate.get('agregarImg').subscribe((translations) => {
+        Swal.fire({
+          title: translations.title,
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: translations.confirm
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.imgPrincipal = null;
+            const files: FileList = event.target.files;
+            this.fileToUpload = files.item(0);
+            let imgPromise = this.getFileBlob(this.fileToUpload);
+            imgPromise.then(blob => {
+              this.imagenesService.guardarImagen(this.usuario.idUsuario, "usuarios", blob).pipe(
+                switchMap(res => {
+                  // Actualizar la imagen del usuario aquí significa que solo se llamará a updateFoto si guardarImagen fue exitoso.
+                  return this.usuarioService.updateFoto(this.usuario.idUsuario, this.usuario);
+                })
+              ).subscribe(
+                resUsuario => {
+                  // Manejo del éxito de ambas operaciones aquí
+                 this.translate.get('ImgActualizar').subscribe((translations) => {
+                  Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: translations.title,
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+                 });
+                  window.location.reload();
+                },
+                err => {
+                  // Manejo de errores
+                  console.error(err);
+                  this.translate.get('ImgError').subscribe((translations) => {
+                    Swal.fire({
+                      position: 'center',
+                      icon: 'error',
+                      title:translations.title ,
+                      showConfirmButton: true
+                    });
+                  });
+                }
+              );
+            });
+          }
+        });
       });
+    }
+     
   }
 
   agregarDireccion() {
@@ -147,10 +156,12 @@ export class PerfilComponent implements OnInit {
       this.cerrarND();
       this.usuarioService.getDomicilio(localStorage.getItem('idUsuario')).subscribe((resDir: any) => {
         this.direcciones = resDir
-        Swal.fire({
-          title: "Exito!",
-          text: "Direccion agregada!.",
-          icon: "success"
+        this.translate.get('DirExito').subscribe((translations) => {
+          Swal.fire({
+            title: translations.title,
+            text: translations.text,
+            icon: "success"
+          });
         });
       })
     })
@@ -162,54 +173,61 @@ export class PerfilComponent implements OnInit {
       this.cerrarActD();
       this.usuarioService.getDomicilio(localStorage.getItem('idUsuario')).subscribe((resDir: any) => {
         this.direcciones = resDir
-        Swal.fire({
-          title: "Exito!",
-          text: "Direccion actualizada!.",
-          icon: "success"
+        this.translate.get('DirActualizar').subscribe((translations) => {
+          Swal.fire({
+            title: translations.title,
+            text: translations.text,
+            icon: "success"
+          });
         });
       })
     })
   }
 
   eliminarDir(id: any) {
-    Swal.fire({
-      title: "¿Estas seguro de eliminar esta direccion?",
-      text: "No será posible revertir este cambio!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Eliminar direccion!"
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.usuarioService.eliminaDireccion(id).subscribe((resproducto: any) => {
-          //console.log("resproducto: ", resproducto);
-          this.usuarioService.getDomicilio(localStorage.getItem('idUsuario')).subscribe((resdir: any) => {
-            this.direcciones = resdir;
-            //console.log(resproducto);
+    this.translate.get('DirEliminar').subscribe((translations) => {
+      Swal.fire({
+        title:translations.title,
+        text: translations.text,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: translations.confirm
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.usuarioService.eliminaDireccion(id).subscribe((resproducto: any) => {
+            //console.log("resproducto: ", resproducto);
+            this.usuarioService.getDomicilio(localStorage.getItem('idUsuario')).subscribe((resdir: any) => {
+              this.direcciones = resdir;
+              //console.log(resproducto);
+            },
+              err => console.error(err)
+            );
           },
             err => console.error(err)
           );
-        },
-          err => console.error(err)
-        );
-        Swal.fire({
-          title: "Eliminado!",
-          text: "Direccion eliminada!.",
-          icon: "success"
-        });
-      }
+          this.translate.get('DirEliminada').subscribe((translations) => {
+            Swal.fire({
+              title: translations.title,
+              text: translations.text,
+              icon: "success"
+            });
+          });
+        }
+      });
     });
   }
 
   actualizar() {
+   this.translate.get('EditarPerfil').subscribe((translations) => {
     Swal.fire({
-      title: "¿Estas seguro de editar el perfil?",
+      title: translations.title,
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Actualizar!"
+      confirmButtonText: translations.confirm
     }).then((result) => {
       if (result.isConfirmed) {
         this.cerrarActP()
@@ -223,13 +241,16 @@ export class PerfilComponent implements OnInit {
         },
           err => console.error(err)
         );
-        Swal.fire({
-          title: "Actualizado!",
-          text: "Usuario actualizado!.",
-          icon: "success"
+        this.translate.get('perfilActualizado').subscribe((translations) => {
+          Swal.fire({
+            title: translations.title,
+            text: translations.text,
+            icon: "success"
+          });
         });
       }
     });
+   });
   }
 
   getFileBlob(file: File): Promise<string | ArrayBuffer | null> {

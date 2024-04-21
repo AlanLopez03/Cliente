@@ -45,7 +45,7 @@
     </tr>
   </table>
   <div class="row center-align">
-    <pagination-controls class="my-pagination" (pageChange)="p = ($event)" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+    <pagination-controls class="my-pagination" (pageChange)="p = ($event)" previousLabel={{Anterior}} nextLabel={{Siguiente}}></pagination-controls>
   </div>
   <div class="container">
     <a (click)="limpiarCarrito()" class="waves-effect waves-light btn"><i class="material-icons right">delete</i>{{"Limpiar Carrito"|translate}}</a>

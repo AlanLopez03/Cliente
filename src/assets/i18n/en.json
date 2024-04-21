@@ -237,7 +237,58 @@
         "title":"Select dates",
         "text":"You must select a  start and end date",
         "confirm":"ok"
+    },
+    "contraVacia":
+    {
+        "title":"Error",
+        "text":"Please make sure you have filled out all fields",
+        "confirm":"Accept"
+    },
+    "contraNoCoincide":
+    {
+        "title":"Error",
+        "text":"Passwords do not match",
+        "confirm":"Accept"
+    },
+    "contraExito":{
+        "title":"Password updated successfully",
+        "text": "The passweord has been updated successfully",
+        "confirm":"Accept"
+    },
+    "agregarImg":{
+        "title":"Are you sure to add the image?",
+        "confirm":"Save image"
+    },
+    "ImgActualizar":{
+        "title":"Image updated successfully"
+    },
+    "ImgError":{
+        "title":"Error updating image"
+    },
+    "DirExito":{
+        "title":"Successfully",
+        "text":"The address has been added successfully"
+    },
+    "DirActualizar":{
+        "title":"Successfully",
+        "text":"The address has been updated successfully"
+    },
+    "DirEliminar":{
+        "title":"Are you sure you want to delete the address?",
+        "text": "This action cannot be reversed!",
+        "confirm":"Delete address!"
+    },
+    "DirEliminada":{
+        "title":"Deleted!",
+        "text": "The address has been deleted successfully"
+    },
+    "EditarPerfil":{
+        "title":"Are you sure you want to update the profile?",
+        "confirm":"Update!"
+    },
+    "PerfilActualizado":{
+        "title":"Update!",
+        "text": "User update successfully"
     }
-
     
 }

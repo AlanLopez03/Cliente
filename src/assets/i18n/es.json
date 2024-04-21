@@ -235,6 +235,57 @@
         "title":"Seleccionar fechas",
         "text":"Debes seleccionar una fecha de inicio y una fecha de fin",
         "confirm":"Aceptar"
+    },
+    "contraVacia":
+    {
+        "title":"Error",
+        "text":"Por favor, asegurese de haber llenado todos los campos",
+        "confirm":"Aceptar"
+    },
+    "contraNoCoincide":
+    {
+        "title":"Error",
+        "text":"Las contraseñas no coinciden",
+        "confirm":"Aceptar"
+    },
+    "contraExito":{
+        "title":"Contraseña actualizada",
+        "text": "Se ha actualizado la contraseña con éxito",
+        "confirm":"Aceptar"
+    },
+    "agregarImg":{
+        "title":"¿Estás seguro de agregar la imagen?",
+        "confirm":"Guardar imagen"
+    },
+    "ImgActualizar":{
+        "title":"Imagen actualizada correctamente"
+    },
+    "ImgError":{
+        "title":"Error al actualizar la imagen"
+    },
+    "DirExito":{
+        "title":"Exito",
+        "text":"Dirección agregada con éxito"
+    },
+    "DirActualizar":{
+        "title":"Exito",
+        "text":"Dirección actualizada con éxito"
+    },
+    "DirEliminar":{
+        "title":"¿Estas seguro de eliminar esta direccion?",
+        "text": "¡No será posible revertir este cambio!",
+        "confirm":"¡Eliminar direccion!"
+    },
+    "DirEliminada":{
+        "title":"¡Eliminado!",
+        "text": "¡Direccion eliminada!."
+    },
+    "EditarPerfil":{
+        "title":"¿Estas seguro de editar el perfil?",
+        "confirm":"¡Actualizar!"
+    },
+    "PerfilActualizado":{
+        "title":"Actualizado!",
+        "text": "Usuario actualizado!."
     }
-    
 }

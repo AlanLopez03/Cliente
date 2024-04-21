@@ -78,7 +78,7 @@ export class MostrarProductosComponent implements OnInit {
         //this.reloadPage();
         if (localStorage.getItem("Categoria") != "-1") {
           this.inventarioService.buscarporCategoria(localStorage.getItem("Categoria")).subscribe((res: any) => {
-            if(res.length == 0){
+            if(res.length == 0 && localStorage.getItem("idioma") == "2"){
               Swal.fire({
                 title: 'No hay productos',
                 text: 'No hay productos en esta categoría',
@@ -86,8 +86,15 @@ export class MostrarProductosComponent implements OnInit {
                 confirmButtonText: 'Aceptar'
               })
             }
-            else{
-              this.productos = res
+            else if(res.length == 0 && localStorage.getItem("idioma") == "1"){
+              Swal.fire({
+                title: 'No products',
+                text: 'There are no products in this category',
+                icon: 'warning',
+                confirmButtonText: 'Accept'
+              })
+            }else{
+              this.productos = res;
             }
           }, err => console.log(err)
           );

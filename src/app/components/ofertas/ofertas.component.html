@@ -31,6 +31,6 @@
   <a class="waves-effect waves-light btn" (click)="enviarOfertas()"><i class="material-icons">send</i> {{"Enviar a Usuarios"|translate}}</a>
   <br><br>
   <div class="row center-align">
-    <pagination-controls class="my-pagination" (pageChange)="p = ($event)" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+    <pagination-controls class="my-pagination" (pageChange)="p = ($event)" previousLabel={{Anterior}} nextLabel={{Siguiente}}></pagination-controls>
   </div>
 </div>
