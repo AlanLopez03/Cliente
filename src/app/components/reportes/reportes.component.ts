@@ -88,14 +88,6 @@ export class ReportesComponent implements OnInit {
         );
       }
     });
-    if(localStorage.getItem('idioma') == 'es'){
-      this.Anterior = 'Anterior';
-      this.Siguiente = 'Siguiente';
-    }else{
-      this.Anterior = 'Previous';
-      this.Siguiente = 'Next';
-    }
-
   }
   buscar() {
     //funcion para buscar con un rango de fechas

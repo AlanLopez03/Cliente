@@ -41,7 +41,8 @@ export class InventarioComponent implements OnInit {
   p = 1;
   Anterior:any;
   Siguiente:any;
-
+  Anterior1:any;
+  Siguiente1:any;
   constructor(private inventarioService: InventarioService, private categoriaService: CategoriaService, private materialService: MaterialService,
     private marcaService: MarcaService, private router: Router, private imagenesService: ImagenesService, private translate: TranslateService,private idiomaService: IdiomaService) {
     this.imgPrincipal = null;
@@ -131,14 +132,6 @@ export class InventarioComponent implements OnInit {
     this.marcaService.list().subscribe((resMarcas: any) => {
       this.marcas = resMarcas;
     }, err => console.log(err));
-
-    if(localStorage.getItem('idioma') == 'es'){
-      this.Anterior = 'Anterior';
-      this.Siguiente = 'Siguiente';
-    }else{
-      this.Anterior = 'Previous';
-      this.Siguiente = 'Next';
-    }
 
   }
   revisarDescuento() {

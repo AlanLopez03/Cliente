@@ -82,13 +82,6 @@ export class ModificarUsuarioComponent implements OnInit {
       this.roles = resRoles;
       console.log(this.roles);
     }, err => console.log(err));
-    if(localStorage.getItem('idioma') == 'es'){
-      this.Anterior = 'Anterior';
-      this.Siguiente = 'Siguiente';
-    }else{
-      this.Anterior = 'Previous';
-      this.Siguiente = 'Next';
-    }
     
   }
 

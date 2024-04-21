@@ -99,13 +99,18 @@ export class CarritoComponent implements OnInit {
 
       err => console.log(err)
     );
-    if(localStorage.getItem('idioma') == 'es'){
-      this.Anterior = 'Anterior';
-      this.Siguiente = 'Siguiente';
-    }else{
-      this.Anterior = 'Previous';
-      this.Siguiente = 'Next';
-    }
+    this.idiomaService.currentLanguage.subscribe(lang => {
+      this.translate.use(lang);
+
+      if(lang == '2'){
+        this.Anterior = 'Anterior';
+        this.Siguiente = 'Siguiente';
+      }
+      else if(lang == '1'){
+        this.Anterior = 'Previous';
+        this.Siguiente = 'Next';
+      }
+    });
 
   }
   setDomicilio(id: any) {
