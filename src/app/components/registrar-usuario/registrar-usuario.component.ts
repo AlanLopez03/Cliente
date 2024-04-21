@@ -24,7 +24,7 @@ export class RegistrarUsuarioComponent {
           showConfirmButton: false,
           timer: 1500
         })
-        this.router.navigateByUrl('/login');
+        this.router.navigateByUrl('/home');
 
         
       },

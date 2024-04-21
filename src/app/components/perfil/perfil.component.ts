@@ -11,6 +11,8 @@ import { ImagenesService } from '../../services/imagenes/imagenes.service';
 import { switchMap } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import { transition } from '@angular/animations';
+import { IdiomaService } from '../../services/idioma/idioma.service';
+
 declare var $: any;
 
 @Component({
@@ -19,9 +21,19 @@ declare var $: any;
   styleUrl: './perfil.component.css'
 })
 export class PerfilComponent implements OnInit {
-  constructor(private usuarioService: UsuarioService, private router: Router, private imagenesService: ImagenesService,private translate: TranslateService) { 
+
+
+  constructor(private usuarioService: UsuarioService, private router: Router, private imagenesService: ImagenesService, private idiomaService: IdiomaService,private translate: TranslateService) {
+
     this.imgPrincipal = null;
     this.fileToUpload = null;
+    this.idiomaService.currentLanguage.subscribe(
+      (msg) => {
+        if (msg != ''){
+          this.idioma = msg;
+        }
+      }
+    )
   }
   usuario: getUsuario = new getUsuario();
   rol: Rol = new Rol();
@@ -29,7 +41,7 @@ export class PerfilComponent implements OnInit {
   direccion: Domicilio = new Domicilio();
   idUsuario = 0;
   flagD = 0;
-  idioma = localStorage.getItem('idioma') ?? 2;
+  idioma = localStorage.getItem('idioma') ?? '2';
   imgPrincipal: any;
   fileToUpload: any;
 
@@ -94,6 +106,7 @@ export class PerfilComponent implements OnInit {
   }
 
   cargandoImagen(event: any) {
+
     if (event.target.files && event.target.files[0]){
       this.translate.get('agregarImg').subscribe((translations) => {
         Swal.fire({
@@ -145,6 +158,7 @@ export class PerfilComponent implements OnInit {
             });
           }
         });
+
       });
     }
      

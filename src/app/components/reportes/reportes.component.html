@@ -33,7 +33,7 @@
         <ng-container *ngIf="estados[i]">
         <td><a>{{venta.idCompra}}</a></td>
         <td><a>{{venta.fecha |date:'yyyy-MM-dd'}}</a> </td>
-        <td><a>{{venta.monto| number:'1.3-3'}}</a> </td>
+        <td><a>{{venta.monto}}</a> </td>
 
         <td *ngIf="idioma=='es'"><a>{{estados[i].nombre}}</a></td>
         <td *ngIf="idioma=='en'"><a>{{estados[i].Name}}</a></td>

@@ -50,7 +50,15 @@ export class OfertasComponent {
  
 
   constructor(private usuarioService: UsuarioService,private inventarioService: InventarioService, private categoriaService: CategoriaService, private materialService: MaterialService, 
-    private marcaService: MarcaService, private router: Router, private correoService:CorreoService,private translate: TranslateService, private idiomaService: IdiomaService) { }
+    private marcaService: MarcaService, private router: Router, private correoService:CorreoService,private translate: TranslateService, private idiomaService: IdiomaService) {
+      this.idiomaService.currentLanguage.subscribe(
+        (msg) => {
+          if (msg != ''){
+            this.idioma = msg;
+          }
+        }
+      )
+     }
   liga: string = environment.API_URL_IMAGENES + '/productos';
 
 

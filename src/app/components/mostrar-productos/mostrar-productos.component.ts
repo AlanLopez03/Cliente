@@ -22,7 +22,7 @@ export class MostrarProductosComponent implements OnInit {
   productos: Producto[] = [];
   buscar: string = '';
 
-  idioma = localStorage.getItem('idioma') ?? 2;
+  idioma = localStorage.getItem('idioma') ?? '2';
   imagenes = ["anillo_u.jpg", "aretes_u.jpg", "arracadas_u.jpg", "esclavas_u.jpg", "Dijes_u.jpg", "Corazon.jpeg"]
   campoEnfocado: boolean = false;
   imgPrincipal: any;
@@ -32,6 +32,14 @@ export class MostrarProductosComponent implements OnInit {
   constructor(private inventarioService: InventarioService, private carritoService: CarritoService, private router: Router,private idiomaService: IdiomaService,private translate: TranslateService) {
     this.imgPrincipal = null;
     this.fileToUpload = null;
+    this.idiomaService.currentLanguage.subscribe(
+      (msg) => {
+        if (msg != ''){
+          this.idioma = msg;
+        }
+      }
+    )
+
   }
 
   ngOnInit(): void {

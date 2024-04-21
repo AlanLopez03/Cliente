@@ -17,7 +17,9 @@ export class AdminBarComponent implements OnInit{
   usuario = new Usuario();
   idUsuario = localStorage.getItem('idUsuario');
 
-constructor(private usuarioService:UsuarioService ,private router:Router,private idiomaService:IdiomaService,private location: Location ,private translate: TranslateService) { }
+constructor(private usuarioService:UsuarioService ,private router:Router,private idiomaService:IdiomaService,private location: Location ,private translate: TranslateService) {
+  
+ }
   ngOnInit(): void 
   {
     $(document).ready(function(){
@@ -50,7 +52,7 @@ constructor(private usuarioService:UsuarioService ,private router:Router,private
   cambiarIdioma(idioma: string) {
     //console.log(idioma);
     this.idiomaService.changeLanguage(idioma);
-    this.reloadPage();
+    //this.reloadPage();
   
   }
 
