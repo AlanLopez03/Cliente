@@ -54,12 +54,15 @@ export class CarritoComponent implements OnInit {
       (res: any) => {
        
         if (res == false) {
+
+          this.translate.get('sinProducto').subscribe((translations) =>
+            {
           Swal.fire({
-            title: 'Sin productos',
-            text: 'No hay productos que ver',
-            icon: 'warning',
-            confirmButtonText: 'Aceptar'
+            title: translations.title,
+            icon: 'error',
+            confirmButtonText: translations.confirm
           })
+        })
         }
         else {
           this.carrito = res;
@@ -100,15 +103,17 @@ export class CarritoComponent implements OnInit {
   }
   eliminarProducto(id: any) {
     var idUsuario = localStorage.getItem('idUsuario');
+    this.translate.get('CarritoUsu').subscribe((translations) =>
+      {
     Swal.fire({
-      title: '¿Está seguro que desea eliminar el producto del carrito?',
-      text: "Esta acción no se puede revertir",
+      title: translations.title,
+      text: translations.text,
       icon: 'warning',
+      confirmButtonText: translations.confirm,
       showCancelButton: true,
       confirmButtonColor: '#d33',
       cancelButtonColor: '#3085d6',
-      cancelButtonText: 'Cancelar',
-      confirmButtonText: 'Eliminar'
+
     }).then((result) => {
 
       if (result.isConfirmed) 
@@ -132,16 +137,21 @@ export class CarritoComponent implements OnInit {
           this.carritoService.eliminarProducto(id).subscribe(
             (res: any) => 
               {
-              Swal.fire(
-                'Producto eliminado',
-                'El producto se ha eliminado con éxito',
-                'success'
-              ).then((result) => {
+                this.translate.get('eliminaArti').subscribe((translations) =>
+                  {
+                    Swal.fire ({
+                      title: translations.title,
+                      text: translations.text,
+                      icon: 'success',
+                      confirmButtonText: translations.confirm
+                    }).then((result) => {
                 this.ngOnInit();
               })
-            }, err => console.log(err));
+            })
+          }, err => console.log(err));
           })
     })
+  })
 
 
   }
@@ -177,10 +187,15 @@ export class CarritoComponent implements OnInit {
 
          }
          else {
-           Swal.fire(
-             'Error',
-             'No hay stock suficiente',
-             'error')
+          this.translate.get('noStock').subscribe((translations) =>
+            {
+              Swal.fire({
+                title: translations.title,
+                text: translations.text,
+                icon: 'warning',
+                confirmButtonText: translations.confirm
+              })
+        })
          }
        },
        err => console.log(err)
@@ -189,15 +204,16 @@ export class CarritoComponent implements OnInit {
   }
   limpiarCarrito() {
     var idUsuario = localStorage.getItem('idUsuario');
+    this.translate.get('LimpiarCarro').subscribe((translations) =>
+      {
     Swal.fire({
-      title: '¿Está seguro que desea limpiar el carrito?',
-      text: "Esta acción no se puede revertir",
+      title: translations.title,
+      text: translations.text,
+      confirmButtonText: translations.confirm,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#d33',
       cancelButtonColor: '#3085d6',
-      cancelButtonText: 'Cancelar',
-      confirmButtonText: 'Limpiar'
     }).then((result) => {
       if (result.isConfirmed) {
         //Debe agregar al stock si se limpia el carrito
@@ -221,11 +237,15 @@ export class CarritoComponent implements OnInit {
             (res: any) => {
 
               this.ngOnInit();
-              Swal.fire(
-                'Carrito limpiado',
-                'El carrito se ha limpiado con éxito',
-                'success'
-              )
+              this.translate.get('CarritoLim').subscribe((translations) =>
+                {
+                  Swal.fire({
+                    title: translations.title,
+                    text: translations.text,
+                    icon: 'success',
+                    confirmButtonText: translations.confirm
+                  })
+            })
             }, err => console.log(err));
         }, err => console.log(err)
         );
@@ -235,6 +255,7 @@ export class CarritoComponent implements OnInit {
 
       }
     })
+  })
   }
   pagar() {
     this.router.navigate(['/pagar']);
@@ -242,11 +263,15 @@ export class CarritoComponent implements OnInit {
 
   comprarCarrito() {
     if (this.idDomicilio <= 0 || this.idDomicilio == null) {
-      Swal.fire(
-        'Error',
-        'Debe seleccionar un domicilio',
-        'error'
-      )
+      this.translate.get('Domicilio').subscribe((translations) =>
+        {
+          Swal.fire({
+            title: translations.title,
+            text: translations.text,
+            icon: 'error',
+            confirmButtonText: translations.confirm
+          })
+    })
     }
 
     else {
@@ -266,18 +291,26 @@ export class CarritoComponent implements OnInit {
       this.carritoService.comprar(localStorage.getItem('idUsuario'), objeto).subscribe(
         (res: any) => {
           if (res == false) {
-            Swal.fire(
-              'Error',
-              'No hay suficiente stock',
-              'error'
-            )
+            this.translate.get('noStock').subscribe((translations) =>
+              {
+                Swal.fire({
+                  title: translations.title,
+                  text: translations.text,
+                  icon: 'warning',
+                  confirmButtonText: translations.confirm
+                })
+          })
           }
           else {
-            Swal.fire(
-              'Compra realizada',
-              'La compra se ha realizado con éxito',
-              'success'
-            )
+            this.translate.get('Compra').subscribe((translations) =>
+              {
+                Swal.fire({
+                  title: translations.title,
+                  text: translations.text,
+                  icon: 'success',
+                  confirmButtonText: translations.confirm
+                })
+          })
             this.router.navigateByUrl('/home');
             this.producto = new Producto();
             //this.ngOnInit();

@@ -87,12 +87,61 @@
     "Usuario":"User",
     "Editar información":"Edit information",
     "Foto de perfil":"Profile picture",
+    "Selecciona una direccion de envio":"Select a shipping address",
+    "Confirmar": "Confirm",
+    "Editar nombre de usuario": "Edit username",
+
+    "imgActu":
+    {
+        "title":"Image updated successfully",
+        "confirm":"ok"
+    },
+
+    "AgregarImg":
+    {
+        "title":"Are you sure to add the image?",
+        "confirm":"ok"
+    },
 
 
     "ProductoNoEncontrado":{
         "title":"Product not found",
         "confirm":"ok"
     },
+
+    "carrito":{
+        "title":"Product added",
+        "text":"The product has been added successfully",
+        "confirm":"ok"
+    },
+
+    "noStock":{
+        "title":"Error",
+        "text":"There is not enough stock",
+        "confirm":"ok"
+    },
+
+    "CarritoUsu":
+    {
+        "title":"Are you sure you want to remove the product from the cart?",
+        "text":"This action cannot be reversed",
+        "confirm":"ok"
+    },
+
+    "eliminaArti":
+    {
+        "title":"Product removed",
+        "text":"The product has been successfully removed",
+        "confirm":"ok"
+    },
+
+    "Ofertass":
+    {
+        "title":"Error",
+        "text":"No offers available",
+        "confirm":"ok"
+    },
+
     "escribeNombre":{
         "title":"Write a name",
         "text":"You must write a name to search",
@@ -120,8 +169,44 @@
         "title":"Product created successfully", 
         "confirm":"ok"
     },
+
+    "sinProducto":
+    {
+        "title":"There are no products",
+        "confirm":"ok"
+    },
+
+    "CarritoLim":
+    {
+        "title":"Cleaned cart",
+        "text": "The cart has been successfully cleaned",
+        "confirm":"ok"
+    },
+
+    "Domicilio":
+    {
+        "title":"error",
+        "text": "You must select an address",
+        "confirm":"ok"
+    },
+
+    "Compra":
+    {
+        "title":"Purchase made",
+        "text": "The purchase has been made successfully",
+        "confirm":"ok"
+    },
+
+    "LimpiarCarro":
+    {
+        "title":"Are you sure you want to clean the cart?",
+        "text": "This action cannot be reversed",
+        "confirm":"ok"
+    },
+
     "noHayProductos":{
         "title":"There are no products",
+        "text": "There are no products to show in this category",
         "confirm":"ok"
     },
     "sinUsuarios":{

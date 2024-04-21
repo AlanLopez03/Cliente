@@ -8,7 +8,7 @@ import { Usuario } from '../../models/Usuario';
 import { Route, Router } from '@angular/router';
 import { environment } from '../../environments/environment';
 import { ImagenesService } from '../../services/imagenes/imagenes.service';
-
+import { switchMap } from 'rxjs/operators';
 declare var $: any;
 
 @Component({
@@ -108,22 +108,34 @@ export class PerfilComponent implements OnInit {
           this.fileToUpload = files.item(0);
           let imgPromise = this.getFileBlob(this.fileToUpload);
           imgPromise.then(blob => {
-            this.imagenesService.guardarImagen(this.usuario.idUsuario, "usuarios", blob).subscribe(
-              (res: any) => {
-                this.imgPrincipal = blob;
-                this.usuarioService.updateFoto(this.usuario.idUsuario, this.usuario).subscribe((resUsuario: any) => 
-                  {
-                    Swal.fire({
-                      position: 'center',
-                      icon: 'success',
-                      title: 'Imagen actualizada correctamente',
-                      showConfirmButton: false,
-                      timer: 1500
-                    })
-                  }, err => console.log(err));
+            this.imagenesService.guardarImagen(this.usuario.idUsuario, "usuarios", blob).pipe(
+              switchMap(res => {
+                // Actualizar la imagen del usuario aquí significa que solo se llamará a updateFoto si guardarImagen fue exitoso.
+                return this.usuarioService.updateFoto(this.usuario.idUsuario, this.usuario);
+              })
+            ).subscribe(
+              resUsuario => {
+                // Manejo del éxito de ambas operaciones aquí
+                Swal.fire({
+                  position: 'center',
+                  icon: 'success',
+                  title: 'Imagen actualizada correctamente',
+                  showConfirmButton: false,
+                  timer: 1500
+                });
                 window.location.reload();
               },
-              err => console.error(err));
+              err => {
+                // Manejo de errores
+                console.error(err);
+                Swal.fire({
+                  position: 'center',
+                  icon: 'error',
+                  title: 'Error al actualizar la imagen',
+                  showConfirmButton: true
+                });
+              }
+            );
           });
         }
       });

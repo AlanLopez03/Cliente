@@ -155,15 +155,18 @@ export class ModificarUsuarioComponent implements OnInit {
   }
   
   cargandoImagen(event: any, id : any) {
+    
     if (event.target.files && event.target.files[0])
+      
+      this.translate.get('AgregarImg').subscribe((translations) =>
+        {
       Swal.fire({
-        title: "¿Estas seguro de agregar la imagen?",
-
+        title: translations.title,
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Guardar imagen"
+        confirmButtonText: translations.confirm
       }).then((result) => {
         if (result.isConfirmed) {
           this.imgPrincipal = null;
@@ -177,21 +180,26 @@ export class ModificarUsuarioComponent implements OnInit {
                 this.imgPrincipal = blob;
                 this.usuarioService.updateFoto(id, this.usuario).subscribe((resUsuario: any) => 
                   {
+                    this.translate.get('imgActu').subscribe((translations) =>
+                      {
                     Swal.fire({
                       position: 'center',
                       icon: 'success',
-                      title: 'Imagen actualizada correctamente',
+                      title: translations.title,
                       showConfirmButton: false,
                       timer: 1500
                     })
+                    window.location.reload();
+                  })
                   }, err => console.log(err));
-                window.location.reload();
+                //
               },
               err => console.error(err));
           });
-        }
+      }
       });
-  }
+  })
+}
 
   getFileBlob(file: File): Promise<string | ArrayBuffer | null> {
     const reader = new FileReader();

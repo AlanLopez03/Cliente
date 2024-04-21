@@ -8,7 +8,7 @@ import { Material } from '../../models/material';
 import { Marca } from '../../models/marca';
 import { MaterialService } from '../../services/material/material.service';
 import { MarcaService } from '../../services/marca/marca.service';
-
+import { switchMap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { ImagenesService } from '../../services/imagenes/imagenes.service';
 
@@ -35,6 +35,7 @@ export class InventarioComponent implements OnInit {
   marcas: Marca[] = [];
   producto = new Producto();
   productos: Producto[] = [];
+  id_producto : any;
   fecha = String;
   pageSize = 4;
   p = 1;
@@ -134,13 +135,13 @@ export class InventarioComponent implements OnInit {
           this.productos = res;
         }
         else {
-          this.translate.get(['ProductoNoEncontrado.title', 'ProductoNoEncontrado.confirm']).subscribe(translations => {
+          this.translate.get('ProductoNoEncontrado').subscribe(translations => {
             Swal.fire({
               position: 'center',
               icon: 'error',
-              title: translations['ProductoNoEncontrado.title'],
+              title: translations.title,
 
-              confirmButtonText: translations['ProductoNoEncontrado.confirm'],
+              confirmButtonText: translations.confirm,
               showConfirmButton: true,
               timer: 1500
             })
@@ -149,15 +150,15 @@ export class InventarioComponent implements OnInit {
         }
       }, err => console.log(err));
     }
-    else {
-      this.translate.get(['escribeNombre.title', 'escribeNombre.confirm', 'escribeNombre.text']).subscribe(translations => {
+    else {//Esta es una notacion mas larga para mostrar los alertas
+      this.translate.get('escribeNombre').subscribe(translations => {
         Swal.fire(
           {
             position: 'center',
             icon: 'error',
-            title: translations['escribeNombre.title'],
-            text: translations['escribeNombre.text'],
-            confirmButtonText: translations['escribeNombre.confirm'],
+            title: translations.title,
+            text: translations.text,  
+            confirmButtonText: translations.confirm,
             showConfirmButton: true,
             timer: 1500
 
@@ -227,13 +228,13 @@ export class InventarioComponent implements OnInit {
       this.inventarioService.actualizar(this.producto).subscribe(
         res => {
           $('#modal1').modal('close');
-          this.translate.get(['ProductoActualizado.title', 'ProductoActualizado.confirm']).subscribe(translations => {
+          this.translate.get('ProductoActualizado').subscribe(translations => {
             Swal.fire({
               position: 'center',
               icon: 'success',
-              title: translations['ProductoActualizado.title'],
+              title: translations.title,
               showConfirmButton: true,
-              confirmButtonText: translations['ProductoActualizado.confirm'],
+              confirmButtonText: translations.confirm,
               timer: 1500
             }).then((result) => {
               this.inventarioService.list().subscribe((resProductos: any) => {
@@ -244,7 +245,7 @@ export class InventarioComponent implements OnInit {
           })
         }, err => console.log(err));
     }
-    else
+    else//Esta es una notacion mas larga para mostrar los alertas
       this.translate.get(['ErrorActualizar.title', 'ErrorActualizar.confirm']).subscribe(translations => {
         {
           Swal.fire({
@@ -323,43 +324,68 @@ export class InventarioComponent implements OnInit {
 
 
 
-cargandoImagen(event: any, id : any) {
-  if (event.target.files && event.target.files[0])
-    Swal.fire({
-      title: "¿Estas seguro de agregar la imagen?",
+  cargandoImagen(event: any, id : any) {
+    if (event.target.files && event.target.files[0])
+      this.translate.get('AgregarImg').subscribe((translations) =>
+        {
+      Swal.fire({
 
-      icon: "warning",
+      title: translations.title,
+      text: translations.text,
+      icon: 'warning',
+      confirmButtonText: translations.confirm,
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Guardar imagen"
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.imgPrincipal = null;
-        console.log(id);
-        const files: FileList = event.target.files;
-        this.fileToUpload = files.item(0);
-        let imgPromise = this.getFileBlob(this.fileToUpload);
-        imgPromise.then(blob => {
-          this.imagenesService.guardarImagen(id, "productos", blob).subscribe(
-            (res: any) => {
-              this.imgPrincipal = blob;
-              this.inventarioService.updateFoto(id, this.producto).subscribe((resProducto: any) => {
+      cancelButtonColor: "#d33"
+
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.imgPrincipal = null;
+          console.log(id);
+          const files: FileList = event.target.files;
+          this.fileToUpload = files.item(0);
+          let imgPromise = this.getFileBlob(this.fileToUpload);
+          imgPromise.then(blob => {
+            this.imagenesService.guardarImagen(id, "productos", blob).pipe(
+              switchMap(resGuardar => {
+                // La imagen ha sido guardada correctamente, ahora procedemos a actualizar el producto
+                this.imgPrincipal = blob;
+                return this.inventarioService.updateFoto(id, this.producto);
+              }),
+              switchMap(resUpdate => {
+                // La foto del producto ha sido actualizada correctamente, ahora obtenemos la traducción para mostrar el mensaje
+                return this.translate.get('imgActu');
+              })
+            ).subscribe(
+              translation => {
+                // Todo fue exitoso, mostramos el mensaje al usuario
                 Swal.fire({
                   position: 'center',
                   icon: 'success',
-                  title: 'Imagen actualizada correctamente',
+                  title: translation.title,
                   showConfirmButton: false,
                   timer: 1500
-                })
-              }, err => console.log(err));
-              window.location.reload();
-            },
-            err => console.error(err));
-        });
-      }
-    });
-}
+                });
+
+                // Considera actualizar la UI aquí en vez de recargar la página, para una mejor experiencia del usuario
+                 window.location.reload();
+              },
+              err => {
+                // Manejo de errores para todo el flujo
+                console.error(err);
+                Swal.fire({
+                  position: 'center',
+                  icon: 'error',
+                  title: 'Error al actualizar la imagen',
+                  showConfirmButton: true
+                });
+              }
+            );
+          });
+        }
+      })
+      });
+  }
 
 getFileBlob(file: File): Promise < string | ArrayBuffer | null > {
   const reader = new FileReader();
