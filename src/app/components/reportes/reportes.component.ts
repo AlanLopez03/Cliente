@@ -34,7 +34,15 @@ export class ReportesComponent implements OnInit {
   pageSize = 5;
   p = 1;
   idioma = localStorage.getItem('idioma') ?? "es";
-  constructor(private router: Router, private reportesService: ReportesService, private usuarioService: UsuarioService, private pedidosService: PedidosService, private inventarioService: InventarioService, private idiomaService: IdiomaService, private translate: TranslateService) { }
+  constructor(private router: Router, private reportesService: ReportesService, private usuarioService: UsuarioService, private pedidosService: PedidosService, private inventarioService: InventarioService, private idiomaService: IdiomaService, private translate: TranslateService) {
+    this.idiomaService.currentLanguage.subscribe(
+      (msg) => {
+        if (msg != ''){
+          this.idioma = msg;
+        }
+      }
+    )
+   }
 
   ngOnInit(): void {//Ya jala
     $(document).ready(function () {

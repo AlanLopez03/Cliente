@@ -11,7 +11,7 @@ import { MarcaService } from '../../services/marca/marca.service';
 import { switchMap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { ImagenesService } from '../../services/imagenes/imagenes.service';
-
+import { IdiomaService } from '../../services/idioma/idioma.service';
 import { TranslateService } from '@ngx-translate/core';
 
 import Swal from 'sweetalert2'
@@ -41,9 +41,16 @@ export class InventarioComponent implements OnInit {
   p = 1;
 
   constructor(private inventarioService: InventarioService, private categoriaService: CategoriaService, private materialService: MaterialService,
-    private marcaService: MarcaService, private router: Router, private imagenesService: ImagenesService, private translate: TranslateService) {
+    private marcaService: MarcaService, private router: Router, private imagenesService: ImagenesService, private translate: TranslateService,private idiomaService: IdiomaService) {
     this.imgPrincipal = null;
     this.fileToUpload = null;
+    this.idiomaService.currentLanguage.subscribe(
+      (msg) => {
+        if (msg != ''){
+          this.idioma = msg;
+        }
+      }
+    )
   }
   imgPrincipal: any;
   fileToUpload: any;
@@ -52,6 +59,9 @@ export class InventarioComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.idiomaService.currentLanguage.subscribe(lang => {
+      this.translate.use(lang);
+    });
     this.producto = new Producto();
     $(document).ready(function () {
       $('.dropdown-trigger').dropdown();
@@ -366,9 +376,8 @@ export class InventarioComponent implements OnInit {
                   showConfirmButton: false,
                   timer: 1500
                 });
-
                 // Considera actualizar la UI aquí en vez de recargar la página, para una mejor experiencia del usuario
-                 window.location.reload();
+                // window.location.reload();
               },
               err => {
                 // Manejo de errores para todo el flujo

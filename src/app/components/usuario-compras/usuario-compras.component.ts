@@ -9,6 +9,8 @@ import { PedidosService } from '../../services/pedidos/pedidos.service';
 import { InventarioService } from '../../services/inventario/inventario.service';
 import { Pedidos } from '../../models/pedidos';
 import { Producto } from '../../models/producto';
+import { IdiomaService } from '../../services/idioma/idioma.service';
+import { TranslateService } from '@ngx-translate/core';
 import Swal from 'sweetalert2';
 
 declare var $: any;
@@ -25,10 +27,18 @@ export class UsuarioComprasComponent implements OnInit{
   datos = new Domicilio();
   compraUsuario = new ventas();
   estado = new Estados();
-  idioma = localStorage.getItem('idioma') ?? 2;
-  constructor(private router: Router, private reportesService: ReportesService,private usuarioService: UsuarioService,private pedidosService: PedidosService,private inventarioService: InventarioService) { 
+  idioma = localStorage.getItem('idioma') ?? '2';
+  constructor(private router: Router, private reportesService: ReportesService,private usuarioService: UsuarioService,private pedidosService: PedidosService,private inventarioService: InventarioService,private idiomaService: IdiomaService,private translate: TranslateService) { 
     var id = localStorage.getItem('idUsuario');
     console.log(id);
+    this.idiomaService.currentLanguage.subscribe(
+      (msg) => {
+        if (msg != ''){
+          this.idioma = msg;
+        }
+        console.log("idioma actual:", this.idioma, " aaaa");
+      }
+    )
     this.reportesService.verComprasUsuario(id).subscribe((res:any) => 
     {
       if (res.length > 0) 

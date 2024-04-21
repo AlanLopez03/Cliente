@@ -9,6 +9,8 @@ import { Route, Router } from '@angular/router';
 import { environment } from '../../environments/environment';
 import { ImagenesService } from '../../services/imagenes/imagenes.service';
 import { switchMap } from 'rxjs/operators';
+import { IdiomaService } from '../../services/idioma/idioma.service';
+import { TranslateService } from '@ngx-translate/core';
 declare var $: any;
 
 @Component({
@@ -17,9 +19,16 @@ declare var $: any;
   styleUrl: './perfil.component.css'
 })
 export class PerfilComponent implements OnInit {
-  constructor(private usuarioService: UsuarioService, private router: Router, private imagenesService: ImagenesService) {
+  constructor(private usuarioService: UsuarioService, private router: Router, private imagenesService: ImagenesService, private idiomaService: IdiomaService,private translate: TranslateService) {
     this.imgPrincipal = null;
     this.fileToUpload = null;
+    this.idiomaService.currentLanguage.subscribe(
+      (msg) => {
+        if (msg != ''){
+          this.idioma = msg;
+        }
+      }
+    )
   }
   usuario: getUsuario = new getUsuario();
   rol: Rol = new Rol();
@@ -27,7 +36,7 @@ export class PerfilComponent implements OnInit {
   direccion: Domicilio = new Domicilio();
   idUsuario = 0;
   flagD = 0;
-  idioma = localStorage.getItem('idioma') ?? 2;
+  idioma = localStorage.getItem('idioma') ?? '2';
   imgPrincipal: any;
   fileToUpload: any;
 
@@ -123,7 +132,6 @@ export class PerfilComponent implements OnInit {
                   showConfirmButton: false,
                   timer: 1500
                 });
-                window.location.reload();
               },
               err => {
                 // Manejo de errores

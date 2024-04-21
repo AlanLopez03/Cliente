@@ -22,9 +22,11 @@ declare var $:any;
 export class NavigationComponent implements OnInit{
   categorias: Categoria []= [];
   productos: Producto[] = [];
-  idioma = localStorage.getItem('idioma') ?? 2;
+  idioma = localStorage.getItem('idioma') ?? 'es';
 constructor(private router:Router,private categoriaService:CategoriaService,
-  private idiomaService:IdiomaService,private inventarioService:InventarioService,private location: Location,private translate: TranslateService) { }
+  private idiomaService:IdiomaService,private inventarioService:InventarioService,private location: Location,private translate: TranslateService) {
+    this.translate.addLangs(["es","en"]);
+   }
   ngOnInit(): void {
     $(document).ready(function(){
       $('.sidenav').sidenav();
@@ -58,17 +60,16 @@ constructor(private router:Router,private categoriaService:CategoriaService,
     console.log(typeof(idio));
     if (idio !== null && idio === '1') {
       this.translate.use('en');
-      //this.idiomaService.changeLanguage('en');
-
+      this.idiomaService.changeLanguage('1');
       this.idioma=idio;
     }
     if (idio !== null && idio === '2') {
       this.translate.use('es');
-      //this.idiomaService.changeLanguage('es');
-
+      this.idiomaService.changeLanguage('2');
+      
       this.idioma=idio;
     }
-    this.reloadPage()
+    //this.reloadPage()
   }
 
   isHome(): boolean {
