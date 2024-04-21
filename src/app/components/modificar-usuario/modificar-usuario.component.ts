@@ -189,9 +189,10 @@ export class ModificarUsuarioComponent implements OnInit {
                       showConfirmButton: false,
                       timer: 1500
                     })
+                    window.location.reload();
                   })
                   }, err => console.log(err));
-                window.location.reload();
+                //
               },
               err => console.error(err));
           });

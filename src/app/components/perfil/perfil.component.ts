@@ -123,6 +123,7 @@ export class PerfilComponent implements OnInit {
                   showConfirmButton: false,
                   timer: 1500
                 });
+                window.location.reload();
               },
               err => {
                 // Manejo de errores
