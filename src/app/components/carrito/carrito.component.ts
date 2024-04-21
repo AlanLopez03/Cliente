@@ -48,6 +48,7 @@ export class CarritoComponent implements OnInit {
         $(this).css('background-color', '#ff0000'); // Cambiar a rojo
       });
     })
+    
     //this.idiomaService.currentLanguage.subscribe((res: any) => {
     //  this.translate.use(res);
     //})

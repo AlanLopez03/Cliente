@@ -68,6 +68,14 @@ export class ReportesComponent implements OnInit {
     });
     this.idiomaService.currentLanguage.subscribe(lang => {
       this.translate.use(lang);
+      if(lang == 'es'){
+        this.Anterior = 'Anterior';
+        this.Siguiente = 'Siguiente';
+      }
+      else{
+        this.Anterior = 'Previous';
+        this.Siguiente = 'Next';
+      }
     });
 
     this.reportesService.list().subscribe((res: any) => {

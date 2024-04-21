@@ -387,7 +387,7 @@ export class InventarioComponent implements OnInit {
                   timer: 1500
                 });
                 // Considera actualizar la UI aquí en vez de recargar la página, para una mejor experiencia del usuario
-                // window.location.reload();
+                 window.location.reload();
               },
               err => {
                 // Manejo de errores para todo el flujo
