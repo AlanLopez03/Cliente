@@ -55,6 +55,14 @@ export class ModificarUsuarioComponent implements OnInit {
     this.idiomaService.currentLanguage.subscribe(lang => {
       //this.lenguaje= lang;
       this.translate.use(lang);
+      if(lang == 'es'){
+        this.Anterior = 'Anterior';
+        this.Siguiente = 'Siguiente';
+      }
+      else if(lang == 'en'){
+        this.Anterior = 'Previous';
+        this.Siguiente = 'Next';
+      }
     });
 
     this.usuarioService.list().subscribe((resUsuarios: any) =>

@@ -77,6 +77,14 @@ export class OfertasComponent {
     });
     this.idiomaService.currentLanguage.subscribe((res: string) => {
       this.translate.use(res);
+      if(res == 'es'){
+        this.Anterior = 'Anterior';
+        this.Siguiente = 'Siguiente';
+      }
+      else if(res == 'en'){
+        this.Anterior = 'Previous';
+        this.Siguiente = 'Next';
+      }
     });
 
     this.inventarioService.list().subscribe((resProductos: any) => {

@@ -63,6 +63,15 @@ export class InventarioComponent implements OnInit {
 
     this.idiomaService.currentLanguage.subscribe(lang => {
       this.translate.use(lang);
+
+      if(lang == 'es'){
+        this.Anterior = 'Anterior';
+        this.Siguiente = 'Siguiente';
+      }
+      else if(lang == 'en'){
+        this.Anterior = 'Previous';
+        this.Siguiente = 'Next';
+      }
     });
     this.producto = new Producto();
     $(document).ready(function () {
