@@ -21,6 +21,7 @@ export class MostrarProductosComponent implements OnInit {
   producto = new Producto();
   productos: Producto[] = [];
   buscar: string = '';
+  palabraIdioma: string = '';
 
   idioma = localStorage.getItem('idioma') ?? '2';
   imagenes = ["anillo_u.jpg", "aretes_u.jpg", "arracadas_u.jpg", "esclavas_u.jpg", "Dijes_u.jpg", "Corazon.jpeg"]
@@ -201,7 +202,7 @@ export class MostrarProductosComponent implements OnInit {
         err => console.log(err)
       );
     } else {
-      this.inventarioService.BuscarProducto(this.buscar).subscribe((res: any) => {
+      this.inventarioService.BuscarProducto(this.buscar, this.idioma).subscribe((res: any) => {
         if (res.id_producto == -1) {
           this.productos = [];
         }
