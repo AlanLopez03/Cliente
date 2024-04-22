@@ -50,9 +50,9 @@ export class InventarioService {
     return this.http.get(`${environment.API_URI}/productos/verOfertas`);
   }
 
-  BuscarProducto(nombre : any) {
+  BuscarProducto(nombre : any, idioma : any) {
     
-    return this.http.get(`${environment.API_URI}/productos/buscarProducto/${nombre}`);
+    return this.http.get(`${environment.API_URI}/productos/buscarProducto/${nombre}/${idioma}`);
 
   }
 }
