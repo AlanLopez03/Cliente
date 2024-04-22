@@ -41,7 +41,7 @@
     "Numero":"Number",
     "Colonia":"Colony",
     "Ciudad":"City",
-    "Estado":"Status",
+    "Estado":"State",
     "Editar":"Edit",
     "Eliminar":"Delete",
     "No hay direcciones disponibles":"There are no addresses available",
@@ -290,6 +290,24 @@
     "PerfilActualizado":{
         "title":"Update!",
         "text": "User update successfully"
+    },
+    "sinCompras":{
+        "title":"There are no purchases",
+        "confirm":"ok"
+    },
+    "datosIncompletos":{
+        "title":"Error",
+        "text":"Please make sure you have filled out all fields",
+        "confirm":"ok"
+    },
+    "registroExitoso":{
+        "title":"User registered successfully",
+        "confirm":"ok"
+    },
+    "sinDomicilios":{
+        "title":"There are no addresses",
+        "text":"Please add an address before making a purchase",
+        "confirm":"ok"
     }
     
 }

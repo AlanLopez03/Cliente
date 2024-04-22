@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { UsuarioService } from '../../services/usuario/usuario.service';
 import { Router } from '@angular/router';
 import { Usuario } from '../../models/Usuario';
+import { TranslateService } from '@ngx-translate/core';
 import Swal from 'sweetalert2'
 @Component({
   selector: 'app-registrar-usuario',
@@ -10,33 +11,41 @@ import Swal from 'sweetalert2'
 })
 export class RegistrarUsuarioComponent {
   usuario: Usuario = new Usuario();
-  constructor(private usuarioService: UsuarioService, private router: Router) { }
+  constructor(private usuarioService: UsuarioService, private router: Router,private translate:TranslateService) { }
 
   registrarUsuario() {
   if (this.usuario.nombre != null &&  this.usuario.correo != null && this.usuario.password != null && this.usuario.username!=null){
     this.usuario.foto = 0;
     this.usuarioService.crearUsuario(this.usuario).subscribe(
       res => {
-        Swal.fire({
+        this.translate.get('registroExitoso').subscribe((translations) =>
+        {
+          Swal.fire({
           position: 'center',
           icon: 'success',
-          title: 'Se ha registrado correctamente',
+          title: translations.title,
           showConfirmButton: false,
+          confirmButtonText: translations.confirm,
           timer: 1500
         })
-        this.router.navigateByUrl('/home');
+        this.router.navigateByUrl('/login');
+      })
 
         
       },
       err => console.log(err)
     )
   }else
-    Swal.fire({
+  this.translate.get('datosIncompletos').subscribe((translations) => 
+    {
+      Swal.fire({
       position: 'center',
       icon: 'error',
-      title: 'Faltan datos por completar',
+      title: translations.title,
+      text: translations.text,
       showConfirmButton: true,
+      confirmButtonText: translations.confirm,
       timer: 1500
-    })
+    })});
   }
 }

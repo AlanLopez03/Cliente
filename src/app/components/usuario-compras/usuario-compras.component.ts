@@ -47,11 +47,14 @@ export class UsuarioComprasComponent implements OnInit{
         
       }
       else
+      this.translate.get('sinCompras').subscribe((translations) => {
       Swal.fire({
         icon: 'error',
-        title: '?...',
-        text: 'No se han encontrado compras',
+        title: translations.title,
+        showConfirmButton: true,
+        confirmButtonText: translations.confirm,
       });
+    });
     });
   }
 

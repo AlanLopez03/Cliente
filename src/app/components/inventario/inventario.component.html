@@ -6,7 +6,7 @@
           <i class="material-icons prefix">search</i>
           <input id="icon_prefix" type="text" class="active" [(ngModel)]="id_producto" name="busqueda">
           <label for="icon_prefix">{{"Buscar por nombre"|translate}}</label>
-          <span *ngIf="producto.idProducto !== 1">{{ producto.idProducto }}</span>
+          <!-- <span *ngIf="producto.idProducto !== 1">{{ producto.idProducto }}</span> -->
       </div>
       
       </td>
@@ -258,15 +258,16 @@
 
           <p>
             <label>
-              <input type="checkbox" class="filled-in" checked="checked" id="descuento" />
+              <input type="checkbox" class="filled-in" checked="checked" id="descuento1" (click)="revisarDescuento()" />
               <span>{{"Descuento"|translate}}</span>
             </label>
           </p>
         </form>
+
         <div class="row">
           <div class="input-field col s6">
-            <input id="name" type="text" class="validate" [(ngModel)]="producto.descuento" name="Cantidad">
-            <label for="name" class="active"> {{"Descuento"|translate}}</label>
+            <input id="name2" type="text" class="validate" [(ngModel)]="producto.descuento" name="Cantidad">
+            <label for="name2" class="active"> {{"Descuento"|translate}}</label>
 
           </div>
         </div>
@@ -276,14 +277,14 @@
             <i class="material-icons prefix">info</i>
 
             <label for="name" class="active"> {{"Inicio descuento"|translate}}</label>
-            <input type="date" class="datepicker" id="inicio_descuento" [(ngModel)]="producto.inicio_descuento"
+            <input type="date" class="datepicker" id="inicio_descuento1" [(ngModel)]="producto.inicio_descuento"
               name="inicio_descuento">
           </div>
 
           <div class="input-field col s6">
             <i class="material-icons prefix">info</i>
             <label for="name" class="active"> {{"Fin descuento"|translate}}</label>
-            <input type="date" class="datepicker" id="fin_descuento" [(ngModel)]="producto.fin_descuento"
+            <input type="date" class="datepicker" id="fin_descuento1" [(ngModel)]="producto.fin_descuento"
               name="fin_descuento">
           </div>
         </div>

@@ -67,7 +67,8 @@
             <a class='dropdown-trigger btn' href='#' data-target='dropdown1' *ngIf="roles!=undefined && idioma == 'es'">{{rol.nombreRol}}</a>
             <ul id='dropdown1' class='dropdown-content' *ngIf="idioma=='es'" >
                 <li *ngFor="let rol of roles">
-                    <a (click)="modificarRol(rol,usuario)">{{rol.nombreRol}}</a>
+                    <a  (click)=" modificarRol(rol,usuario)">{{rol.nombreRol}}</a>
+
                 </li>
             </ul>
             <a class='dropdown-trigger btn' href='#' data-target='dropdown1' *ngIf="roles!=undefined && idioma == 'en'">{{rol.nameRol}}</a>

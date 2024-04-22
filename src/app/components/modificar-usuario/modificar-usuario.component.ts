@@ -31,7 +31,6 @@ export class ModificarUsuarioComponent implements OnInit {
   rol: Rol = new Rol();
   roles: Rol[] = [];
   pageSize = 5;
-  lenguaje: string = 'es';
   p = 1;
   imgPrincipal: any;
   fileToUpload: any;
@@ -53,7 +52,7 @@ export class ModificarUsuarioComponent implements OnInit {
     this.imgPrincipal = null;
 
     this.idiomaService.currentLanguage.subscribe(lang => {
-      //this.lenguaje= lang;
+      this.idioma = lang;
       this.translate.use(lang);
       if(lang == 'es'){
         this.Anterior = 'Anterior';

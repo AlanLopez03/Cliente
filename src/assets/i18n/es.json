@@ -288,5 +288,24 @@
     "PerfilActualizado":{
         "title":"Actualizado!",
         "text": "Usuario actualizado!."
+    },
+    "sinCompras":{
+        "title":"No hay compras",
+        "confirm":"Aceptar"
+    },
+    "datosIncompletos":{
+        "title":"Error",
+        "text":"Por favor, asegurese de haber llenado todos los campos",
+        "confirm":"Aceptar"
+    },
+    "registroExitoso":{
+        "title":"Registro exitoso",
+        "text":"Usuario registrado con éxito",
+        "confirm":"Aceptar"
+    },
+    "sinDomicilios":{
+        "title":"No hay direcciones",
+        "text":"Por favor agregue un domicilio para poder realizar compras",
+        "confirm":"Aceptar"
     }
 }
