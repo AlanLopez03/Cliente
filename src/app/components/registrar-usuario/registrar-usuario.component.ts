@@ -17,35 +17,51 @@ export class RegistrarUsuarioComponent {
   if (this.usuario.nombre != null &&  this.usuario.correo != null && this.usuario.password != null && this.usuario.username!=null){
     this.usuario.foto = 0;
     this.usuarioService.crearUsuario(this.usuario).subscribe(
-      res => {
-        this.translate.get('registroExitoso').subscribe((translations) =>
-        {
-          Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: translations.title,
-          showConfirmButton: false,
-          confirmButtonText: translations.confirm,
-          timer: 1500
-        })
-        this.router.navigateByUrl('/login');
+      res => {//Pa cuando se implemente lo del idioma en el registro
+     //   this.translate.get('registroExitoso').subscribe((translations) =>
+     //   {
+     //     Swal.fire({
+     //     position: 'center',
+     //     icon: 'success',
+     //     title: translations.title,
+     //     showConfirmButton: false,
+     //     confirmButtonText: translations.confirm,
+     //     timer: 1500
+     //   })
+     //   this.router.navigateByUrl('/login');
+     // })
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Registro Exitoso',
+        showConfirmButton: false,
+        timer: 1500
       })
-
+      this.router.navigateByUrl('/login');
         
       },
       err => console.log(err)
     )
   }else
-  this.translate.get('datosIncompletos').subscribe((translations) => 
-    {
-      Swal.fire({
-      position: 'center',
-      icon: 'error',
-      title: translations.title,
-      text: translations.text,
-      showConfirmButton: true,
-      confirmButtonText: translations.confirm,
-      timer: 1500
-    })});
+  //this.translate.get('datosIncompletos').subscribe((translations) => 
+  //  {
+  //    Swal.fire({
+  //    position: 'center',
+  //    icon: 'error',
+  //    title: translations.title,
+  //    text: translations.text,
+  //    showConfirmButton: true,
+  //    confirmButtonText: translations.confirm,
+  //    timer: 1500
+  //  })});
+  //}
+  Swal.fire({
+    position: 'center',
+    icon: 'error',
+    title: 'Datos Incompletos',
+    text: 'Por favor complete todos los campos',
+    showConfirmButton: true,
+    timer: 1500
+  })
   }
 }
