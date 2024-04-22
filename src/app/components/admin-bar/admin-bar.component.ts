@@ -45,7 +45,7 @@ constructor(private usuarioService:UsuarioService ,private router:Router,private
     //console.log(localStorage.getItem('idUsuario'));
     localStorage.removeItem('idUsuario');
     localStorage.removeItem('idioma');
-
+    this.idiomaService.resetLanguage();
     this.router.navigateByUrl('/');
 
   }

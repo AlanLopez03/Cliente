@@ -82,6 +82,7 @@ constructor(private router:Router,private categoriaService:CategoriaService,
     localStorage.removeItem('idUsuario');
     localStorage.removeItem('idioma');
     this.router.navigateByUrl('/login');
+    this.idiomaService.resetLanguage();
 
   }
 
