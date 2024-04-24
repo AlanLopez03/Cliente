@@ -23,7 +23,7 @@ export class MostrarProductosComponent implements OnInit {
   buscar: string = '';
   palabraIdioma: string = '';
 
-  idioma = localStorage.getItem('idioma') ?? '2';
+  idioma = localStorage.getItem('idioma') ?? 'es';
   imagenes = ["anillo_u.jpg", "aretes_u.jpg", "arracadas_u.jpg", "esclavas_u.jpg", "Dijes_u.jpg", "Corazon.jpeg"]
   campoEnfocado: boolean = false;
   imgPrincipal: any;
@@ -33,20 +33,13 @@ export class MostrarProductosComponent implements OnInit {
   constructor(private inventarioService: InventarioService, private carritoService: CarritoService, private router: Router,private idiomaService: IdiomaService,private translate: TranslateService) {
     this.imgPrincipal = null;
     this.fileToUpload = null;
-    this.idiomaService.currentLanguage.subscribe(
-      (msg) => {
-        if (msg != ''){
-          this.idioma = msg;
-        }
-      }
-    )
-
   }
 
   ngOnInit(): void {
 
     this.idiomaService.currentLanguage.subscribe(lang => {
       this.translate.use(lang);
+      this.idioma = lang;
     });
 
     $(document).ready(function () {
@@ -87,7 +80,7 @@ export class MostrarProductosComponent implements OnInit {
         //this.reloadPage();
         if (localStorage.getItem("Categoria") != "-1") {
           this.inventarioService.buscarporCategoria(localStorage.getItem("Categoria")).subscribe((res: any) => {
-            if(res.length == 0 && localStorage.getItem("idioma") == "2"){
+            if(res.length == 0 && localStorage.getItem("idioma") == "es"){
               Swal.fire({
                 title: 'No hay productos',
                 text: 'No hay productos en esta categoría',
@@ -95,7 +88,7 @@ export class MostrarProductosComponent implements OnInit {
                 confirmButtonText: 'Aceptar'
               })
             }
-            else if(res.length == 0 && localStorage.getItem("idioma") == "1"){
+            else if(res.length == 0 && localStorage.getItem("idioma") == "en"){
               Swal.fire({
                 title: 'No products',
                 text: 'There are no products in this category',

@@ -27,14 +27,16 @@ export class UsuarioComprasComponent implements OnInit{
   datos = new Domicilio();
   compraUsuario = new ventas();
   estado = new Estados();
-  idioma = localStorage.getItem('idioma') ?? '2';
+  idioma = localStorage.getItem('idioma') ?? 'es';
   constructor(private router: Router, private reportesService: ReportesService,private usuarioService: UsuarioService,private pedidosService: PedidosService,private inventarioService: InventarioService,private idiomaService: IdiomaService,private translate: TranslateService) { 
     var id = localStorage.getItem('idUsuario');
     console.log(id);
     this.idiomaService.currentLanguage.subscribe(
       (msg) => {
         if (msg != ''){
+          this.translate.use(msg);
           this.idioma = msg;
+
         }
         console.log("idioma actual:", this.idioma, " aaaa");
       }

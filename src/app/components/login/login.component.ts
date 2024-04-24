@@ -25,10 +25,10 @@ logueo(){
         localStorage.setItem('idUsuario',res.idUsuario);
         //console.log(res);
         if (res.idRol == 1){  
-          localStorage.setItem('idioma',"es") 
+          //localStorage.setItem('idioma',"es") 
           this.router.navigateByUrl('/control');}
         else{
-          localStorage.setItem('idioma',"2");
+          //localStorage.setItem('idioma',"en");
           this.router.navigateByUrl('/home');
         }
           

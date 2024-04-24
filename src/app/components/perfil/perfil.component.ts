@@ -41,7 +41,7 @@ export class PerfilComponent implements OnInit {
   direccion: Domicilio = new Domicilio();
   idUsuario = 0;
   flagD = 0;
-  idioma = localStorage.getItem('idioma') ?? '2';
+  idioma = localStorage.getItem('idioma') ?? 'es';
   imgPrincipal: any;
   fileToUpload: any;
 
@@ -53,7 +53,11 @@ export class PerfilComponent implements OnInit {
     }
     );
     this.imgPrincipal = null;
-
+    this.idiomaService.currentLanguage.subscribe(lang => {
+      this.translate.use(lang);
+      this.idioma = lang;
+      
+    })
 
     this.usuarioService.listone(localStorage.getItem('idUsuario')).subscribe((resusuario: any) => {
       this.usuario = resusuario;

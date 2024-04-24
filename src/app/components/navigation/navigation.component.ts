@@ -34,6 +34,7 @@ constructor(private router:Router,private categoriaService:CategoriaService,
     });
     this.idiomaService.currentLanguage.subscribe((res: any) => {
       this.translate.use(res);
+      this.idioma = res;
     })
     this.categoriaService.list().subscribe(
       (res:any) => {
@@ -41,35 +42,21 @@ constructor(private router:Router,private categoriaService:CategoriaService,
       },
       err => console.log(err)
     );
-    this.actualizarIdioma();
+    //this.actualizarIdioma();
   }
-  actualizarIdioma(){
-    const idio = localStorage.getItem('idioma');
-    if (idio !== null && idio === '1') {
-      this.translate.use('en');
-      this.idioma=idio;
-    }
-    if (idio !== null && idio === '2') {
-      this.translate.use('es');
-      this.idioma=idio;
-    }
-  }
+  //actualizarIdioma(){
+  //  const idio = localStorage.getItem('idioma');
+  //  if (idio !== null && idio === '1') {
+  //    this.translate.use('en');
+  //    this.idioma=idio;
+  //  }
+  //  if (idio !== null && idio === '2') {
+  //    this.translate.use('es');
+  //    this.idioma=idio;
+  //  }
+  //}
   setIdioma(idioma:any) {
-    localStorage.setItem('idioma',idioma);
-    const idio = localStorage.getItem('idioma');
-    console.log(typeof(idio));
-    if (idio !== null && idio === '1') {
-      this.translate.use('en');
-      this.idiomaService.changeLanguage('1');
-      this.idioma=idio;
-    }
-    if (idio !== null && idio === '2') {
-      this.translate.use('es');
-      this.idiomaService.changeLanguage('2');
-      
-      this.idioma=idio;
-    }
-    //this.reloadPage()
+    this.idiomaService.changeLanguage(idioma);
   }
 
   isHome(): boolean {
