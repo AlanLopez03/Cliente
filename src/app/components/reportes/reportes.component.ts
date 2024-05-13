@@ -48,22 +48,6 @@ export class ReportesComponent implements OnInit {
 
   ngOnInit(): void {//Ya jala
     $(document).ready(function () {
-      $('.datepicker').datepicker({
-        format: 'yyyy-mm-dd',
-        i18n: {
-          cancel: 'Cancelar',
-          clear: 'Limpiar',
-          done: 'Aceptar',
-          previousMonth: '‹',
-          nextMonth: '›',
-          months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-          monthsShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
-          weekdays: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-          weekdaysShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'],
-          weekdaysAbbrev: ['D', 'L', 'M', 'M', 'J', 'V', 'S']
-        }
-      }
-      );
       $('.modal').modal();
     });
     this.idiomaService.currentLanguage.subscribe(lang => {
@@ -71,10 +55,50 @@ export class ReportesComponent implements OnInit {
       if(lang == 'es'){
         this.Anterior = 'Anterior';
         this.Siguiente = 'Siguiente';
+        $(document).ready(function () {
+          $('.datepicker').datepicker({
+            format: 'yyyy-mm-dd',
+            i18n: {
+              cancel: 'Cancelar',
+              clear: 'Limpiar',
+              done: 'Aceptar',
+              previousMonth: '‹',
+              nextMonth: '›',
+              months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+                'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+              monthsShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
+                'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+              weekdays: ['Domingo', 'Lunes', 'Martes', 'Miércoles',
+                'Jueves', 'Viernes', 'Sábado'],
+              weekdaysShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'],
+              weekdaysAbbrev: ['D', 'L', 'M', 'M', 'J', 'V', 'S']
+            }
+          });
+        });
       }
       else{
         this.Anterior = 'Previous';
         this.Siguiente = 'Next';
+        $(document).ready(function () {
+          $('.datepicker').datepicker({
+            format: 'yyyy-mm-dd',
+            i18n: {
+              cancel: 'Cancel',
+              clear: 'Clear',
+              done: 'Ok',
+              previousMonth: '‹',
+              nextMonth: '›',
+              months: ['January', 'February', 'March', 'April', 'May', 'June',
+                'July', 'August', 'September', 'October', 'November', 'December'],
+              monthsShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+              weekdays: ['Sunday', 'Monday', 'Tuesday', 'Wednesday',
+                'Thursday', 'Friday', 'Saturday'],
+              weekdaysShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+              weekdaysAbbrev: ['S', 'M', 'T', 'W', 'T', 'F', 'S']
+            }
+          });
+        });
       }
     });
 
